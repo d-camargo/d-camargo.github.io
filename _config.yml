@@ -3,10 +3,10 @@
 # -----------------------------------------------------------------------------
 
 title: Diego Camargo # the website title (if blank, full name will be used instead)
-first_name: Bashir
+first_name: Diego
 middle_name: 
-last_name: Kazimi
-email: b.kazimi@fz-juelich.de
+last_name: Camargo
+email: eng.dcamargo@outlook.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   My academic page. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >
