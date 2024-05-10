@@ -30,3 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler"
 end
+
+gem 'jekyll-feed', '~> 0.17.0'
+
+gem 'minima', '~> 0.1.0'
