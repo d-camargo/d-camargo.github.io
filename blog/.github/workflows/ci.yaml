@@ -2,10 +2,10 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - master
+      - ph-pages
   pull_request:
     branches:
-      - master
+      - ph-pages
 jobs:
   build:
     name: "Test with Jekyll ${{ matrix.jekyll }}"
