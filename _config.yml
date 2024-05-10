@@ -22,6 +22,7 @@ baseurl: https://d-camargo.github.io/blog # the subpath of your site, e.g. /blog
 last_updated: false # set to true if you want to display last updated in the footer
 impressum_path:  # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 source: blog
+include: [_pages]
 
 # -----------------------------------------------------------------------------
 # Theme
@@ -97,4 +98,9 @@ minima:
   #  - { platform: x,              user_url: "https://x.com/jekyllrb" }
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
 
-
+collections:
+  news:
+    defaults:
+      layout: post
+    output: true
+    permalink: /blog/:path/
