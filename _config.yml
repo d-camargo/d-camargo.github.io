@@ -99,7 +99,7 @@ minima:
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
 
 collections:
-  news:
+  blog:
     defaults:
       layout: post
     output: true
