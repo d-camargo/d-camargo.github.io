@@ -1,0 +1,44 @@
+# Gemfile
+
+source 'https://rubygems.org'
+
+# gem 'bundle-gem-install', '~> 0.0.1'
+# BUNDLE_GEMFILE='./blog/Gemfile' bundle exec jekyll serve
+bundle exec jekyll serve --source blog
+
+gem "jekyll", "~> 4.2"
+
+group :jekyll_plugins do
+  gem "jekyll-timeago", "~> 0.13.1"
+end
+
+Gem::Specification.new do |spec|
+  spec.name     = "minima"
+  spec.version  = "3.0.0.dev"
+  spec.authors  = ["Joel Glovier"]
+  spec.email    = ["jglovier@github.com"]
+
+  spec.summary  = "A beautiful, minimal theme for Jekyll."
+  spec.homepage = "https://github.com/jekyll/minima"
+  spec.license  = "MIT"
+
+  spec.metadata["plugin_type"] = "theme"
+
+  spec.files = `git ls-files -z`.split("\x0").select do |f|
+    f.match(%r!^(assets|_(includes|layouts|sass)/|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
+  end
+
+  spec.add_runtime_dependency "jekyll", ">= 3.5", "< 5.0"
+  spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
+  spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.1"
+
+  spec.add_development_dependency "bundler"
+end
+
+gem 'jekyll-feed', '~> 0.17.0'
+
+gem 'minima', '~> 0.1.0'
+
+gem 'jekyll-seo-tag', '~> 2.8'
+
+gem 'faraday-retry', '~> 2.2'
