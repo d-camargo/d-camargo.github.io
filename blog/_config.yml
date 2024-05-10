@@ -7,16 +7,35 @@ first_name: Diego
 middle_name: 
 last_name: Camargo
 email: eng.dcamargo@outlook.com
+description: > # the ">" symbol means to ignore newlines until "footer_text:"
+  My academic page. Based on [*folio](https://github.com/bogoli/-folio) design.
+footer_text: >
+  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+keywords: jekyll, jekyll-theme, academic-website, portfolio-website  # add your own keywords or leave empty
 
-#=======
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "https://d-camargo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+lang: pt-br # the language of your site (for example: en, fr, cn, ru, etc.)
+icon: ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+
+url: https://d-camargo.github.io/blog # the base hostname & protocol for your site
+baseurl: /blog # the subpath of your site, e.g. /blog/
+last_updated: false # set to true if you want to display last updated in the footer
+impressum_path:  # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
+source: blog
+include: [_pages]
+
+# -----------------------------------------------------------------------------
+# Theme
+# -----------------------------------------------------------------------------
+
+# code highlighter theme
+highlight_theme_light: github   # https://github.com/jwarby/jekyll-pygments-themes
+highlight_theme_dark: native    # https://github.com/jwarby/jekyll-pygments-themes
+
+# repo color theme
+repo_theme_light: default       # https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md
+repo_theme_dark: dark           # https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md
+
 
 # Build settings
 
@@ -79,4 +98,9 @@ minima:
   #  - { platform: x,              user_url: "https://x.com/jekyllrb" }
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
 
-
+collections:
+  news:
+    defaults:
+      layout: post
+    output: true
+    permalink: /blog/:path/
