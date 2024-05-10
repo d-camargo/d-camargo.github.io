@@ -2,8 +2,6 @@
 
 source 'https://rubygems.org'
 
-# gem 'bundle-gem-install', '~> 0.0.1'
-# BUNDLE_GEMFILE='./blog/Gemfile' bundle exec jekyll serve
 bundle exec jekyll serve --source blog
 
 gem "jekyll", "~> 4.2"
