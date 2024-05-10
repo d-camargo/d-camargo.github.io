@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-bundle exec jekyll serve --source blog
+bundle exec jekyll serve
 
 gem "jekyll", "~> 4.2"
 
