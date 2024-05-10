@@ -10,7 +10,7 @@ end
 
 gem 'jekyll-feed', '~> 0.17.0'
 
-gem 'minima', '~> 0.1.0'
+gem 'minima', '~> 2.5', '>= 2.5.1'
 
 gem 'jekyll-seo-tag', '~> 2.8'
 
