@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<style>
+    .post-header {
+        padding-top: 150px;
+        padding-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.05));
+    }
+    .post-content-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .post-content-container p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+    .post-content-container h2 {
+        color: var(--text-primary);
+        font-size: 1.8rem;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    .post-content-container ul, .post-content-container ol {
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        padding-left: 2rem;
+    }
+    .post-content-container li {
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<article>
+    <header class="post-header">
+        <div class="container">
+            <h1 class="section-title">{{ page.title }}</h1>
+            <p style="color: var(--accent); font-family: 'Cinzel', serif; letter-spacing: 1px; margin-top: 1rem; font-size: 1.1rem;">
+                {{ page.date | date: "%d de %m de %Y" }}
+            </p>
+        </div>
+    </header>
+
+    <div class="post-content-container" style="margin-bottom: 5rem;">
+        {{ content }}
+    </div>
+    
+    <div style="text-align: center; margin-bottom: 5rem;">
+        <a href="{{ '/blog/index.html' | relative_url }}" class="btn secondary-btn"><i class="fas fa-arrow-left"></i> Voltar para o Blog</a>
+    </div>
+</article>
