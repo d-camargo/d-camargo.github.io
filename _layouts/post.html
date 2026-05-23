@@ -41,7 +41,11 @@ layout: default
         <div class="container">
             <h1 class="section-title">{{ page.title }}</h1>
             <p style="color: var(--accent); font-family: 'Cinzel', serif; letter-spacing: 1px; margin-top: 1rem; font-size: 1.1rem;">
-                {{ page.date | date: "%d de %m de %Y" }}
+                {% if page.lang == 'en' %}
+                    {{ page.date | date: "%B %d, %Y" }}
+                {% else %}
+                    {{ page.date | date: "%d de %m de %Y" }}
+                {% endif %}
             </p>
         </div>
     </header>
@@ -51,6 +55,10 @@ layout: default
     </div>
     
     <div style="text-align: center; margin-bottom: 5rem;">
-        <a href="{{ '/blog/index.html' | relative_url }}" class="btn secondary-btn"><i class="fas fa-arrow-left"></i> Voltar para o Blog</a>
+        {% if page.lang == 'en' %}
+            <a href="{{ '/en/blog/index.html' | relative_url }}" class="btn secondary-btn"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+        {% else %}
+            <a href="{{ '/blog/index.html' | relative_url }}" class="btn secondary-btn"><i class="fas fa-arrow-left"></i> Voltar para o Blog</a>
+        {% endif %}
     </div>
 </article>

@@ -52,12 +52,23 @@
     {% endif %}
 
     <nav class="navbar">
-        <a href="{{ '/' | relative_url }}" class="logo">D.C.</a>
+        <a href="{% if page.lang == 'en' %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}" class="logo">D.C.</a>
         <div class="nav-links">
+            {% if page.lang == 'en' %}
+            <a href="{{ '/en/#about' | relative_url }}" class="nav-link">About</a>
+            <a href="{{ '/en/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url contains '/curriculo/' %}active{% endif %}">Resume</a>
+            <a href="{{ '/en/portfolio/index.html' | relative_url }}" class="nav-link {% if page.url contains '/portfolio/' %}active{% endif %}">Portfolio</a>
+            <a href="{{ '/en/blog/index.html' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog</a>
+            <a href="{{ page.url | replace_first: '/en/', '/' | relative_url }}" class="nav-link lang-switcher" title="Mudar para Português">🇧🇷 PT</a>
+            {% else %}
             <a href="{{ '/index.html#about' | relative_url }}" class="nav-link">Sobre</a>
-            <a href="{{ '/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url == '/curriculo/curriculo.html' %}active{% endif %}">Currículo</a>
-            <a href="{{ '/portfolio/index.html' | relative_url }}" class="nav-link {% if page.url == '/portfolio/' or page.url == '/portfolio/index.html' %}active{% endif %}">Portfólio</a>
-            <a href="{{ '/blog/index.html' | relative_url }}" class="nav-link {% if page.url == '/blog/' or page.url == '/blog/index.html' or page.layout == 'post' %}active{% endif %}">Blog</a>
+            <a href="{{ '/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url contains '/curriculo/' %}active{% endif %}">Currículo</a>
+            <a href="{{ '/portfolio/index.html' | relative_url }}" class="nav-link {% if page.url contains '/portfolio/' %}active{% endif %}">Portfólio</a>
+            <a href="{{ '/blog/index.html' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog</a>
+            {% assign en_url = page.url %}
+            {% if en_url == '/' %}{% assign en_url = '/index.html' %}{% endif %}
+            <a href="{{ '/en' | append: en_url | relative_url }}" class="nav-link lang-switcher" title="Switch to English">🇺🇸 EN</a>
+            {% endif %}
         </div>
         <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
     </nav>

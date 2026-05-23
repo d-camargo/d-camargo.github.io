@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Blog
+lang: en
 ---
 <style>
     .page-header {
@@ -70,7 +71,7 @@ title: Blog
         color: var(--text-primary);
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         margin-top: auto;
         transition: color 0.3s ease;
     }
@@ -82,9 +83,9 @@ title: Blog
 
 <section class="page-header">
     <div class="container">
-        <h1 class="section-title">Últimas do Blog</h1>
+        <h1 class="section-title">Latest from the Blog</h1>
         <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-            Compartilhando conhecimentos, tutoriais e reflexões sobre as tendências da Engenharia e Tecnologia.
+            Sharing knowledge, tutorials, and reflections on Engineering and Technology trends.
         </p>
     </div>
 </section>
@@ -92,16 +93,16 @@ title: Blog
 <section class="blog-content-section">
     <div class="container">
         <div class="blog-grid">
-            {% assign posts = site.posts | where_exp: "item", "item.lang != 'en'" %}
+            {% assign posts = site.posts | where: "lang", "en" %}
             {% for post in posts %}
             <article class="blog-card">
-                <span class="blog-date">{{ post.date | date: "%d/%m/%Y" }}</span>
+                <span class="blog-date">{{ post.date | date: "%Y-%m-%d" }}</span>
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-                <a href="{{ post.url | relative_url }}" class="read-more">Ler Artigo <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ post.url | relative_url }}" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
             </article>
             {% else %}
-            <p style="text-align: center; color: var(--text-muted); padding: 3rem;">Ainda não há nenhuma publicação no blog.</p>
+            <p style="text-align: center; color: var(--text-muted); padding: 3rem;">No posts published yet.</p>
             {% endfor %}
         </div>
     </div>
