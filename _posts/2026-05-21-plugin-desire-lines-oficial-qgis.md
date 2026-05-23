@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Plugin Desire Lines disponível no repositório oficial do QGIS"
+lang: pt
 ---
 
 O plugin Desire Lines agora integra o repositório oficial de complementos do QGIS. A aprovação facilita a instalação direta pelo gerenciador do software, dispensando o download de arquivos externos.

@@ -1,0 +1,122 @@
+---
+layout: default
+title: Portfolio
+lang: en
+---
+<style>
+    .page-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    
+    .portfolio-extended-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    
+    .portfolio-item {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        cursor: pointer;
+    }
+
+    .portfolio-bg {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.6s ease;
+    }
+
+    .portfolio-item:hover .portfolio-bg {
+        transform: scale(1.1);
+    }
+
+    .portfolio-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        z-index: 2;
+    }
+
+    .portfolio-content h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .portfolio-category {
+        font-size: 0.9rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="section-title">Project Portfolio</h1>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+            Check out below some of the projects, research, and work developed in the fields of Civil Engineering, Technology, and Mobility.
+        </p>
+    </div>
+</section>
+
+<section class="portfolio-content-section">
+    <div class="container">
+        <div class="portfolio-extended-grid">
+            <a href="{{ '/en/portfolio/desire-lines.html' | relative_url }}" style="text-decoration: none; color: inherit; display: block;">
+                <div class="portfolio-item">
+                    <div class="portfolio-bg" style="background-image: url('{{ '/assets/images/portfolio/desire_lines.webp' | relative_url }}');"></div>
+                    <div class="portfolio-content">
+                        <h3>QGIS Plugin: Desire Lines</h3>
+                        <span class="portfolio-category">GIS / Development</span>
+                    </div>
+                </div>
+            </a>
+            <div class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="portfolio-content">
+                    <h3>Technology Solution 1</h3>
+                    <span class="portfolio-category">Development</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="portfolio-content">
+                    <h3>Urban Mobility Study</h3>
+                    <span class="portfolio-category">Transportation</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1541888087525-2c83c271e8f2?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="portfolio-content">
+                    <h3>Structural Project 2</h3>
+                    <span class="portfolio-category">Civil Engineering</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="portfolio-content">
+                    <h3>Management System</h3>
+                    <span class="portfolio-category">Development</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-bg" style="background-image: url('https://images.unsplash.com/photo-1460308006240-df6a44d82ae5?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="portfolio-content">
+                    <h3>Traffic Survey</h3>
+                    <span class="portfolio-category">Transportation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

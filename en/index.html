@@ -1,14 +1,15 @@
 ---
 layout: default
-title: Início
+title: Home
+lang: en
 ---
 <section id="hero" class="hero">
     <div class="hero-content">
-        <p class="subtitle_fade">ENGENHEIRO & PROFESSOR</p>
+        <p class="subtitle_fade">ENGINEER & PROFESSOR</p>
         <h1 class="title_reveal">Diego <br><span class="accent">Camargo</span></h1>
         <p class="description_fade">
-            Especialista em Engenharia de Transportes, focado na interseção <br>
-            entre mobilidade, infraestrutura e inovação tecnológica.
+            Specialist in Transportation Engineering, focused on the intersection <br>
+            between mobility, infrastructure, and technological innovation.
         </p>
         <div class="hero-actions">
             <a href="{{ '/assets/download/Diego_Camargo_Currículo.pdf' | relative_url }}"
@@ -19,7 +20,7 @@ title: Início
     </div>
 
     <div class="scroll-indicator">
-        <p>DESCUBRA</p>
+        <p>DISCOVER</p>
         <div class="mouse">
             <div class="wheel"></div>
         </div>
@@ -36,14 +37,11 @@ title: Início
             </div>
         </div>
         <div class="layout-text">
-            <h2 class="section-title">Sobre Mim</h2>
-            <h3 class="section-subtitle">Engenharia do amanhã, através da educação da evolução da mobilidade.</h3>
+            <h2 class="section-title">About Me</h2>
+            <h3 class="section-subtitle">Engineering the future, through education and the evolution of mobility.</h3>
 
-            <p>Meu nome é Diego Camargo. Sou engenheiro civil e mestre em engenharia de transportes, apaixonado pela
-                evolução da tecnologia.</p>
-            <p>Nesse espaço, divido conhecimentos e insights sobre infraestrutura, desafios urbanos e sistemas de
-                transporte. Acredito firmemente que a tecnologia tem o papel essencial de remodelar tanto a maneira como
-                aprendemos quanto a maneira como nos movemos.</p>
+            <p>My name is Diego Camargo. I am a civil engineer and hold a master's degree in transportation engineering, passionate about the evolution of technology.</p>
+            <p>In this space, I share knowledge and insights about infrastructure, urban challenges, and transportation systems. I strongly believe that technology plays an essential role in reshaping both how we learn and how we move.</p>
 
             <div class="contact-info">
                 <div class="info-block">
@@ -61,7 +59,7 @@ title: Início
 
 <section id="social" class="social">
     <div class="container">
-        <h2 class="section-title text-center">Conexões</h2>
+        <h2 class="section-title text-center">Connections</h2>
 
         <div class="social-grid">
             <a href="https://www.linkedin.com/in/engdcamargo/" target="_blank" class="social-card hover-glow">
@@ -86,18 +84,17 @@ title: Início
 
 <section id="portfolio" class="portfolio">
     <div class="container">
-        <h2 class="section-title text-center">Portfólio</h2>
-        <p class="text-center" style="color: var(--text-muted); margin-top:2rem">Navegue pelas áreas de atuação e
-            projetos recentes.</p>
+        <h2 class="section-title text-center">Portfolio</h2>
+        <p class="text-center" style="color: var(--text-muted); margin-top:2rem">Browse through my areas of expertise and recent projects.</p>
         <div class="portfolio-grid">
-            <a href="{{ '/portfolio/desire-lines.html' | relative_url }}" style="text-decoration: none; color: inherit; display: block;">
+            <a href="{{ '/en/portfolio/desire-lines.html' | relative_url }}" style="text-decoration: none; color: inherit; display: block;">
                 <div class="portfolio-item">
                     <div class="portfolio-bg"
                         style="background-image: url('{{ '/assets/images/portfolio/desire_lines.webp' | relative_url }}');">
                     </div>
                     <div class="portfolio-content">
-                        <h3>Plugin QGIS: Desire Lines</h3>
-                        <span class="portfolio-category">GIS / Desenvolvimento</span>
+                        <h3>QGIS Plugin: Desire Lines</h3>
+                        <span class="portfolio-category">GIS / Development</span>
                     </div>
                 </div>
             </a>
@@ -106,8 +103,8 @@ title: Início
                     style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop');">
                 </div>
                 <div class="portfolio-content">
-                    <h3>Tecnologia</h3>
-                    <span class="portfolio-category">Desenvolvimento</span>
+                    <h3>Technology</h3>
+                    <span class="portfolio-category">Development</span>
                 </div>
             </div>
             <div class="portfolio-item">
@@ -115,13 +112,13 @@ title: Início
                     style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop');">
                 </div>
                 <div class="portfolio-content">
-                    <h3>Mobilidade</h3>
-                    <span class="portfolio-category">Transportes</span>
+                    <h3>Mobility</h3>
+                    <span class="portfolio-category">Transportation</span>
                 </div>
             </div>
         </div>
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="{{ '/portfolio/index.html' | relative_url }}" class="btn secondary-btn">Ver portfólio completo</a>
+            <a href="{{ '/en/portfolio/index.html' | relative_url }}" class="btn secondary-btn">View full portfolio</a>
         </div>
     </div>
 </section>
@@ -129,14 +126,14 @@ title: Início
 <section id="blog" class="blog">
     <div class="container dual-layout reverse">
         <div class="layout-text">
-            <h2 class="section-title">Últimos Posts</h2>
-            <p>Compartilhando conhecimentos, tutoriais e reflexões sobre as tendências da área.</p>
-            <a href="{{ '/blog/index.html' | relative_url }}" class="link-arrow">Ver todos os posts <i
+            <h2 class="section-title">Latest Posts</h2>
+            <p>Sharing knowledge, tutorials, and reflections on industry trends.</p>
+            <a href="{{ '/en/blog/index.html' | relative_url }}" class="link-arrow">View all posts <i
                     class="fas fa-arrow-right"></i></a>
         </div>
 
         <div class="blog-list">
-            {% assign posts = site.posts | where_exp: "item", "item.lang != 'en'" %}
+            {% assign posts = site.posts | where: "lang", "en" %}
             {% for post in posts limit:2 %}
             <article class="blog-preview">
                 <span class="blog-date">{{ post.date | date: "%d/%m/%Y" }}</span>
