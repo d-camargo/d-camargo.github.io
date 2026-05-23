@@ -11,7 +11,7 @@ No meio rural, a obrigatoriedade do georreferenciamento de imóveis consta da Le
 
 Segundo o glossário do IBGE, área rural é caracterizada pela dispersão ou isolamento das ocupações e pela presença de estabelecimentos agropecuários. Essa classificação é feita a partir dos setores censitários identificados como povoados, núcleos rurais, lugarejos e áreas rurais. Já a área urbana é definida como uma região onde predominam superfícies artificiais não agropecuárias, com concentração de domicílios e equipamentos urbanos, como edificações, pavimentação e redes elétrica e sanitária. As leis municipais determinam as zonas urbanas para fins de cobrança do IPTU e parcelamento do solo.
 
-Para fins estatísticos, a localização de um domicílio em área urbana ou rural segue a legislação municipal. Consideram-se urbanas as áreas de cidades (sedes municipais), vilas (sedes distritais) ou áreas urbanas isoladas; tudo o que está fora desses perímetros é classificado como rural. Um estudo do IBGE publicado pelo Nexo Jornal mostra que 98,3 % do território brasileiro se enquadra na categoria rural, contra apenas 1,3 % de área urbana e 0,4 % de corpos d’água [nexojornal.com.br](http://nexojornal.com.br).
+Para fins estatísticos, a localização de um domicílio em área urbana ou rural segue a legislação municipal. Consideram-se urbanas as áreas de cidades (sedes municipais), vilas (sedes distritais) ou áreas urbanas isoladas; tudo o que está fora desses perímetros é classificado como rural. Um estudo do IBGE publicado pelo Nexo Jornal mostra que 98,3 % do território brasileiro se enquadra na categoria rural, contra apenas 1,3 % de área urbana e 0,4 % de corpos d’água.
 
 ## Cadastro Territorial Multifinalitário (CTM) e Mapa Urbano Básico (MUB)
 
