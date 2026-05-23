@@ -1,657 +1,338 @@
-<!doctype html>
-<html class="no-js" lang="pt-br">
-    <head>
-        <!-- meta data -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+---
+layout: default
+title: Currículo
+---
+<style>
+    /* Specific curriculum styles reusing the main variable definitions */
+    .cv-header {
+        padding-top: 150px;
+        padding-bottom: 50px;
+        text-align: center;
+    }
 
-        <!--font-family-->
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
+    .timeline-section {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .timeline-section::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--border-color);
+    }
+
+    .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 2rem 3rem;
+    }
+    
+    .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 50%;
+        text-align: left;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        top: 2.5rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot { right: -6px; }
+    .timeline-item:nth-child(even) .timeline-dot { left: -6px; }
+
+    .timeline-date {
+        font-family: var(--font-display);
+        color: var(--accent);
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .timeline-location {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    /* Skills specific */
+    .skills-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+    
+    .skill-group h3 {
+        margin-bottom: 2rem;
+        color: var(--accent);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+    }
+
+    .skill-bar-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .skill-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .skill-bar-bg {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.05);
+        position: relative;
+    }
+
+    .skill-bar-fill {
+        height: 100%;
+        background: var(--text-main);
+        position: absolute;
+        top: 0; left: 0;
+        transition: width 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    @media (max-width: 768px) {
+        .timeline-section::before {
+            left: 20px;
+        }
+        .timeline-item {
+            width: 100%;
+            padding-left: 50px;
+            padding-right: 0;
+            text-align: left !important;
+            left: 0 !important;
+        }
+        .timeline-item:nth-child(odd) .timeline-dot,
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: 14px;
+        }
+        .skills-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="cv-header">
+    <div class="container">
+        <p class="section-subtitle reveal">Trajetória Profissional</p>
+        <h1 class="section-title reveal">Currículo</h1>
+        <p class="reveal" style="max-width: 600px; margin: 2rem auto; color: var(--text-muted);">
+            Uma visão geral condensada da minha formação acadêmica, experiências profissionais e conjunto de habilidades técnicas.
+        </p>
+        <div class="reveal" style="margin-top:2rem">
+            <a href="{{ '/assets/download/Diego_Camargo_Currículo.pdf' | relative_url }}" class="btn secondary-btn" download>Baixar PDF completo <i class="fas fa-download"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Formação Acadêmica -->
+<section id="education">
+    <div class="container">
+        <h2 class="section-title text-center reveal">Formação Acadêmica</h2>
+        <div class="timeline-section reveal">
+            
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2013 - 2015</div>
+                <h3 class="timeline-title">Master's degree, Transportation/Mobility Management</h3>
+                <div class="timeline-location">Universidade de São Paulo</div>
+                <p>Mestrado focado em sistemas de transporte, planejamento e gestão de mobilidade.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2007 - 2012</div>
+                <h3 class="timeline-title">Graduação em Engenharia Civil</h3>
+                <div class="timeline-location">Escola de Engenharia de Piracicaba - EEP</div>
+                <p>Formação completa em Engenharia Civil.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Experiência Profissional -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title text-center reveal">Experiência Profissional</h2>
+        <div class="timeline-section reveal">
+            
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2018 - Presente</div>
+                <h3 class="timeline-title">Professor EBTT</h3>
+                <div class="timeline-location">Centro Federal de Educação Tecnológica de Minas Gerais - Belo Horizonte, MG</div>
+                <p>Lecionando disciplinas de Engenharia de Transportes, Geoprocessamento e Análise de Dados. Orientador de projetos de pesquisa (Desenvolvimento do plugin QGIS "Desire Lines" com Python) e de extensão (Canal Mobiliza CEFET-MG).</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Fev 2017 - Jul 2018</div>
+                <h3 class="timeline-title">Professor Assistente</h3>
+                <div class="timeline-location">Universidade Federal de Goiás - Catalão e Região, BR</div>
+                <p>Lecionando Planejamento de Transportes, Engenharia de Tráfego, Projeto Geométrico de Rodovias e Desenho Técnico para a graduação em Engenharia Civil.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Ago 2017 - Dez 2017</div>
+                <h3 class="timeline-title">Autor de Materiais Didáticos</h3>
+                <div class="timeline-location">Kroton Educational SA</div>
+                <p>Produção de material educacional (apostilas e guias de estudo) focado em Portos e Hidrovias.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Mar 2015 - Fev 2017</div>
+                <h3 class="timeline-title">Engenheiro Civil (Autônomo)</h3>
+                <div class="timeline-location">Bofete, SP</div>
+                <p>Desenvolvimento de projetos residenciais, regularização de obras, levantamentos topográficos com GNSS RTK e retificação administrativa de áreas.</p>
+            </div>
+            
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Fev 2015 - Jan 2016</div>
+                <h3 class="timeline-title">Engenheiro de Transportes</h3>
+                <div class="timeline-location">IPK Projetos LTDA - Piracicaba e Região, BR</div>
+                <p>Consultoria em Transporte Público Urbano. Análise operacional, estudos de reestruturação de sistemas e desenvolvimento de ferramentas para gestão de demanda e operações usando MySQL e VBA.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jan 2013 - Mar 2013</div>
+                <h3 class="timeline-title">Engenheiro Civil</h3>
+                <div class="timeline-location">Prefeitura Municipal de Bofete - Bofete, SP</div>
+                <p>Monitoramento, gerenciamento e revisão de projetos contratados pelo município. Participação na elaboração de orçamentos para licitações.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Habilidades -->
+<section id="skills" style="border-bottom:none">
+    <div class="container">
+        <h2 class="section-title text-center reveal">Habilidades</h2>
         
-        <!-- title of site -->
-        <title>Diego Camargo</title>
+        <div class="skills-container" style="margin-top: 4rem;">
+            <!-- Hard Skills -->
+            <div class="skill-group reveal">
+                <h3>Hard Skills & Ferramentas</h3>
+                
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Python (PyQGIS & Data Science)</span><span>90%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="90%"></div></div>
+                </div>
 
-        <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.ico"/>
-       
-        <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>QGIS & Geoprocessamento</span><span>95%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="95%"></div></div>
+                </div>
 
-		<!--flat icon css-->
-		<link rel="stylesheet" href="assets/css/flaticon.css">
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>SQL & Análise de Dados</span><span>85%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="85%"></div></div>
+                </div>
 
-		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Construction Engineering & Topografia</span><span>80%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="80%"></div></div>
+                </div>
 
-        <!--owl.carousel.css-->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-		<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-		
-        <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Budgeting & Gestão de Projetos</span><span>85%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>AutoCAD & Desenho Técnico</span><span>75%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="75%"></div></div>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="skill-group reveal">
+                <h3>Idiomas & Soft Skills</h3>
+                
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Inglês (Professional Working)</span><span>90%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="90%"></div></div>
+                </div>
+                
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Espanhol (Limited Working)</span><span>50%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="50%"></div></div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Desenvolvimento de Extensões & Ferramentas</span><span>90%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="90%"></div></div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Ensino & Preparação de Material Didático</span><span>95%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="95%"></div></div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Análise de Padrões Espaciais de Transporte</span><span>85%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="85%"></div></div>
+                </div>
+
+                <div class="skill-bar-container">
+                    <div class="skill-info"><span>Gestão e Planejamento Urbano</span><span>80%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0" data-width="80%"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const skillFills = document.querySelectorAll('.skill-bar-fill');
         
-        <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
-        
-        <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
-        
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		
-        <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        const animateSkills = () => {
+            const windowHeight = window.innerHeight;
+            skillFills.forEach(fill => {
+                const elementTop = fill.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    fill.style.width = fill.getAttribute('data-width');
+                }
+            });
+        };
 
-    </head>
-    <body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-		
-		<!-- top-area Start -->
-		<header class="top-area">
-			<div class="header-area">
-				<!-- Start Navigation -->
-			    <nav class="navbar navbar-default bootsnav navbar-fixed dark no-background">
-
-			        <div class="container">
-
-			            <!-- Start Header Navigation -->
-			            <div class="navbar-header">
-			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-			                    <i class="fa fa-bars"></i>
-			                </button>
-			                <a class="navbar-brand" href="../index.html">diego camargo</a>
-			            </div><!--/.navbar-header-->
-			            <!-- End Header Navigation -->
-
-			            <!-- Collect the nav links, forms, and other content for toggling -->
-			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                <li class=" smooth-menu active"></li>
-							<li class="navbar-header"><a href="../index.html">redes sociais</a></li>
-							<li class="navbar-header"><a href="#">currículo</a></li>
-							<li class="navbar-header"><a href="../portifolio/portfolio.html">portfolio</a></li>
-							<li class="navbar-header"><a href="../blog/blog.html">blog</a></li>
-			                </ul><!--/.nav -->
-			            </div><!-- /.navbar-collapse -->
-			        </div><!--/.container-->
-			    </nav><!--/nav-->
-			    <!-- End Navigation -->
-			</div><!--/.header-area-->
-
-		    <div class="clearfix"></div>
-
-		</header><!-- /.top-area-->
-		<!-- top-area End -->
-        
-		<!--formacao academica start -->
-		<section id="education" class="education">
-			<div class="section-heading-education text-center">
-				<h2>Formação acadêmica</h2>
-			</div>
-			<div class="container">
-				<div class="education-horizontal-timeline">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
-								<div class="experience-time">
-									<h2>2007 - 2013</h2>
-									<h3>graduação <span>em </span> engenharia civil</h3>
-								</div><!--/.experience-time-->
-								<div class="timeline-horizontal-border">
-									<i class="fa fa-circle" aria-hidden="true"></i>
-									<span class="single-timeline-horizontal"></span>
-								</div>
-								<div class="timeline">
-									<div class="timeline-content">
-										<h4 class="title">
-											EEP/FUMEP
-										</h4>
-										<h5>Piracicaba/SP, BR</h5>
-										<p class="description">
-											Escola de Engenharia de Piracicaba da Fundação Municipal de Ensino de Piracicaba.
-											Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-										</p>
-									</div><!--/.timeline-content-->
-								</div><!--/.timeline-->
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
-								<div class="experience-time">
-									<h2>2014 - 2015</h2>
-									<h3>esp. <span>em </span> georreferenciamento <span>de </span>imóveis rurais</h3>
-								</div><!--/.experience-time-->
-								<div class="timeline-horizontal-border">
-									<i class="fa fa-circle" aria-hidden="true"></i>
-									<span class="single-timeline-horizontal"></span>
-								</div>
-								<div class="timeline">
-									<div class="timeline-content">
-										<h4 class="title">
-											FATEP
-										</h4>
-										<h5>Piracicaba/SP, BR</h5>
-										<p class="description">
-											Faculdade de Tecnologia de Piracicaba - FATEP
-											Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-										</p>
-									</div><!--/.timeline-content-->
-								</div><!--/.timeline-->
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
-								<div class="experience-time">
-									<h2>2013 - 2016</h2>
-									<h3>mestrado <span>em </span> engenharia de transportes</h3>
-								</div><!--/.experience-time-->
-								<div class="timeline-horizontal-border">
-									<i class="fa fa-circle" aria-hidden="true"></i>
-									<span class="single-timeline-horizontal spacial-horizontal-line
-									"></span>
-								</div>
-								<div class="timeline">
-									<div class="timeline-content">
-										<h4 class="title">
-											EESC/USP
-										</h4>
-										<h5>São Carlos/SP, BR</h5>
-										<p class="description">
-											Escola de Engenharia de São Carlos da Universidade de São Paulo.
-											Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-										</p>
-									</div><!--/.timeline-content-->
-								</div><!--/.timeline-->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</section><!--/.education-->
-		<!--education end -->
-
-		<!--hard skills start -->
-		<section id="skills" class="skills">
-				<div class="skill-content">
-					<div class="section-heading text-center">
-						<h2>Hard skills</h2>
-					</div>
-					<div class="container">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="single-skill-content">
-									<div class="barWrapper">
-										<span class="progressText">suite microsoft office</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="10" aria-valuemax="100" style="">
-													  
-												</div>
-											</div>
-											<h3>90%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">AutoCAD</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>65%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">QGIS</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="10" aria-valuemax="100" style="">
-												   
-											   </div>
-											</div>
-											<h3>70%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">LINGUAGENS DE PROGRAMAÇÃO (R, python, SQL)</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>65%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">inglês</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>B2</h3>	
-										</div>
-									</div><!-- /.barWrapper -->							
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="single-skill-content">
-									<div class="barWrapper">
-										<span class="progressText">html 5 e css</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="10" aria-valuemax="100" style="">
-													
-												</div>
-											</div>
-											<h3>40%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">mapeamento com drone (webodm)</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>75%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">gestão de projetos</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="">
-												   
-											   </div>
-											</div>
-											<h3>50%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">computação na nuvem</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>35%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">espanhol</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="10" aria-valuemax="100" style="">
-												   
-											   </div>
-											</div>
-											<h3>A1</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-								</div>
-							</div>
-						</div><!-- /.row -->
-					</div>	<!-- /.container -->		
-				</div><!-- /.skill-content-->
-
-		</section><!--/.skills-->
-		<!--skills end -->
-
-		<!--soft skills start -->
-		<section id="skills" class="skills">
-			<div class="skill-content">
-				<div class="section-heading text-center">
-					<h2>Soft skills</h2>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="single-skill-content">
-								<div class="barWrapper">
-									<span class="progressText">resiliência</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-											<div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="10" aria-valuemax="100" style="">
-												  
-											</div>
-										</div>
-										<h3>75%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText">ética</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="10" aria-valuemax="100" style="">
-												
-										   </div>
-										</div>
-										<h3>95%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText">gestão de tempo</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="10" aria-valuemax="100" style="">
-											   
-										   </div>
-										</div>
-										<h3>80%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText">empatia</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="10" aria-valuemax="100" style="">
-												
-										   </div>
-										</div>
-										<h3>85%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->					
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="single-skill-content">
-								<div class="barWrapper">
-									<span class="progressText">pensamento crítico</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-											<div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="10" aria-valuemax="100" style="">
-												
-											</div>
-										</div>
-										<h3>80%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText">proatividade</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="10" aria-valuemax="100" style="">
-										   </div>
-										</div>
-										<h3>75%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText">cortesia</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
-										   </div>
-										</div>
-										<h3>90%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-								<div class="barWrapper">
-									<span class="progressText"> criatividade</span>
-									<div class="single-progress-txt">
-										<div class="progress ">
-										   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
-												
-										   </div>
-										</div>
-										<h3>90%</h3>	
-									</div>
-								</div><!-- /.barWrapper -->
-							</div>
-						</div>
-					</div><!-- /.row -->
-				</div>	<!-- /.container -->		
-			</div><!-- /.skill-content-->
-
-		</section><!--/.skills-->
-		<!--skills end -->
-
-
-		<!--experience start -->
-		<section id="experience" class="experience">
-			<div class="section-heading text-center">
-				<h2>trajetório acadêmica/profissional</h2>
-			</div>
-			<div class="container">
-				<div class="experience-content">
-						<div class="main-timeline">
-							<ul>
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>2018 - Present</h2>
-													<h3>professor ebtt</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															cefet-mg
-														</h4>
-														<h5>Belo Horizonte/MG, BR</h5>
-														<p class="description">
-															Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-												<div class="experience-time">
-													<h2>
-														<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-														2017 - 2018
-													</h2>
-													<h3>Professor substituto</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-5">
-												<div class="timeline">
-													<div class="timeline-content text-right">
-														<h4 class="title">
-															Universidade de Goiás - UFG
-														</h4>
-														<h5>Catalão/GO, BR</h5>
-														<p class="description">
-															Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5 experience-time-main">
-												<div class="experience-time">
-													<h2>
-														<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-														2017 - 2018
-													</h2>
-													<h3>Professor substituto</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>2016 - 2017</h2>
-													<h3>engenheiro civil</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															autônomo
-														</h4>
-														<h5>Bofete/SP, BR</h5>
-														<p class="description">
-															Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-												<div class="experience-time">
-													<h2>
-														<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-														2016 - 2017
-													</h2>
-													<h3>Engenharia civil</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-5">
-												<div class="timeline">
-													<div class="timeline-content text-right">
-														<h4 class="title">
-															ipk projetos
-														</h4>
-														<h5>Piracicaba/SP, BR</h5>
-														<p class="description">
-															Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5 experience-time-main">
-												<div class="experience-time">
-													<h2>
-														<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-														2015 - 2016
-													</h2>
-													<h3>engenheiro de transportes</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>2013 - 2013</h2>
-													<h3>Engenheiro Civil</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															Prefeitura Municipal de Bofete
-														</h4>
-														<h5>Bofete/SP, BR</h5>
-														<p class="description">
-															Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident. 
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-
-							</ul>
-						</div><!--.main-timeline-->
-					</div><!--.experience-content-->
-			</div>
-
-		</section><!--/.experience-->
-		<!--experience end -->
-
-		<!--footer-copyright start-->
-		<footer id="footer-copyright" class="footer-copyright">
-			<div class="container">
-				<div class="hm-footer-copyright text-center">
-					<p>
-						&copy; copyright diego camargo. design and developed by <a href="https://www.themesine.com/">themesine</a>
-					</p><!--/p-->
-				</div><!--/.text-center-->
-			</div><!--/.container-->
-
-			<div id="scroll-Top">
-				<div class="return-to-top">
-					<i class="fa fa-angle-up " id="scroll-top" ></i>
-				</div>
-				
-			</div><!--/.scroll-Top-->
-			
-		</footer><!--/.footer-copyright-->
-		<!--footer-copyright end-->
-		
-		<!-- Include all js compiled plugins (below), or include individual files as needed -->
-
-		<script src="assets/js/jquery.js"></script>
-		
-		<!--modernizr.min.js-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		
-		<!--bootstrap.min.js-->
-		<script src="assets/js/bootstrap.min.js"></script>
-		
-		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
-		
-		<!-- jquery.sticky.js -->
-		<script src="assets/js/jquery.sticky.js"></script>
-		
-		<!-- for progress bar start-->
-
-		<!-- progressbar js -->
-		<script src="assets/js/progressbar.js"></script>
-
-		<!-- appear js -->
-		<script src="assets/js/jquery.appear.js"></script>
-
-		<!-- for progress bar end -->
-
-		<!--owl.carousel.js-->
-		<script src="assets/js/owl.carousel.min.js"></script>
-
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-		
-		
-		<!--Custom JS-->
-		<script src="assets/js/custom.js"></script>
-	</body>
-	
-</html>
+        window.addEventListener('scroll', animateSkills);
+        setTimeout(animateSkills, 500); // Check on load
+    });
+</script>

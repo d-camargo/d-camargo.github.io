@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N4VM7QL6');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5XVV8ETD0S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5XVV8ETD0S');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4VM7QL6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Ambient / Background effects -->
+    <div class="glow-sphere"></div>
+    <div class="noise-overlay"></div>
+    {% if page.extra_glow %}
+    <div class="glow-sphere-2"></div>
+    {% endif %}
+
+    <nav class="navbar">
+        <a href="{{ '/' | relative_url }}" class="logo">D.C.</a>
+        <div class="nav-links">
+            <a href="{{ '/index.html#about' | relative_url }}" class="nav-link">Sobre</a>
+            <a href="{{ '/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url == '/curriculo/curriculo.html' %}active{% endif %}">Currículo</a>
+            <a href="{{ '/portfolio/index.html' | relative_url }}" class="nav-link {% if page.url == '/portfolio/' or page.url == '/portfolio/index.html' %}active{% endif %}">Portfólio</a>
+            <a href="{{ '/blog/index.html' | relative_url }}" class="nav-link {% if page.url == '/blog/' or page.url == '/blog/index.html' or page.layout == 'post' %}active{% endif %}">Blog</a>
+        </div>
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        <div class="container flex-footer">
+            <p>&copy; 2024 Diego Camargo. Todos os direitos reservados.</p>
+            <a href="#" class="back-to-top">Voltar ao topo <i class="fas fa-level-up-alt"></i></a>
+        </div>
+    </footer>
+
+    <script src="{{ '/assets/js/custom.js' | relative_url }}"></script>
+</body>
+</html>

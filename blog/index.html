@@ -1,0 +1,107 @@
+---
+layout: default
+title: Blog
+---
+<style>
+    .page-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .blog-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--accent);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .blog-date {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+    }
+
+    .blog-card h3 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .blog-card h3 a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .blog-card:hover h3 a {
+        color: var(--accent);
+    }
+
+    .blog-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        flex-grow: 1;
+    }
+
+    .read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: auto;
+        transition: color 0.3s ease;
+    }
+
+    .blog-card:hover .read-more {
+        color: var(--accent);
+    }
+</style>
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="section-title">Últimas do Blog</h1>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+            Compartilhando conhecimentos, tutoriais e reflexões sobre as tendências da Engenharia e Tecnologia.
+        </p>
+    </div>
+</section>
+
+<section class="blog-content-section">
+    <div class="container">
+        <div class="blog-grid">
+            {% for post in site.posts %}
+            <article class="blog-card">
+                <span class="blog-date">{{ post.date | date: "%d/%m/%Y" }}</span>
+                <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                <a href="{{ post.url | relative_url }}" class="read-more">Ler Artigo <i class="fas fa-arrow-right"></i></a>
+            </article>
+            {% else %}
+            <p style="text-align: center; color: var(--text-muted); padding: 3rem;">Ainda não há nenhuma publicação no blog.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,98 @@
+---
+layout: default
+title: "Plugin QGIS: Desire Lines"
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-image img {
+        width: 100%;
+        max-width: 800px;
+        border-radius: 12px;
+        margin: 0 auto;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Plugin QGIS: Desire Lines</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Facilitando a criação de mapas de fluxo para Engenharia de Transportes.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+        <div class="project-image">
+            <img src="{{ '/assets/images/portfolio/desire_lines.webp' | relative_url }}" alt="Mapa de Fluxo - Desire Lines">
+        </div>
+
+        <div class="project-content">
+            <h2>O Problema</h2>
+            <p>Nas aulas de geoprocessamento para o curso de Engenharia de Transportes, havia uma grande dificuldade em utilizar softwares de SIG, já que o QGIS não é exclusivo da área de transportes. Algumas ferramentas de fluxo existentes simplesmente não funcionavam ou exigiam versões antigas do software.</p>
+            <p>Durante um período, ensinei a criação de mapas de fluxo utilizando programação em SQL diretamente no QGIS. No entanto, por ser uma disciplina do 3º período, os alunos enfrentavam uma barreira técnica grande. Como nem todos dominam código, até mesmo colegas e profissionais da área acabavam pedindo ajuda para resolver esse problema analítico comum (há inclusive vídeos sobre a abordagem com SQL no canal do meu projeto acadêmico, o <a href="https://www.youtube.com/@MobilizaCEFETMG" target="_blank" style="color: var(--accent);">Mobiliza CEFETMG</a>).</p>
+
+            <h2>A Solução</h2>
+            <p>Diante das dificuldades de aplicar o conceito de mapa de fluxo no QGIS de forma nativa e acessível, resolvi desenvolver uma ferramenta dedicada. O desenvolvimento foi acompanhado por publicações no Medium para documentar o processo e auxiliar a comunidade:</p>
+            <ul>
+                <li><strong>16 de setembro de 2024:</strong> Publicação do primeiro artigo introduzindo o tema: <a href="https://medium.com/@eng.diegocamargo/voc%C3%AA-sabe-o-que-%C3%A9-uma-matriz-o-d-7b66a922018d" target="_blank" style="color: var(--accent);">Você sabe o que é uma Matriz O-D?</a></li>
+                <li><strong>26 de setembro de 2024:</strong> O projeto ficou totalmente funcional, marcado pela publicação detalhando seu uso: <a href="https://medium.com/@eng.diegocamargo/mapa-de-fluxo-no-qgis-com-desirelines-49591953c173" target="_blank" style="color: var(--accent);">Mapa de Fluxo no QGIS com DesireLines</a>. Inicialmente, a distribuição era feita de forma manual via arquivo .ZIP.</li>
+                <li><strong>21 de maio de 2026:</strong> O plugin foi oficialmente aprovado e incluído no repositório oficial do QGIS, facilitando a instalação direta pelo software.</li>
+            </ul>
+            <p>O <strong>Desire Lines</strong> foi criado para automatizar e democratizar a geração de mapas de desejo (linhas retas conectando origens a destinos). Este tipo de visualização é uma etapa essencial para a engenharia de tráfego, análise de mobilidade urbana, e planejamento estratégico de redes de transporte público.</p>
+
+            <h2>Tecnologias Utilizadas</h2>
+            <ul>
+                <li><strong>Python</strong> para o desenvolvimento da lógica central.</li>
+                <li><strong>PyQGIS (API do QGIS)</strong> para a integração da interface gráfica e processamento de feições espaciais.</li>
+                <li><strong>Metodologia Analítica</strong> baseada em conceitos de Engenharia de Transportes (Matrizes de Origem-Destino).</li>
+            </ul>
+
+            <h2>Próximos Passos</h2>
+            <p>O desenvolvimento do plugin é contínuo. As próximas melhorias mapeadas são:</p>
+            <ul>
+                <li><strong>1. Incorporar análise com Delaunay Lines:</strong> Implementar algoritmos de triangulação espacial para gerar conexões e análises de redes de transporte mais complexas.</li>
+                <li><strong>2. Criar estilo visual integrado:</strong> Permitir que o usuário aplique e configure o estilo das linhas (cores, espessura baseada em demanda) diretamente pela interface do plugin.</li>
+                <li><strong>3. Filtro de carregamento:</strong> Desenvolver uma função para filtrar e destacar automaticamente as rotas com os maiores volumes de tráfego, facilitando a leitura de mapas densos.</li>
+            </ul>
+
+            <div class="project-links">
+                <a href="https://plugins.qgis.org/plugins/desire_lines/#plugin-details" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Repositório Oficial QGIS</a>
+                <a href="https://github.com/d-camargo/desire_lines" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+            </div>
+        </div>
+    </div>
+</section>
