@@ -1,7 +1,7 @@
 title: Diego Camargo
 description: Engenheiro Civil e Professor
 baseurl: ""
-url: "https://d-camargo.github.io"
+url: "https://www.dcamargo.com.br"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
