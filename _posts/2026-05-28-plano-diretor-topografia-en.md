@@ -2,6 +2,7 @@
 layout: post
 title: "The Master Plan: Why It Relies on Surveying and Mapping"
 lang: en
+permalink: /en/2026/05/28/plano-diretor-topografia.html
 ---
 
 The Master Plan (in Brazil, *Plano Diretor*) is the basic law governing a municipality's urban development and expansion policy, as established by the Federal Constitution. For anyone studying Advanced Surveying, it is the document that organizes the physical and territorial space and defines how the territory should be read, planned, and managed. More than a legal instrument, the Master Plan is the main consumer of a municipality's georeferenced maps.

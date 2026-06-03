@@ -159,4 +159,59 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    /*
+     * 6. Image Lightbox
+     * Adds click-to-enlarge functionality for images in blog posts
+     */
+    const postImages = document.querySelectorAll('.post-content-container img');
+    if (postImages.length > 0) {
+        // Create modal elements
+        const modal = document.createElement('div');
+        modal.classList.add('lightbox-modal');
+        
+        const closeBtn = document.createElement('span');
+        closeBtn.classList.add('lightbox-close');
+        closeBtn.innerHTML = '&times;';
+        
+        const modalImg = document.createElement('img');
+        modalImg.classList.add('lightbox-content');
+        
+        modal.appendChild(closeBtn);
+        modal.appendChild(modalImg);
+        document.body.appendChild(modal);
+        
+        // Open modal
+        postImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modalImg.src = this.src;
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // prevent scrolling
+            });
+        });
+        
+        // Close modal functions
+        const closeModal = () => {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // restore scrolling
+            // Wait for transition before hiding completely
+            setTimeout(() => {
+                if(!modal.classList.contains('show')) {
+                    modalImg.src = '';
+                }
+            }, 300);
+        };
+        
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    }
 });

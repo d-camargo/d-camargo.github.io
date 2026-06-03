@@ -23,7 +23,7 @@ layout: default
     .post-content-container img {
         display: block;
         width: 100%;
-        max-width: 600px;
+        max-width: 100%;
         height: auto;
         margin: 2rem auto;
         border-radius: 8px;
@@ -43,6 +43,19 @@ layout: default
     .post-content-container li {
         margin-bottom: 0.5rem;
     }
+    .post-content-container p a,
+    .post-content-container li a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: rgba(212, 175, 55, 0.4);
+        text-underline-offset: 4px;
+        transition: all 0.3s ease;
+    }
+    .post-content-container p a:hover,
+    .post-content-container li a:hover {
+        color: #fff;
+        text-decoration-color: #fff;
+    }
 </style>
 
 <article>
@@ -53,7 +66,23 @@ layout: default
                 {% if page.lang == 'en' %}
                     {{ page.date | date: "%B %d, %Y" }}
                 {% else %}
-                    {{ page.date | date: "%d de %m de %Y" }}
+                    {{ page.date | date: "%d" }} de 
+                    {% assign m = page.date | date: "%-m" %}
+                    {% case m %}
+                      {% when '1' %}janeiro
+                      {% when '2' %}fevereiro
+                      {% when '3' %}março
+                      {% when '4' %}abril
+                      {% when '5' %}maio
+                      {% when '6' %}junho
+                      {% when '7' %}julho
+                      {% when '8' %}agosto
+                      {% when '9' %}setembro
+                      {% when '10' %}outubro
+                      {% when '11' %}novembro
+                      {% when '12' %}dezembro
+                    {% endcase %}
+                    de {{ page.date | date: "%Y" }}
                 {% endif %}
             </p>
         </div>
