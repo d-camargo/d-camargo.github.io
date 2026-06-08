@@ -1,0 +1,150 @@
+---
+layout: default
+title: "Gestão Acadêmica EPTNM — CEFET-MG"
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-image img {
+        width: 100%;
+        max-width: 800px;
+        border-radius: 12px;
+        margin: 0 auto;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Gestão Acadêmica EPTNM</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Automatizando o acompanhamento de turmas dos cursos técnicos do CEFET-MG com Python e Streamlit.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=800&auto=format&fit=crop" alt="Gestão Acadêmica EPTNM" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>O Problema</h2>
+            <p>O SIGAA — sistema acadêmico institucional do CEFET-MG — não emite relatórios de gestão consolidados para turmas dos cursos técnicos de nível médio (EPTNM). Para um coordenador acompanhar o desempenho dos alunos, era necessário baixar o mapa de turma — que contém todas as disciplinas — e cruzar os dados manualmente, um processo repetitivo e sujeito a erros que consumia horas a cada bimestre.</p>
+            <p>O cenário é ainda mais complexo nos cursos de Trânsito e Estradas. A partir do 2º ano, as disciplinas técnicas se diferenciam entre os dois cursos — embora as disciplinas de Ensino Médio permaneçam as mesmas. Isso significa que, para os alunos do 2º e 3º anos, existem planilhas XLS distintas para as disciplinas técnicas de cada curso, enquanto o núcleo de Ensino Médio segue na mesma planilha compartilhada.</p>
+
+            <h2>A Solução — Evolução do Projeto</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <p style="margin-bottom:0">Primeira versão desenvolvida em <strong>Google Colab</strong>. O script já lia o arquivo <code>MapaTurma.xls</code> exportado do SIGAA e gerava os relatórios de forma automatizada, eliminando o trabalho manual de compilação de dados.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2025 — Reativação</div>
+                <p style="margin-bottom:0">Ao retornar à coordenação do curso, o código foi reativado e expandido: passou a gerar automaticamente o <strong>relatório em PDF</strong> com layout profissional (gráficos, boxplots, sumário dinâmico) e incorporou a <strong>API da OpenAI</strong> como funcionalidade opcional, gerando parágrafos analíticos sobre os dados processados.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Generalização e Streamlit</div>
+                <p style="margin-bottom:0">Com o apoio de Inteligência Artificial para acelerar o desenvolvimento, o código foi generalizado para atender qualquer curso da EPTNM, não apenas o de Trânsito. Em seguida, os scripts foram empacotados em uma <strong>aplicação web com Streamlit</strong>, permitindo que qualquer coordenador envie sua planilha e receba o relatório PDF direto no e-mail institucional, sem instalar nada.</p>
+            </div>
+
+            <h2>Funcionalidades Principais</h2>
+
+            <p><strong>Processamento inteligente de mapas de turma:</strong> O sistema extrai automaticamente o nome do curso, a turma e o bimestre a partir do cabeçalho da planilha XLS exportada do SIGAA. Caso a planilha contenha dados misturados de dois bimestres, a execução é abortada com aviso ao usuário para garantir precisão estatística.</p>
+
+            <p><strong>Régua de aprovação dinâmica:</strong> O CEFET-MG distribui pontos de forma variável — 1º e 3º bimestres valem 20 pontos; 2º e 4º valem 30. O sistema identifica o bimestre e ajusta automaticamente o limiar de aprovação (60%), tornando precisas as taxas calculadas sem nenhuma configuração manual.</p>
+
+            <p><strong>Análise estatística de faltas:</strong> A frequência é analisada por métricas estatísticas (média, mediana, P90, desvio padrão) em vez de um cálculo fixo de carga horária. Isso permite identificar anomalias — alunos acima do P90 ou além de <em>média + 2σ</em> — e produzir um ranking dos dez maiores faltosos do bimestre.</p>
+
+            <p><strong>Relatório PDF profissional:</strong> Gerado com ReportLab, o documento inclui sumário dinâmico (TOC), histograma de faltas, boxplots por disciplina, gráficos de desempenho, listagem de alunos e disciplinas críticas, e um parágrafo analítico opcional gerado por IA.</p>
+
+            <p><strong>Caso especial Trânsito + Estradas (2º e 3º anos):</strong> A partir do 2º ano, cada curso possui suas próprias disciplinas técnicas em planilhas XLS separadas, mas o núcleo de Ensino Médio permanece numa planilha compartilhada. Ao ativar esse modo, o coordenador sobe as duas planilhas de técnicas; o sistema extrai as notas do Ensino Médio da planilha de Estradas, incorpora nos dados de Trânsito, e então gera <strong>dois PDFs distintos</strong> — um para cada curso — enviando-os juntos no mesmo e-mail.</p>
+
+            <p><strong>Privacidade por design:</strong> O acesso de envio é restrito ao domínio <code>@cefetmg.br</code>. Planilhas e PDFs são processados exclusivamente em memória RAM (<code>BytesIO</code>) — nenhum dado de aluno é salvo em disco ou disponibilizado para download no site.</p>
+
+            <h2>Stack Tecnológica</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Streamlit</span>
+                <span class="tech-badge">Pandas</span>
+                <span class="tech-badge">ReportLab</span>
+                <span class="tech-badge">smtplib</span>
+                <span class="tech-badge">OpenAI API</span>
+            </p>
+
+            <h2>Impacto</h2>
+            <p>O sistema substituiu um processo inteiramente manual — que antes exigia horas de compilação de dados a cada bimestre — por uma interface web acessível e centralizada. Hoje, qualquer coordenador da EPTNM do CEFET-MG pode, em minutos, obter um relatório gerencial completo no seu e-mail institucional, com dados e gráficos prontos para embasar intervenções pedagógicas mais ágeis e precisas.</p>
+
+            <div class="project-links">
+                <a href="https://gestaotec.streamlit.app/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Acessar Aplicação</a>
+            </div>
+
+        </div>
+    </div>
+</section>

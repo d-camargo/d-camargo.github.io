@@ -1,0 +1,151 @@
+---
+layout: default
+title: "Academic Management EPTNM — CEFET-MG"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-image img {
+        width: 100%;
+        max-width: 800px;
+        border-radius: 12px;
+        margin: 0 auto;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Academic Management EPTNM</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Automating class monitoring for CEFET-MG technical courses with Python and Streamlit.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=800&auto=format&fit=crop" alt="Academic Management EPTNM" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>SIGAA — the institutional academic system at CEFET-MG — does not generate consolidated management reports for secondary-level technical courses (EPTNM). To track student performance, a program coordinator had to download the class map — a single file containing all subjects — and manually cross-reference the data, a repetitive and error-prone process that consumed hours every quarter.</p>
+            <p>The scenario is even more complex for the Traffic Operations and Road Building Technical Programs. From the 2nd year onward, the technical subjects diverge between the two programs — but the secondary-education core subjects remain the same. This means that for 2nd and 3rd year students, separate XLS spreadsheets exist for each program's technical disciplines, while the shared secondary-education core stays in a single common spreadsheet.</p>
+
+            <h2>The Solution — Project Evolution</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <p style="margin-bottom:0">First version developed in <strong>Google Colab</strong>. The script already read the <code>MapaTurma.xls</code> file exported from SIGAA and generated reports automatically, eliminating the manual data compilation work.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2025 — Reactivation</div>
+                <p style="margin-bottom:0">Upon returning to the course coordination role, the code was reactivated and expanded: it now automatically generates a <strong>PDF report</strong> with a professional layout (charts, boxplots, dynamic table of contents) and integrated the <strong>OpenAI API</strong> as an optional feature, generating analytical paragraphs from the processed data.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Generalization &amp; Streamlit</div>
+                <p style="margin-bottom:0">With AI-assisted development, the code was generalized to support any EPTNM course, not just Transportation. The scripts were then packaged into a <strong>Streamlit web application</strong>, allowing any coordinator to upload their spreadsheet and receive the PDF report directly in their institutional email — no installation required.</p>
+            </div>
+
+            <h2>Key Features</h2>
+
+            <p><strong>Intelligent class map processing:</strong> The system automatically extracts the course name, class, and academic quarter from the header of the XLS file exported from SIGAA. If the spreadsheet contains data from two mixed quarters, execution is aborted with a user alert to guarantee statistical accuracy.</p>
+
+            <p><strong>Dynamic approval threshold:</strong> CEFET-MG distributes points variably — 1st and 3rd quarters are worth 20 points; 2nd and 4th quarters are worth 30. The system identifies the current quarter and automatically adjusts the approval threshold (60%), making all calculated pass rates precise without any manual configuration.</p>
+
+            <p><strong>Statistical attendance analysis:</strong> Attendance is analyzed using statistical metrics (mean, median, P90, standard deviation) rather than a fixed credit-hour calculation. This enables anomaly detection — students above P90 or beyond <em>mean + 2σ</em> — and produces a top-10 absentee ranking for the quarter.</p>
+
+            <p><strong>Professional PDF report:</strong> Built with ReportLab, the document includes a dynamic table of contents, an absence distribution histogram, subject-level boxplots, performance charts, a highlighted list of at-risk students and subjects, and an optional AI-generated analytical paragraph.</p>
+
+            <p><strong>Traffic Operations + Road Building special case (2nd &amp; 3rd years):</strong> From the 2nd year onward, each program has its own technical disciplines in separate XLS spreadsheets, but the secondary-education core remains in a single shared spreadsheet. When this mode is enabled, the coordinator uploads both technical spreadsheets; the system extracts the secondary-education grades from the Road Building spreadsheet, incorporates them into the Traffic Operations data, and then generates <strong>two distinct PDFs</strong> — one per program — sent together in the same email.</p>
+
+            <p><strong>Privacy by design:</strong> Report delivery is restricted to <code>@cefetmg.br</code> domain addresses. Spreadsheets and PDFs are processed exclusively in RAM (<code>BytesIO</code>) — no student data is ever written to disk or made available for direct download on the site.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Streamlit</span>
+                <span class="tech-badge">Pandas</span>
+                <span class="tech-badge">ReportLab</span>
+                <span class="tech-badge">smtplib</span>
+                <span class="tech-badge">OpenAI API</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>The system replaced a fully manual process — which previously required hours of data compilation each quarter — with an accessible, centralized web interface. Today, any EPTNM coordinator at CEFET-MG can, in minutes, receive a complete management report in their institutional inbox, with data and charts ready to support faster, evidence-based pedagogical interventions.</p>
+
+            <div class="project-links">
+                <a href="https://gestaotec.streamlit.app/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Open Application</a>
+            </div>
+
+        </div>
+    </div>
+</section>
