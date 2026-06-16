@@ -1,0 +1,147 @@
+---
+layout: default
+title: "SIG-Bus: QGIS Plugin for Public Transport Analysis"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">SIG-Bus</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">QGIS plugin for GTFS reading, passenger demand integration, and per-line report generation.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/sig_bus.png' | relative_url }}" alt="SIG-Bus — passenger load map by route segment in QGIS" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>QGIS has no native GTFS support beyond basic geometry loading. For a transport engineer analyzing Belo Horizonte's bus network — combining route geometry, schedules, and passenger demand — the workflow was entirely manual: importing separate files, building joins, and reconciling inconsistencies between line identifiers in the fare system and those in the GTFS feed.</p>
+            <p>Demand data, published by the City of BH on the <a href="https://dados.pbh.gov.br/dataset/estimativa-de-embarque-nos-pontos-de-parada" target="_blank" style="color: var(--accent);">open data portal</a>, arrives as CSV files with their own coordinate system and line codes. Without a dedicated tool, combining this data with GTFS required advanced GIS and programming skills — a high barrier for anyone who simply needed operational line analyses.</p>
+
+            <h2>The Solution — Project Evolution</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">2020 — PIBIC Start</div>
+                <p style="margin-bottom:0">Research began as an undergraduate research initiative (PIBIC) at CEFET-MG (application filed in 2019), focused on building public transport analysis tools from open data.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2022 — Plugin Development</div>
+                <p style="margin-bottom:0">Codebase structured as a PyQGIS plugin with a Qt Designer interface. Implemented a native GTFS reader (adapted from CTU GeoForAll Lab under GPL v2+), requiring no external dependencies beyond QGIS itself.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2025 — Science & Technology Week at CEFET-MG</div>
+                <p style="margin-bottom:0">Project presented at CEFET-MG's Science and Technology Week, demonstrating the GTFS + demand integration and per-line load map generation.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Reports and Clustering</div>
+                <p style="margin-bottom:0">Added automatic cluster-based categorization of demand segments with graduated styling, and PDF report generation with two maps — accumulated load and cluster grouping — overlaid on route geometry.</p>
+            </div>
+
+            <h2>Key Features</h2>
+
+            <p><strong>GTFS import and validation:</strong> The plugin reads GTFS feeds directly from ZIP files, validates data integrity, and generates synthetic calendars when the feed lacks a `calendar.txt` file. Data is converted to GeoPackage with indexed spatial layers for efficient querying.</p>
+
+            <p><strong>Per-stop demand integration:</strong> Loads the BHTrans boarding CSV and spatially links demand points to GTFS stops, restricted to each line's dominant service pattern to prevent false matches with nearby parallel routes.</p>
+
+            <p><strong>Departure schedule by stop (horarios_paradas):</strong> When filtering a line, the plugin automatically generates a point layer with scheduled times for all trips on the selected route — `arrival_time`, `departure_time`, `stop_sequence`, `trip_id`, `shape_id`, and `direction_id` per stop. Built from a direct join in the GeoPackage database, this layer enables visualization of service distribution throughout the day.</p>
+
+            <p><strong>Segment demand allocation (tramos_demanda):</strong> Generates a line layer with accumulated passenger load and trip count per segment for the selected time period. Load is calculated using flow conservation, producing an upper bound on actual occupancy — suitable for relative comparison across segments and time periods.</p>
+
+            <p><strong>Hourly analysis:</strong> Analysis can be restricted to a specific hour (0h to 23h) or run for the full day, with automatic selection of the dominant route shape when a line operates multiple geometric variants.</p>
+
+            <p><strong>PDF report with clustering:</strong> The current version generates a report with two maps — accumulated load and cluster-based segment grouping — with graduated styles applied automatically at the end of processing.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">GDAL</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+                <span class="tech-badge">Qt Designer</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>The plugin eliminates the manual integration step between network data (GTFS) and demand data (fare system), letting transport engineers and researchers move directly to operational analysis. Applied to Belo Horizonte's bus network, SIG-Bus enables per-line load studies, identification of critical segments, and hourly passenger distribution analysis — all within QGIS, with no external dependencies.</p>
+
+            <div class="project-links">
+                <a href="https://github.com/d-camargo/sig-bus" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>

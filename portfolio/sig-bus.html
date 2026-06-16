@@ -1,0 +1,146 @@
+---
+layout: default
+title: "SIG-Bus: Plugin QGIS para Análise de Transporte Público"
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">SIG-Bus</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Plugin QGIS para leitura de GTFS, integração de demanda de passageiros e geração de relatórios por linha.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/sig_bus.png' | relative_url }}" alt="SIG-Bus — mapa de carga de passageiros por trecho no QGIS" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>O Problema</h2>
+            <p>O QGIS não possui suporte nativo para o formato GTFS além da leitura básica de geometrias. Para um engenheiro de transportes analisar a rede de ônibus de Belo Horizonte — cruzando geometria de rotas, horários e demanda de passageiros — o processo era inteiramente manual: importar arquivos separados, construir junções e tratar inconsistências entre os identificadores de linhas do sistema de bilhetagem e os do feed GTFS.</p>
+            <p>Os dados de demanda, publicados pela PBH no <a href="https://dados.pbh.gov.br/dataset/estimativa-de-embarque-nos-pontos-de-parada" target="_blank" style="color: var(--accent);">portal de dados abertos</a>, chegam em CSV com coordenadas e códigos de linha próprios. Sem uma ferramenta dedicada, a combinação desses dados com o GTFS exigia conhecimento avançado em SIG e programação — uma barreira alta para quem precisava apenas gerar análises operacionais de linha.</p>
+
+            <h2>A Solução — Evolução do Projeto</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">2020 — Início do PIBIC</div>
+                <p style="margin-bottom:0">Início da pesquisa como iniciação científica no CEFET-MG (aplicação ao edital em 2019), com foco no desenvolvimento de ferramentas de análise de transporte público baseadas em dados abertos.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2022 — Desenvolvimento do Plugin</div>
+                <p style="margin-bottom:0">Estruturação do código como plugin PyQGIS, com interface gráfica em Qt Designer. Implementação do leitor GTFS nativo (adaptado do CTU GeoForAll Lab sob GPL v2+), sem dependências externas além do próprio QGIS.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2025 — Semana C&T CEFET-MG</div>
+                <p style="margin-bottom:0">Apresentação do projeto na Semana de Ciência e Tecnologia do CEFET-MG, com demonstração da integração GTFS + demanda e geração dos mapas de carga por linha.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Relatórios e Clusterização</div>
+                <p style="margin-bottom:0">Adição de categorização automática dos trechos por cluster de demanda com estilos graduados, e geração de relatório PDF com dois mapas — carga acumulada e agrupamento por cluster — sobrepostos à geometria da rota.</p>
+            </div>
+
+            <h2>Funcionalidades Principais</h2>
+
+            <p><strong>Importação e validação de GTFS:</strong> O plugin lê feeds GTFS diretamente de arquivos ZIP, valida a integridade dos dados e gera calendários sintéticos quando o feed não inclui o arquivo `calendar.txt`. Os dados são convertidos para GeoPackage com camadas espaciais indexadas para consulta eficiente.</p>
+
+            <p><strong>Integração de demanda por parada:</strong> Carrega o CSV de embarques da BHTrans e vincula os pontos de demanda às paradas GTFS por junção espacial, restrita ao padrão de serviço dominante de cada linha para evitar associações incorretas com rotas paralelas próximas.</p>
+
+            <p><strong>Horários por parada (horarios_paradas):</strong> Ao filtrar uma linha, o plugin gera automaticamente uma camada de pontos com os horários de todas as viagens da rota selecionada — `arrival_time`, `departure_time`, `stop_sequence`, `trip_id`, `shape_id` e `direction_id` para cada parada. A camada é construída por junção direta no banco GeoPackage e permite visualizar a distribuição dos serviços ao longo do dia.</p>
+
+            <p><strong>Alocação de demanda por trecho (tramos_demanda):</strong> Gera uma camada de linhas com a carga acumulada de passageiros e a contagem de viagens por trecho, para o período horário selecionado. A carga segue o princípio de conservação de fluxo, produzindo um limite superior da ocupação real — adequado para comparação relativa entre trechos e períodos.</p>
+
+            <p><strong>Análise horária:</strong> Toda a análise pode ser restrita a um intervalo horário específico (0h a 23h) ou executada para o dia completo, com seleção da forma de rota dominante quando uma linha opera múltiplas variantes geométricas.</p>
+
+            <p><strong>Relatório PDF com clusterização:</strong> A versão atual gera um relatório com dois mapas — carga acumulada e agrupamento dos trechos por cluster de demanda — com estilos graduados aplicados automaticamente ao final do processamento.</p>
+
+            <h2>Stack Tecnológica</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">GDAL</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+                <span class="tech-badge">Qt Designer</span>
+            </p>
+
+            <h2>Impacto</h2>
+            <p>O plugin elimina a etapa manual de integração entre dados de rede (GTFS) e dados de demanda (bilhetagem), permitindo que engenheiros e pesquisadores de transportes passem diretamente à análise operacional. Aplicado à rede de ônibus de Belo Horizonte, o SIG-Bus viabiliza estudos de carga por linha, identificação de trechos críticos e análise da distribuição horária de passageiros — tudo dentro do ambiente QGIS, sem dependências externas.</p>
+
+            <div class="project-links">
+                <a href="https://github.com/d-camargo/sig-bus" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>
