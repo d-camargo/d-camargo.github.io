@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Guia Prático: Modelos Digitais de Elevação (DEM) e Aplicações Essenciais no QGIS"
+category: "Geoprocessamento"
 ---
 
 O **Modelo Digital de Elevação (MDE ou DEM - *Digital Elevation Model*)** é a representação digital contínua das altitudes da superfície da Terra. Na engenharia civil, ambiental e no planejamento urbano, ele funciona como a base de dados fundamental para análises topográficas e modelagem espacial.

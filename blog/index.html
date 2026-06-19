@@ -78,6 +78,55 @@ title: Blog
     .blog-card:hover .read-more {
         color: var(--accent);
     }
+
+    /* Filtros por categoria */
+    .blog-filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-secondary);
+        font-family: 'Cinzel', serif;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        padding: 0.55rem 1.25rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--bg-main);
+    }
+
+    .blog-category {
+        align-self: flex-start;
+        font-size: 0.7rem;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+    }
+
+    .blog-card.hidden {
+        display: none;
+    }
 </style>
 
 <section class="page-header">
@@ -91,11 +140,21 @@ title: Blog
 
 <section class="blog-content-section">
     <div class="container">
+        {% assign posts = site.posts | where_exp: "item", "item.lang != 'en'" %}
+        {% assign categories = posts | map: "category" | compact | uniq | sort %}
+        {% if categories.size > 1 %}
+        <div class="blog-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            {% for category in categories %}
+            <button class="filter-btn" data-filter="{{ category | slugify }}">{{ category }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="blog-grid">
-            {% assign posts = site.posts | where_exp: "item", "item.lang != 'en'" %}
             {% for post in posts %}
-            <article class="blog-card">
+            <article class="blog-card" data-category="{{ post.category | default: 'Geral' | slugify }}">
                 <span class="blog-date">{{ post.date | date: "%d/%m/%Y" }}</span>
+                {% if post.category %}<span class="blog-category">{{ post.category }}</span>{% endif %}
                 <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
                 <a href="{{ post.url | relative_url }}" class="read-more">Ler Artigo <i class="fas fa-arrow-right"></i></a>
@@ -104,5 +163,30 @@ title: Blog
             <p style="text-align: center; color: var(--text-muted); padding: 3rem;">Ainda não há nenhuma publicação no blog.</p>
             {% endfor %}
         </div>
+        <p class="blog-empty-msg" style="display: none; text-align: center; color: var(--text-muted); padding: 3rem;">Nenhuma publicação nesta categoria.</p>
     </div>
 </section>
+
+<script>
+    (function () {
+        const buttons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.blog-card');
+        const emptyMsg = document.querySelector('.blog-empty-msg');
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const filter = btn.getAttribute('data-filter');
+                buttons.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+
+                let visible = 0;
+                cards.forEach(function (card) {
+                    const match = filter === 'all' || card.getAttribute('data-category') === filter;
+                    card.classList.toggle('hidden', !match);
+                    if (match) visible++;
+                });
+                if (emptyMsg) emptyMsg.style.display = visible === 0 ? 'block' : 'none';
+            });
+        });
+    })();
+</script>

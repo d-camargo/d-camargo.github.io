@@ -3,6 +3,7 @@ layout: post
 title: "Desire Lines plugin available in the official QGIS repository"
 lang: en
 permalink: /en/2026/05/21/plugin-desire-lines-oficial-qgis.html
+category: "Transport Engineering"
 ---
 
 The Desire Lines plugin is now integrated into the official QGIS plugin repository. This approval makes installation straightforward via the software's plugin manager, removing the need for external file downloads.

@@ -2,6 +2,7 @@
 layout: post
 title: "Plano Diretor: por que ele depende da Topografia e do Mapeamento"
 lang: pt
+category: "Planejamento Urbano"
 ---
 
 O Plano Diretor (PD) é a lei básica da política de desenvolvimento e expansão urbana do município, conforme previsto na Constituição Federal. Para quem estuda Topografia Avançada, ele é o documento que organiza o espaço físico-territorial e define como o território deve ser lido, planejado e gerido. Mais do que uma peça jurídica, o PD é o principal demandante de mapas georreferenciados de um município.

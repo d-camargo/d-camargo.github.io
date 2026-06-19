@@ -3,6 +3,7 @@ layout: post
 title: "Desire Lines 0.2.0: AoN allocation on Delaunay networks and QGIS usability updates"
 lang: en
 permalink: /en/2026/06/03/desire-lines-aon-delaunay-qgis.html
+category: "Transport Engineering"
 ---
 
 The new update of the Desire Lines plugin (version 0.2.0) introduces advanced flow allocation tools and significant usability enhancements. The main highlight of this release is the capability to perform *All-or-Nothing* (AoN) flow allocations on a structured network built from Delaunay triangulations, offering a new layer of spatial analysis for transport engineers and urban planners.

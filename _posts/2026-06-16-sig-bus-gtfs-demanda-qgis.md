@@ -2,6 +2,7 @@
 layout: post
 title: "SIG-Bus: Leitura de GTFS e Integração de Demanda de Passageiros no QGIS"
 lang: pt
+category: "Engenharia de Transportes"
 ---
 
 O SIG-Bus tem um objetivo bem delimitado: ler feeds GTFS dentro do QGIS, cruzá-los com os dados de embarque por parada e entregar relatórios sintéticos por linha, tudo sem dependências externas além do próprio QGIS. O projeto nasceu como PIBIC no CEFET-MG em 2020 (com aplicação ao edital em 2019) e foi apresentado na Semana de Ciência e Tecnologia de 2025.

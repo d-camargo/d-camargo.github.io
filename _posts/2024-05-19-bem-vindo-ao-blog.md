@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Bem-vindo ao novo Blog!"
+category: "Geral"
 ---
 
 Olá e bem-vindo ao novo espaço do site!

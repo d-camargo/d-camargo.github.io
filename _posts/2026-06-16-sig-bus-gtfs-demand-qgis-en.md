@@ -3,6 +3,7 @@ layout: post
 title: "SIG-Bus: GTFS Reader and Passenger Demand Integration for QGIS"
 lang: en
 permalink: /en/2026/06/16/sig-bus-gtfs-demand-qgis.html
+category: "Transport Engineering"
 ---
 
 SIG-Bus has a well-defined purpose: read GTFS feeds inside QGIS, cross-reference them with per-stop boarding records, and deliver synthetic reports per line, with no external dependencies beyond QGIS itself. The project started as a PIBIC undergraduate research initiative at CEFET-MG in 2020 (with the application filed in 2019) and was presented at the institution's Science and Technology Week in 2025.

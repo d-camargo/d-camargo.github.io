@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Georreferenciamento: por que ele é importante?"
+category: "Geoprocessamento"
 ---
 
 O georreferenciamento associa coordenadas geográficas a pontos que definem os limites de uma propriedade. Na prática, essa técnica permite determinar com precisão a forma, a dimensão e a localização de terrenos rurais e urbanos, oferecendo segurança jurídica e uma base sólida para o planejamento territorial.
