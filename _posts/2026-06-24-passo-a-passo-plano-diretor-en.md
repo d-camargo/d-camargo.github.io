@@ -8,7 +8,7 @@ category: "Urban Planning"
 
 Drafting a Master Plan does not start with writing a bill — it starts by organizing who decides and by reading the territory you intend to plan honestly. This post walks through the process from start to finish, split into five stages, following the methodology of Brazil's *Guide for Drafting and Revising Master Plans*.
 
-![Urban zoning map overlaid on a georeferenced territorial grid](/assets/images/plano_diretor_cover2.png)
+![Urban zoning map overlaid on a georeferenced territorial grid](/assets/images/plano_diretor_cover2.webp)
 
 In Brazil, the Master Plan (*Plano Diretor*) is the municipal law that guides urban development and expansion policy. It organizes the territory, ensures that property fulfills its social and environmental function, and is the main mechanism for delivering the right to sustainable cities — housing, infrastructure, sanitation, and mobility. I have already written about [why it relies directly on surveying and mapping](/en/2026/05/28/plano-diretor-topografia.html); here the focus is the drafting process itself.
 

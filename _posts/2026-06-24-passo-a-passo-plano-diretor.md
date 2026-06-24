@@ -7,7 +7,7 @@ category: "Planejamento Urbano"
 
 Elaborar um Plano Diretor não começa com a redação de um projeto de lei — começa com a organização de quem decide e com a leitura honesta do território que se quer planejar. Este post percorre o processo do início ao fim, dividido em cinco etapas, seguindo a metodologia do *Guia para Elaboração e Revisão de Planos Diretores*.
 
-![Mapa de zoneamento urbano sobreposto a uma malha territorial georreferenciada](/assets/images/plano_diretor_cover2.png)
+![Mapa de zoneamento urbano sobreposto a uma malha territorial georreferenciada](/assets/images/plano_diretor_cover2.webp)
 
 O Plano Diretor (PD) é a lei municipal que orienta a política de desenvolvimento e expansão urbana. Ele ordena o território, garante que a propriedade cumpra sua função socioambiental e é o principal mecanismo para efetivar o direito a cidades sustentáveis — moradia, infraestrutura, saneamento e mobilidade. Já tratei [de por que ele depende diretamente da topografia e do mapeamento](/2026/05/28/plano-diretor-topografia.html); aqui o foco é o processo de elaboração.
 
