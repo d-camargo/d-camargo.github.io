@@ -7,6 +7,8 @@ category: "Planejamento Urbano"
 
 A Leitura do Território é a etapa do Plano Diretor que troca a cidade idealizada no papel pela cidade que existe. São nove mapeamentos temáticos que viram diagnóstico, e este post mostra cada um deles com as bases de dados abertos que alimentam o mapa.
 
+![Mapeamentos temáticos sobrepostos à malha de um território municipal](/assets/images/leitura_territorio.webp)
+
 Já descrevi [as cinco etapas de elaboração do Plano Diretor](/planejamento%20urbano/2026/06/24/passo-a-passo-plano-diretor.html); a Leitura do Território é a segunda delas, e a que mais depende de geoprocessamento. O objetivo é **espacializar** os problemas: cruzar dados técnicos com a vivência da comunidade para descobrir com exatidão *onde* cada fenômeno acontece.
 
 Essa leitura se apoia em dois tipos de levantamento. Os **básicos** são essenciais para municípios de qualquer porte e usam dados secundários (Censos do IBGE, MapBiomas) ou cadastros da própria prefeitura. Os **complementares** não são obrigatórios, mas aprofundam a análise e apontam caminhos mais especializados. Ambos exigem uma base cartográfica preferencialmente georreferenciada, organizada nos mapeamentos temáticos a seguir.

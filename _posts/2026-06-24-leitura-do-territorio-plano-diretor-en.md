@@ -8,6 +8,8 @@ category: "Urban Planning"
 
 Reading the Territory is the stage where a Master Plan swaps the idealized city on paper for the city that actually exists. There are nine thematic mappings that turn into a diagnosis, and this post pairs each of them with the open datasets that feed the map.
 
+![Thematic mappings overlaid on a municipal territorial grid](/assets/images/leitura_territorio.webp)
+
 I have already laid out [the five stages of drafting a Master Plan](/en/2026/06/24/step-by-step-master-plan.html); Reading the Territory is the second, and the one that leans most heavily on GIS. The goal is to **spatialize** the problems: cross technical data with the community's lived experience to pinpoint exactly *where* each phenomenon happens.
 
 This reading rests on two kinds of survey. The **basic** ones are essential for municipalities of any size and rely on secondary data (Brazil's IBGE censuses, MapBiomas) or the city's own cadastres. The **complementary** ones are not mandatory but deepen the analysis. Both require a cartographic base, preferably georeferenced, organized into the thematic mappings below. The data sources cited are Brazilian, but most have direct equivalents in other countries.
