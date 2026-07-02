@@ -2,6 +2,7 @@
 layout: post
 title: "Plano Diretor: por que ele depende da Topografia e do Mapeamento"
 lang: pt
+translation: /en/2026/05/28/plano-diretor-topografia.html
 category: "Planejamento Urbano"
 ---
 

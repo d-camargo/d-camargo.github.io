@@ -2,6 +2,7 @@
 layout: post
 title: "Como se elabora um Plano Diretor: as cinco etapas na prática"
 lang: pt
+translation: /en/2026/06/24/step-by-step-master-plan.html
 category: "Planejamento Urbano"
 ---
 

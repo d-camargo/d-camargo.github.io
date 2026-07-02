@@ -38,6 +38,7 @@ title: "Post Title"
 lang: pt                    # 'pt' or 'en'
 category: "Geoprocessamento"  # singular field, one category per post
 permalink: /en/YYYY/MM/DD/slug.html   # required for English posts only
+translation: /en/YYYY/MM/DD/slug.html # URL of the counterpart post in the other language; the nav language toggle uses it. On EN posts this is the PT post's default URL, which includes the category, e.g. "/planejamento urbano/YYYY/MM/DD/slug.html" (quote it). Omit if there is no counterpart — the toggle then falls back to the other language's blog index.
 ---
 ```
 

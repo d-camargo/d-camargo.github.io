@@ -2,6 +2,7 @@
 layout: post
 title: "How a Master Plan Is Built: the Five Stages in Practice"
 lang: en
+translation: "/planejamento urbano/2026/06/24/passo-a-passo-plano-diretor.html"
 permalink: /en/2026/06/24/step-by-step-master-plan.html
 category: "Urban Planning"
 ---

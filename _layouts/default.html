@@ -60,7 +60,9 @@
             <a href="{{ '/en/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url contains '/curriculo/' %}active{% endif %}">Resume</a>
             <a href="{{ '/en/portfolio/index.html' | relative_url }}" class="nav-link {% if page.url contains '/portfolio/' %}active{% endif %}">Portfolio</a>
             <a href="{{ '/en/blog/index.html' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog</a>
-            <a href="{{ page.url | replace_first: '/en/', '/' | relative_url }}" class="nav-link lang-switcher" title="Mudar para Português">🇧🇷 PT</a>
+            {% assign pt_url = page.url | replace_first: '/en/', '/' %}
+            {% if page.translation %}{% assign pt_url = page.translation %}{% elsif page.layout == 'post' %}{% assign pt_url = '/blog/index.html' %}{% endif %}
+            <a href="{{ pt_url | relative_url }}" class="nav-link lang-switcher" title="Mudar para Português">🇧🇷 PT</a>
             {% else %}
             <a href="{{ '/index.html#about' | relative_url }}" class="nav-link">Sobre</a>
             <a href="{{ '/curriculo/curriculo.html' | relative_url }}" class="nav-link {% if page.url contains '/curriculo/' %}active{% endif %}">Currículo</a>
@@ -68,7 +70,9 @@
             <a href="{{ '/blog/index.html' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog</a>
             {% assign en_url = page.url %}
             {% if en_url == '/' %}{% assign en_url = '/index.html' %}{% endif %}
-            <a href="{{ '/en' | append: en_url | relative_url }}" class="nav-link lang-switcher" title="Switch to English">🇺🇸 EN</a>
+            {% assign en_url = '/en' | append: en_url %}
+            {% if page.translation %}{% assign en_url = page.translation %}{% elsif page.layout == 'post' %}{% assign en_url = '/en/blog/index.html' %}{% endif %}
+            <a href="{{ en_url | relative_url }}" class="nav-link lang-switcher" title="Switch to English">🇺🇸 EN</a>
             {% endif %}
         </div>
         <button class="mobile-toggle"><i class="fas fa-bars"></i></button>

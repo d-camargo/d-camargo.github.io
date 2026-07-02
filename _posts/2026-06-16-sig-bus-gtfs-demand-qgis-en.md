@@ -2,6 +2,7 @@
 layout: post
 title: "SIG-Bus: GTFS Reader and Passenger Demand Integration for QGIS"
 lang: en
+translation: "/engenharia de transportes/2026/06/16/sig-bus-gtfs-demanda-qgis.html"
 permalink: /en/2026/06/16/sig-bus-gtfs-demand-qgis.html
 category: "Transport Engineering"
 ---

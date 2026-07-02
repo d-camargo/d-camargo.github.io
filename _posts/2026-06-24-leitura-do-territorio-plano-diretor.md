@@ -2,6 +2,7 @@
 layout: post
 title: "Leitura do Território: como diagnosticar a cidade real com dados abertos"
 lang: pt
+translation: /en/2026/06/24/reading-the-territory-master-plan.html
 category: "Planejamento Urbano"
 ---
 

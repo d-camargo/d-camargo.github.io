@@ -2,6 +2,7 @@
 layout: post
 title: "Reading the Territory: Diagnosing the Real City with Open Data"
 lang: en
+translation: "/planejamento urbano/2026/06/24/leitura-do-territorio-plano-diretor.html"
 permalink: /en/2026/06/24/reading-the-territory-master-plan.html
 category: "Urban Planning"
 ---
