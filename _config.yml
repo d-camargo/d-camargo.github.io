@@ -2,6 +2,11 @@ title: Diego Camargo
 description: Engenheiro Civil e Professor
 baseurl: ""
 url: "https://www.dcamargo.com.br"
+
+# Date-based post URLs, no category segment. A category in the path
+# (e.g. /geoprocessamento/...) was being turned into a subdomain by the
+# domain's URL forwarding; EN posts already use /en/:year/:month/:day/:title.
+permalink: /:year/:month/:day/:title.html
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap

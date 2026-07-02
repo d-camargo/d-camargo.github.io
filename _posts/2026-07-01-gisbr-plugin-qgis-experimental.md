@@ -38,7 +38,7 @@ Os downloads vão para um cache em disco, com fallback automático: se o servido
 
 ## Para onde o projeto vai
 
-O espelho do geobr é a fundação de algo mais específico: o GisBR está evoluindo para um **sistema de diagnóstico municipal** voltado a cidades que precisam elaborar ou revisar o Plano Diretor. A ideia é escolher o município em um painel e receber as bases oficiais (transportes, drenagem e saneamento, demografia, meio ambiente, educação e saúde) já recortadas pelo polígono municipal e organizadas em um GeoPackage. É a automação do trabalho que descrevi no post sobre [leitura do território](/planejamento%20urbano/2026/06/24/leitura-do-territorio-plano-diretor.html). Essa camada ainda está em desenvolvimento e entra em uma versão futura.
+O espelho do geobr é a fundação de algo mais específico: o GisBR está evoluindo para um **sistema de diagnóstico municipal** voltado a cidades que precisam elaborar ou revisar o Plano Diretor. A ideia é escolher o município em um painel e receber as bases oficiais (transportes, drenagem e saneamento, demografia, meio ambiente, educação e saúde) já recortadas pelo polígono municipal e organizadas em um GeoPackage. É a automação do trabalho que descrevi no post sobre [leitura do território](/2026/06/24/leitura-do-territorio-plano-diretor.html). Essa camada ainda está em desenvolvimento e entra em uma versão futura.
 
 ## Como instalar
 

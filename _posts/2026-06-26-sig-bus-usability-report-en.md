@@ -2,7 +2,7 @@
 layout: post
 title: "SIG-Bus: from the interface to the PDF report"
 lang: en
-translation: "/engenharia de transportes/2026/06/26/sig-bus-usabilidade-relatorio.html"
+translation: "/2026/06/26/sig-bus-usabilidade-relatorio.html"
 permalink: /en/2026/06/26/sig-bus-usability-report.html
 category: "Transport Engineering"
 ---

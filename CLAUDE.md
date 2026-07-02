@@ -51,7 +51,7 @@ translation: /en/YYYY/MM/DD/slug.html # URL of the counterpart post in the other
 | Planejamento Urbano | Urban Planning |
 | Geral | General |
 
-Note: posts without a `permalink` use Jekyll's default `/:categories/:year/:month/:day/:title.html`, so the PT category name becomes a (space-containing) URL segment, e.g. `/planejamento urbano/2026/06/24/slug.html`. This is existing behavior — links are generated via `post.url`, so it works regardless.
+Note: `category` no longer appears in post URLs. `_config.yml` sets `permalink: /:year/:month/:day/:title.html`, so PT posts resolve to `/2026/06/24/slug.html` (EN posts keep their explicit `/en/...` permalink). This replaced the Jekyll default `/:categories/...`, which put the category in the path — a single-word category like `geoprocessamento` was then being rewritten into a subdomain (`geoprocessamento.dcamargo.com.br`) by the domain's URL forwarding, 404ing the page. Links are generated via `post.url`, so listings and nav follow automatically; only hardcoded cross-links between posts and EN `translation:` fields must use the date-based path.
 
 Portuguese posts are named `YYYY-MM-DD-slug.md`; English counterparts use the same date and a matching slug with `-en` suffix, e.g. `2026-06-03-desire-lines-aon-delaunay-qgis-en.md`.
 

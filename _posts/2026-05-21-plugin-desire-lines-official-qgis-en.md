@@ -2,7 +2,7 @@
 layout: post
 title: "Desire Lines plugin available in the official QGIS repository"
 lang: en
-translation: "/engenharia de transportes/2026/05/21/plugin-desire-lines-oficial-qgis.html"
+translation: "/2026/05/21/plugin-desire-lines-oficial-qgis.html"
 permalink: /en/2026/05/21/plugin-desire-lines-oficial-qgis.html
 category: "Transport Engineering"
 ---

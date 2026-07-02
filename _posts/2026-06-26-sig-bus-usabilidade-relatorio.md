@@ -67,6 +67,6 @@ O relatório usa `QgsPrintLayout`, a API de impressão nativa do QGIS. A escolha
 
 ---
 
-O [post anterior desta série](https://www.dcamargo.com.br/engenharia%20de%20transportes/2026/06/16/sig-bus-gtfs-demanda-qgis.html) detalha o modelo de alocação de demanda e as decisões de estrutura de dados. A próxima parte vai cobrir o Diagrama de Blocos, a ferramenta de alocação de frota do plugin.
+O [post anterior desta série](https://www.dcamargo.com.br/2026/06/16/sig-bus-gtfs-demanda-qgis.html) detalha o modelo de alocação de demanda e as decisões de estrutura de dados. A próxima parte vai cobrir o Diagrama de Blocos, a ferramenta de alocação de frota do plugin.
 
 O repositório está disponível no [GitHub](https://github.com/d-camargo/sig-bus). O feed GTFS de Belo Horizonte para reproduzir as análises está em `docs/gtfsfiles.zip`.

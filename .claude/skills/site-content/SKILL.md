@@ -103,7 +103,7 @@ EN post (`_posts/YYYY-MM-DD-slug-en.md`, same date, slug + `-en`):
 layout: post
 title: "Post Title"
 lang: en
-translation: "/geoprocessamento/YYYY/MM/DD/slug.html"  # PT post's URL — includes the lowercase PT category segment (spaces kept), so quote it
+translation: "/YYYY/MM/DD/slug.html"    # PT post's URL (date-based, no category segment)
 permalink: /en/YYYY/MM/DD/slug.html     # required for EN posts
 category: "Geoprocessing"               # EN name of the same category
 ---
@@ -114,6 +114,7 @@ Rules:
 - Category names must match the language of the post. Existing pairs: Engenharia de Transportes / Transport Engineering, Geoprocessamento / Geoprocessing, Planejamento Urbano / Urban Planning, Geral / General.
 - The `translation` field feeds the nav language toggle; without it the toggle falls back to the other language's blog index.
 - Date comes from the filename; no `date:` field is used.
+- Post URLs are date-based (`/:year/:month/:day/:title.html`, set in `_config.yml`); the category never appears in the path. Any cross-link between posts must use this date-based URL, never `/category/...`.
 
 ### Structure
 

@@ -2,7 +2,7 @@
 layout: post
 title: "Desire Lines 0.2.0: AoN allocation on Delaunay networks and QGIS usability updates"
 lang: en
-translation: "/engenharia de transportes/2026/06/03/desire-lines-aon-delaunay-qgis.html"
+translation: "/2026/06/03/desire-lines-aon-delaunay-qgis.html"
 permalink: /en/2026/06/03/desire-lines-aon-delaunay-qgis.html
 category: "Transport Engineering"
 ---

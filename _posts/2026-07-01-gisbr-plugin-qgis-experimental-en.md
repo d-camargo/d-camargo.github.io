@@ -2,7 +2,7 @@
 layout: post
 title: "GisBR: Brazil's Official Spatial Datasets Straight into QGIS"
 lang: en
-translation: "/geoprocessamento/2026/07/01/gisbr-plugin-qgis-experimental.html"
+translation: "/2026/07/01/gisbr-plugin-qgis-experimental.html"
 permalink: /en/2026/07/01/gisbr-plugin-qgis-experimental.html
 category: "Geoprocessing"
 ---

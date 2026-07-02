@@ -2,7 +2,7 @@
 layout: post
 title: "The Master Plan: Why It Relies on Surveying and Mapping"
 lang: en
-translation: "/planejamento urbano/2026/05/28/plano-diretor-topografia.html"
+translation: "/2026/05/28/plano-diretor-topografia.html"
 permalink: /en/2026/05/28/plano-diretor-topografia.html
 category: "Urban Planning"
 ---
