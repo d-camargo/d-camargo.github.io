@@ -8,6 +8,8 @@ category: "Geoprocessamento"
 
 O GisBR, meu novo plugin para QGIS, foi aprovado no repositório oficial de complementos como versão experimental. Ele traz para dentro do QGIS o acesso "uma linha → uma camada" dos pacotes **geobr** e **censobr**, do IPEA, sem exigir que o usuário saiba programar em R ou Python.
 
+![Ícone do plugin GisBR](/assets/images/posts/gisbr-cover.webp)
+
 ## O problema que ele resolve
 
 Quem trabalha com análise espacial no Brasil conhece a rotina: para montar um mapa municipal, é preciso navegar pelo FTP do IBGE, localizar a malha do ano correto, baixar o arquivo compactado, extrair e só então carregar no QGIS. O pacote geobr resolveu isso de forma elegante para quem usa R ou Python: uma função retorna a camada pronta. Mas grande parte dos profissionais de geoprocessamento trabalha direto no QGIS e ficava de fora desse fluxo.

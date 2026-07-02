@@ -118,6 +118,7 @@ Rules:
 ### Structure
 
 - Open with a **hook** — one concrete sentence about what the post solves or reveals.
+- Cover image goes **after the first paragraph**, not before it: `![Alt text](/assets/images/posts/FILE.webp)` on its own line, then a blank line before the next paragraph.
 - Use `## H2` headings to break up sections. Keep them descriptive, not generic ("Como instalar" not "Instalação").
 - End with a **call to action** or takeaway — what should the reader do or think next?
 - For EN posts: keep the same structure as PT but adapt idioms; don't translate literally.

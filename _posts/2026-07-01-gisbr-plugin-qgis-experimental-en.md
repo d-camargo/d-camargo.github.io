@@ -9,6 +9,8 @@ category: "Geoprocessing"
 
 GisBR, my new QGIS plugin, has been approved in the official plugin repository as an experimental release. It brings the "one line → one layer" access of IPEA's **geobr** and **censobr** packages into QGIS, no R or Python skills required.
 
+![GisBR plugin icon](/assets/images/posts/gisbr-cover.webp)
+
 ## The problem it solves
 
 Anyone doing spatial analysis in Brazil knows the routine: to build a municipal map, you browse IBGE's FTP server, find the boundary files for the right year, download the archive, extract it, and only then load it into QGIS. The geobr package solved this elegantly for R and Python users: one function call returns a ready-to-use layer. But a large share of GIS professionals work directly in QGIS and were left out of that workflow.
