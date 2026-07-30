@@ -1,0 +1,147 @@
+---
+layout: default
+title: "GisBR: QGIS Plugin for Brazil's Official Spatial Data"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">GisBR</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">A QGIS plugin that brings Brazil's official spatial datasets straight into the Processing Toolbox.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/posts/gisbr-cover.webp' | relative_url }}" alt="GisBR plugin icon" style="max-width:400px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>Anyone doing spatial analysis in Brazil knows the routine: building a municipal map means browsing IBGE's FTP server, finding the boundary files for the right year, downloading the archive, extracting it, and only then loading it into QGIS. The <strong>geobr</strong> package, from IPEA, solved this elegantly for R and Python users — one function call returns a ready-to-use layer — but left out most GIS professionals, who work directly in QGIS and don't write code.</p>
+            <p>The same applies to diagnosing a municipality for a Master Plan: gathering official transport, sanitation, demographic, and environmental datasets means manually querying dozens of different WFS servers, ArcGIS REST endpoints, and download portals, each with its own format and reference system.</p>
+
+            <h2>The Solution — Project Evolution</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.2.0 — Experimental release</div>
+                <p style="margin-bottom:0">Approved in the official QGIS plugin repository. Each geobr geography becomes a Processing algorithm: 55 in total, covering administrative boundaries, census data, urban and metropolitan areas, environmental themes, and sectoral data such as health and education, plus the <code>join_censo</code> algorithm, which joins census tracts with censobr's demographic tables. Design decision: zero external dependencies, only the native QGIS/Qt API and Python's standard library.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.3.2 — OSM road networks</div>
+                <p style="margin-bottom:0">Downloads the road network of any municipality directly from OpenStreetMap via the Overpass API, structured as links and nodes with minimal topology — the same logic behind <a href="https://github.com/jiawlu/OSM2GMNS" target="_blank" style="color: var(--accent);">osm2gmns</a>, by professor Xuesong Zhou (Arizona State University), applied inside QGIS. Also fixed a timeout value that was never applied to Overpass requests. First release published without the "experimental" label.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.4.0 / v0.4.1 — QGIS 4.x compatibility</div>
+                <p style="margin-bottom:0">Explicit support for QGIS 4.x, plus a fix for a PyQt6 enum-scoping bug that took down the municipality catalog and the Overpass network error check.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.4.3 — Consolidated SSL certificates</div>
+                <p style="margin-bottom:0">SSL certificate support, until then limited to the IPEA downloader, moved into a single module (<code>core/ssl_support.py</code>) and was extended to every connector in the plugin — WFS, ArcGIS REST, Overpass, and the satellite basemap — fixing certificate chain failures on fresh Windows/OSGeo4W installs when querying sources like SICAR, ANA/SNIRH, INDE, SGB, and IBAMA.</p>
+            </div>
+
+            <h2>Key Features</h2>
+
+            <p><strong>55 Processing algorithms:</strong> every official geography (country, states, municipalities, census tracts, biomes, conservation units, indigenous lands, favelas, polling places, and more) becomes an algorithm with year, state/IBGE code filtering, and optional simplified geometry.</p>
+
+            <p><strong>OpenStreetMap road networks:</strong> downloads any municipality's roads via Overpass, assembled as a link-and-node network ready for transport modeling, in SIRGAS 2000 (EPSG:4674).</p>
+
+            <p><strong>Local cache with a GitHub mirror:</strong> downloads are cached on disk; if IPEA's server is down, the plugin fetches the same files from a GitHub mirror without interrupting the workflow.</p>
+
+            <p><strong>Embedded SSL certificates:</strong> recognizes the trust chains of IPEA, SICAR, ANA/SNIRH, INDE, SGB, IBAMA, Overpass, and the satellite basemap, fixing failures on fresh Windows installs without relaxing any security check.</p>
+
+            <p><strong>Zero external dependencies:</strong> runs on only the native QGIS/Qt API and Python's standard library — no geopandas, pandas, or requests — avoiding conflicts with other plugins and installation barriers for less technical users.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">QGIS Processing Framework</span>
+                <span class="tech-badge">Overpass API</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+                <span class="tech-badge">Parquet / GDAL</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>GisBR removes the manual search, download, and conversion steps for anyone working in QGIS, covering dozens of administrative, census, environmental, and sectoral geographies, plus OpenStreetMap road networks — all without requiring any programming knowledge. The project is evolving into an automated municipal diagnosis system for drafting and revising Master Plans, gathering a municipality's official datasets already clipped to its boundary into a single GeoPackage.</p>
+
+            <div class="project-links">
+                <a href="https://plugins.qgis.org/plugins/gisbr/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Official QGIS Repository</a>
+                <a href="https://github.com/d-camargo/gisbr" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,146 @@
+---
+layout: default
+title: "GisBR: Plugin QGIS para Dados Espaciais Oficiais do Brasil"
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">GisBR</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Plugin QGIS que traz os dados espaciais oficiais do Brasil direto para a Caixa de Ferramentas de Processamento.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/posts/gisbr-cover.webp' | relative_url }}" alt="Ícone do plugin GisBR" style="max-width:400px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>O Problema</h2>
+            <p>Quem trabalha com análise espacial no Brasil conhece a rotina: para montar um mapa municipal, é preciso navegar pelo FTP do IBGE, localizar a malha do ano correto, baixar o arquivo compactado, extrair e só então carregar no QGIS. O pacote <strong>geobr</strong>, do IPEA, resolveu essa etapa de forma elegante para quem programa em R ou Python — uma função retorna a camada pronta —, mas deixou de fora a maior parte dos profissionais de geoprocessamento, que trabalham direto no QGIS e não escrevem código.</p>
+            <p>O mesmo vale para o diagnóstico de um município na elaboração de um Plano Diretor: reunir as bases oficiais de transporte, saneamento, demografia e meio ambiente significa consultar manualmente dezenas de servidores WFS, ArcGIS REST e portais de download diferentes, cada um com seu próprio formato e sistema de referência.</p>
+
+            <h2>A Solução — Evolução do Projeto</h2>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.2.0 — Lançamento experimental</div>
+                <p style="margin-bottom:0">Aprovação no repositório oficial de complementos do QGIS. Cada geografia do geobr vira um algoritmo de Processing: 55 ao todo, cobrindo divisão administrativa, censo, áreas urbanas e metropolitanas, meio ambiente e temas setoriais como saúde e educação, além do algoritmo <code>join_censo</code>, que cruza setores censitários com as tabelas demográficas do censobr. Decisão de projeto: zero dependências externas, só a API nativa do QGIS/Qt e a biblioteca padrão do Python.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.3.2 — Malha viária do OSM</div>
+                <p style="margin-bottom:0">Download da rede viária de qualquer município direto do OpenStreetMap via API Overpass, estruturada como links e nós com topologia mínima — a mesma lógica do <a href="https://github.com/jiawlu/OSM2GMNS" target="_blank" style="color: var(--accent);">osm2gmns</a>, do professor Xuesong Zhou (Arizona State University), aplicada dentro do QGIS. Corrigido também um timeout que nunca era aplicado às consultas Overpass. Primeira versão publicada sem o rótulo "experimental".</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.4.0 / v0.4.1 — Compatibilidade QGIS 4.x</div>
+                <p style="margin-bottom:0">Declaração explícita de suporte ao QGIS 4.x e correção de um bug de escopo de enum no PyQt6 que derrubava o catálogo de municípios e a checagem de erros do Overpass.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.4.3 — Certificados SSL consolidados</div>
+                <p style="margin-bottom:0">O suporte a certificados SSL, até então restrito ao downloader do IPEA, passou para um módulo único (<code>core/ssl_support.py</code>) e se estendeu a todos os conectores do plugin — WFS, ArcGIS REST, Overpass e o basemap de satélite —, resolvendo falhas de cadeia de certificado em instalações novas de Windows/OSGeo4W ao consultar fontes como SICAR, ANA/SNIRH, INDE, SGB e IBAMA.</p>
+            </div>
+
+            <h2>Funcionalidades Principais</h2>
+
+            <p><strong>55 algoritmos de Processing:</strong> cada geografia oficial (país, estados, municípios, setores censitários, biomas, unidades de conservação, terras indígenas, favelas, locais de votação e mais) vira um algoritmo com parâmetros de ano, filtro por UF ou código IBGE e opção de geometria simplificada.</p>
+
+            <p><strong>Malha viária do OpenStreetMap:</strong> download das vias de qualquer município via Overpass, montadas como uma rede de links e nós pronta para modelagem de transportes, em SIRGAS 2000 (EPSG:4674).</p>
+
+            <p><strong>Cache local com espelho no GitHub:</strong> downloads ficam em cache em disco; se o servidor do IPEA estiver fora do ar, o plugin busca os mesmos arquivos em um espelho no GitHub, sem interromper o fluxo de trabalho.</p>
+
+            <p><strong>Certificados SSL embarcados:</strong> reconhece as cadeias de confiança de IPEA, SICAR, ANA/SNIRH, INDE, SGB, IBAMA, Overpass e o basemap de satélite, resolvendo falhas de instalações novas de Windows sem relaxar nenhuma verificação de segurança.</p>
+
+            <p><strong>Zero dependências externas:</strong> funciona apenas com a API nativa do QGIS/Qt e a biblioteca padrão do Python — sem geopandas, pandas ou requests, o que evita conflitos com outros plugins e barreiras de instalação para usuários menos técnicos.</p>
+
+            <h2>Stack Tecnológica</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">QGIS Processing Framework</span>
+                <span class="tech-badge">Overpass API</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+                <span class="tech-badge">Parquet / GDAL</span>
+            </p>
+
+            <h2>Impacto</h2>
+            <p>O GisBR elimina a etapa manual de busca, download e conversão de dados oficiais para quem trabalha em QGIS, cobrindo dezenas de geografias administrativas, censitárias, ambientais e setoriais, além da malha viária do OpenStreetMap — tudo sem exigir conhecimento de programação. O projeto está evoluindo para um sistema de diagnóstico municipal automatizado, voltado à elaboração e revisão de Planos Diretores, que reúne as bases oficiais de um município já recortadas pelo seu polígono em um único GeoPackage.</p>
+
+            <div class="project-links">
+                <a href="https://plugins.qgis.org/plugins/gisbr/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Repositório Oficial QGIS</a>
+                <a href="https://github.com/d-camargo/gisbr" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>
