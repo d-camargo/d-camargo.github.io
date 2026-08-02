@@ -14,7 +14,7 @@ bundle exec jekyll build
 
 Dependencies live in `vendor/bundle` (set via `.bundle/config`). Run `bundle install` if gems are missing.
 
-Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/jekyll.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`.
+Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/deploy-pages.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`.
 
 ## Architecture
 
@@ -38,7 +38,7 @@ title: "Post Title"
 lang: pt                    # 'pt' or 'en'
 category: "Geoprocessamento"  # singular field, one category per post
 permalink: /en/YYYY/MM/DD/slug.html   # required for English posts only
-translation: /en/YYYY/MM/DD/slug.html # URL of the counterpart post in the other language; the nav language toggle uses it. On EN posts this is the PT post's default URL, which includes the category, e.g. "/planejamento urbano/YYYY/MM/DD/slug.html" (quote it). Omit if there is no counterpart — the toggle then falls back to the other language's blog index.
+translation: /en/YYYY/MM/DD/slug.html # URL of the counterpart post in the other language; the nav language toggle uses it. On EN posts this is the PT post's date-based URL, e.g. "/2026/06/24/slug.html" (quote it) — no category in the path, see the note below. Omit if there is no counterpart — the toggle then falls back to the other language's blog index.
 ---
 ```
 
@@ -63,3 +63,10 @@ Portuguese posts are named `YYYY-MM-DD-slug.md`; English counterparts use the sa
 **Portfolio pages** (`portfolio/` and `en/portfolio/`) are plain HTML files using `layout: default`. Each page is self-contained with its own `<style>` block; there is no shared portfolio template.
 
 **Images**: Post images go in `assets/images/posts/`; portfolio images go in `assets/images/portfolio/`.
+
+## Skills
+
+Project skills are located exclusively in `.claude/skills/<nome>/SKILL.md`:
+- `site-content` — voz e tom
+- `blog-post-writer` — estrutura e gravação do post
+
