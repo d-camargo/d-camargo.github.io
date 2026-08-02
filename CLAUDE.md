@@ -5,14 +5,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Serve locally with live reload
-bundle exec jekyll serve
+# Serve locally with live reload (http://localhost:4000)
+./serve.sh
 
-# Build for production
-bundle exec jekyll build
+# Build only, output to _site/
+./serve.sh --build
 ```
 
-Dependencies live in `vendor/bundle` (set via `.bundle/config`). Run `bundle install` if gems are missing.
+`serve.sh` runs Jekyll inside a `ruby:3.3` podman container, because the VPS has no Ruby and no root access to install one. Gems are installed into `vendor/bundle` on first run (gitignored); later runs reuse them. On a machine that does have Ruby installed, `bundle exec jekyll serve` works directly.
+
+The server binds to `127.0.0.1` only. To view it from another machine, open an SSH tunnel from that machine:
+
+```bash
+ssh -L 4000:localhost:4000 -L 35729:localhost:35729 diego@<ip-da-vps>
+```
+
+then browse to `http://localhost:4000`. Port 35729 carries live reload.
+
+`_config.yml` has an `exclude:` list keeping repo working files (`CLAUDE.md`, `Skills/`, `serve.sh`, the Gemfiles) out of the published site — anything added at the repo root that is not site content must be added there too.
 
 Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/deploy-pages.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`.
 

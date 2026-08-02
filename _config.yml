@@ -10,3 +10,13 @@ permalink: /:year/:month/:day/:title.html
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+
+# Arquivos de trabalho do repositorio nao fazem parte do site publicado.
+exclude:
+  - CLAUDE.md
+  - Skills/
+  - serve.sh
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .planexec/
