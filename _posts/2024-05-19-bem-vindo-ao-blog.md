@@ -2,9 +2,12 @@
 layout: post
 title: "Bem-vindo ao novo Blog!"
 category: "Geral"
+image: /assets/images/posts/bem-vindo-ao-blog.webp
 ---
 
 Olá e bem-vindo ao novo espaço do site!
+
+![Treliça, malha viária e código convergindo num mesmo ponto](/assets/images/posts/bem-vindo-ao-blog.webp)
 
 Decidi criar este blog para compartilhar conhecimentos, descobertas e insights sobre a minha jornada acadêmica e profissional. Com as constantes e aceleradas mudanças no cenário tecnológico, sinto a necessidade de conectar a **Engenharia Civil**, a **Engenharia de Transportes** e o **Desenvolvimento de Sistemas** em um só lugar e de forma consistente.
 

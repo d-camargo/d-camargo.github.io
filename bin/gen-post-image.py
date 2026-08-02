@@ -28,6 +28,7 @@ import io
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -38,6 +39,10 @@ ENV_FILE = Path.home() / ".config" / "dcamargo" / "gemini.env"
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTDIR = REPO_ROOT / "assets" / "images" / "posts"
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+
+# O modelo de imagem devolve 503 com alguma frequencia quando esta sobrecarregado.
+MAX_RETRIES = 4
+RETRY_BASE_DELAY = 5  # segundos, dobrando a cada tentativa
 
 # Prompt de casa: mantem as capas coerentes com o design system do site
 # (assets/css/style.css). Alterar aqui muda o visual de toda a serie.
@@ -92,7 +97,10 @@ def request_image(api_key, model, prompt, aspect, size):
         },
     }
 
-    for attempt in ("com imageConfig", "sem imageConfig"):
+    payload = None
+    transient = 0
+
+    while payload is None:
         req = urllib.request.Request(
             ENDPOINT.format(model=model),
             data=json.dumps(body).encode(),
@@ -102,30 +110,44 @@ def request_image(api_key, model, prompt, aspect, size):
         try:
             with urllib.request.urlopen(req, timeout=180) as resp:
                 payload = json.load(resp)
-            break
         except urllib.error.HTTPError as exc:
             detail = exc.read().decode(errors="replace")
-            message = ""
             try:
                 message = json.loads(detail).get("error", {}).get("message", "")
             except json.JSONDecodeError:
                 message = detail[:400]
 
-            retriable = attempt == "com imageConfig" and exc.code == 400 and "imageConfig" in detail
-            if retriable:
-                body["generationConfig"].pop("imageConfig", None)
+            if exc.code == 400 and "imageConfig" in detail and "imageConfig" in body["generationConfig"]:
+                body["generationConfig"].pop("imageConfig")
                 print("aviso: modelo rejeitou imageConfig, repetindo sem ele", file=sys.stderr)
                 continue
 
+            # Cota esgotada nao adianta repetir: o problema e de faturamento.
             if exc.code == 429 and "free_tier" in detail:
                 sys.exit(
                     "erro 429: o projeto da chave esta no free tier, que tem cota ZERO "
                     "para modelos de imagem.\nAtive o faturamento em "
                     "https://aistudio.google.com/apikey (link 'Set up Billing' no projeto)."
                 )
+            if exc.code == 429 and "prepayment" in detail.lower():
+                sys.exit(
+                    "erro 429: saldo pre-pago zerado. Compre creditos em "
+                    "https://aistudio.google.com/billing — os creditos promocionais "
+                    "do Google AI Pro so sao consumidos com saldo ativo."
+                )
+
+            # 503 (modelo sobrecarregado) e 429 de rate limit sao temporarios.
+            if exc.code in (500, 502, 503, 504) or (exc.code == 429 and "free_tier" not in detail):
+                transient += 1
+                if transient > MAX_RETRIES:
+                    sys.exit(f"erro HTTP {exc.code} apos {MAX_RETRIES} tentativas: {message}")
+                delay = RETRY_BASE_DELAY * 2 ** (transient - 1)
+                print(f"aviso: HTTP {exc.code}, nova tentativa em {delay}s "
+                      f"({transient}/{MAX_RETRIES})", file=sys.stderr)
+                time.sleep(delay)
+                continue
+
             sys.exit(f"erro HTTP {exc.code}: {message}")
-    else:
-        sys.exit("erro: nao foi possivel obter resposta da API.")
 
     for candidate in payload.get("candidates", []):
         for part in candidate.get("content", {}).get("parts", []):

@@ -2,9 +2,12 @@
 layout: post
 title: "Georreferenciamento: por que ele é importante?"
 category: "Geoprocessamento"
+image: /assets/images/posts/georreferenciamento.webp
 ---
 
 O georreferenciamento associa coordenadas geográficas a pontos que definem os limites de uma propriedade. Na prática, essa técnica permite determinar com precisão a forma, a dimensão e a localização de terrenos rurais e urbanos, oferecendo segurança jurídica e uma base sólida para o planejamento territorial.
+
+![Planta cadastral: parcelas rurais com vértices de divisa à esquerda, malha urbana à direita](/assets/images/posts/georreferenciamento.webp)
 
 No meio rural, a obrigatoriedade do georreferenciamento de imóveis consta da Lei 10.267/2001 e do Decreto 4.449/2002. A medida visa atualizar registros, prevenir conflitos de vizinhança e integrar informações fundiárias em um cadastro único. No contexto urbano, a criação do Cadastro Territorial Multifinalitário (CTM) e sua integração ao Sistema Nacional de Gestão de Informações Territoriais (SINTER) permitem organizar dados cadastrais de forma padronizada e interoperável, servindo às administrações públicas e aos cidadãos.
 
