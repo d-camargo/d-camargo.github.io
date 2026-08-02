@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/07/14/desire-lines-pt-br-qt6-qgis4.html"
 permalink: /en/2026/07/14/desire-lines-pt-br-qt6-qgis4.html
 category: "Transport Engineering"
+image: /assets/images/desire_lines_flow_map.png
 ---
 
 The Desire Lines plugin picked up two updates that change who can use it and where. The interface is now translated into Portuguese, and the same package runs on both QGIS 3.x and QGIS 4.x, which moved from Qt5 to Qt6.

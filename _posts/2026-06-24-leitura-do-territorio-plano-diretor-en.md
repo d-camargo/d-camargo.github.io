@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/06/24/leitura-do-territorio-plano-diretor.html"
 permalink: /en/2026/06/24/reading-the-territory-master-plan.html
 category: "Urban Planning"
+image: /assets/images/leitura_territorio.webp
 ---
 
 Reading the Territory is the stage where a Master Plan swaps the idealized city on paper for the city that actually exists. There are nine thematic mappings that turn into a diagnosis, and this post pairs each of them with the open datasets that feed the map.

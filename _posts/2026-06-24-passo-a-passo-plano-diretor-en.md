@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/06/24/passo-a-passo-plano-diretor.html"
 permalink: /en/2026/06/24/step-by-step-master-plan.html
 category: "Urban Planning"
+image: /assets/images/plano_diretor_cover2.webp
 ---
 
 A Master Plan has to be revised at least every ten years. Yet before a single line of the bill is written, four stages decide whether the future law will have any connection to the real city. There are five stages in total, and this post walks through each one following the methodology of Brazil's *Guide for Drafting and Revising Master Plans*.

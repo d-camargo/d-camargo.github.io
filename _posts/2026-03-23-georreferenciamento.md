@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Georreferenciamento: por que ele é importante?"
+lang: pt
 category: "Geoprocessamento"
 image: /assets/images/posts/georreferenciamento.webp
 ---
@@ -33,11 +34,11 @@ No meio urbano, os levantamentos devem estar apoiados em pelo menos dois vértic
 
 ## Como funciona o georreferenciamento urbano na prática?
 
-1. **Planejamento** — Avalia-se a existência de cadastros e da RRCM; definem-se as camadas essenciais (relevo, infraestrutura, parâmetros urbanísticos, cadastro imobiliário, meio ambiente).
-2. **Levantamento** — Instalados e medidos os vértices de divisa, suas coordenadas são vinculadas ao SGB via RRCM. O levantamento deve captar alinhamentos prediais, logradouros e elementos de infraestrutura.
-3. **Ajustamento** — As observações são ajustadas por mínimos quadrados e é elaborado um laudo técnico comprovando a acurácia obtida.
-4. **Montagem do cadastro** — O CTM armazena dados das parcelas e das unidades imobiliárias, cada uma com um Código de Identificação do Imóvel (CIN), integrando-se ao cadastro imobiliário e ao IPTU.
-5. **Certificação** — A parcela é validada por um responsável técnico e enviada ao SINTER, condicionando a aprovação de obras e habite-se à atualização do cadastro.
+1. **Planejamento**: Avalia-se a existência de cadastros e da RRCM; definem-se as camadas essenciais (relevo, infraestrutura, parâmetros urbanísticos, cadastro imobiliário, meio ambiente).
+2. **Levantamento**: Instalados e medidos os vértices de divisa, suas coordenadas são vinculadas ao SGB via RRCM. O levantamento deve captar alinhamentos prediais, logradouros e elementos de infraestrutura.
+3. **Ajustamento**: As observações são ajustadas por mínimos quadrados e é elaborado um laudo técnico comprovando a acurácia obtida.
+4. **Montagem do cadastro**: O CTM armazena dados das parcelas e das unidades imobiliárias, cada uma com um Código de Identificação do Imóvel (CIN), integrando-se ao cadastro imobiliário e ao IPTU.
+5. **Certificação**: A parcela é validada por um responsável técnico e enviada ao SINTER, condicionando a aprovação de obras e habite-se à atualização do cadastro.
 
 ## Gestão e responsabilidades
 

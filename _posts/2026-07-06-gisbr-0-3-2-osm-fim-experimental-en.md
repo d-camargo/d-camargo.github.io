@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/07/06/gisbr-0-3-2-osm-fim-experimental.html"
 permalink: /en/2026/07/06/gisbr-0-3-2-osm-fim-experimental.html
 category: "Geoprocessing"
+image: /assets/images/posts/gisbr-osm-belem.webp
 ---
 
 About two years ago I talked with professor Xuesong (Simon) Zhou, from Arizona State University, one of the authors of [osm2gmns](https://github.com/jiawlu/OSM2GMNS), a tool that turns OpenStreetMap data into transport networks ready for modeling. Two years later, that link-and-node mechanic lands in my plugin: GisBR 0.3.2 downloads the road network of any Brazilian municipality straight from OSM. It is also the first release published without the **experimental** label in the official QGIS plugin repository.

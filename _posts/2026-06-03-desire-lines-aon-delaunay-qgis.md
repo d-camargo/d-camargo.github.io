@@ -4,6 +4,7 @@ title: "Desire Lines 0.2.0: Alocação AoN sobre redes Delaunay e melhorias de u
 lang: pt
 translation: /en/2026/06/03/desire-lines-aon-delaunay-qgis.html
 category: "Engenharia de Transportes"
+image: /assets/images/posts/desire_lines_v020.png
 ---
 
 A nova atualização do plugin Desire Lines (versão 0.2.0) introduz ferramentas avançadas de alocação de fluxo e melhorias significativas na experiência do usuário. O principal destaque da versão é a possibilidade de realizar alocações do tipo *All-or-Nothing* (Tudo ou Nada) em uma rede estruturada a partir de triangulações Delaunay, oferecendo uma nova camada de análise espacial para engenheiros de transportes e planejadores urbanos.
@@ -46,7 +47,7 @@ Além disso, o plugin agora realiza uma **validação em tempo real das tabelas 
 
 ## Visualização Facilitada com Estilo Graduado
 
-A análise visual dos resultados ficou mais intuitiva com a aplicação automática de um estilo graduado baseado no algoritmo **Natural Breaks (Jenks)**. Ao finalizar o processamento, as camadas geradas são coloridas automaticamente de acordo com o volume de fluxo alocado, destacando de forma instantânea os principais eixos de desejo e canais de tráfego. O estilo permanece 100% editável e integrado ao painel de simbologia padrão do QGIS.
+A análise visual dos resultados dispensa configuração manual: o plugin aplica sozinho um estilo graduado baseado no algoritmo **Natural Breaks (Jenks)**. Ao finalizar o processamento, as camadas geradas são coloridas automaticamente de acordo com o volume de fluxo alocado, destacando de forma instantânea os principais eixos de desejo e canais de tráfego. O estilo permanece 100% editável e integrado ao painel de simbologia padrão do QGIS.
 
 ## Como Instalar
 

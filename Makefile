@@ -10,9 +10,15 @@
 # `jekyll build` sai != 0 em erro de Liquid, frontmatter invalido ou include
 # ausente, entao ele e o gate honesto deste projeto.
 
-.PHONY: test build serve
+.PHONY: test build content serve
 
-test: build
+# Duas verificacoes independentes: o build pega template quebrado, o
+# check-content pega texto fora das regras da casa e frontmatter incompleto.
+# `content` roda primeiro por ser instantaneo — falha rapido antes do container.
+test: content build
+
+content:
+	bin/check-content.py
 
 build:
 	./serve.sh --build

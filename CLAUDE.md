@@ -11,19 +11,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Build only, output to _site/
 ./serve.sh --build
 
-# Verification gate — same thing, via the target the Hermes engine looks for
+# Verification gate — content lint + build, via the target the Hermes engine looks for
 make test
+
+# Content lint alone (instant, no container)
+bin/check-content.py
 
 # Generate a post cover image (see Images below)
 bin/gen-post-image.py --slug <slug> --prompt "<subject>" [--n 3]
 ```
 
-`make test` is the project's verification gate: it runs `jekyll build`, which exits
-non-zero on a Liquid error, invalid frontmatter or a missing include. It exists because
-the Hermes engine (`planexec.py`) looks for a `test:` Makefile target to decide whether a
-project has a gate at all; without it `run_tests` returns `None` and the review approves
-on the reviewing model's word alone — on a repo that publishes straight to production.
-Run it before any push.
+`make test` is the project's verification gate, and it runs two independent checks:
+
+- **`bin/check-content.py`** turns the mechanical half of the `site-content` skill into a
+  real check: em dashes in body text (the rule is zero), the banned "Não é apenas X"
+  structure, unproven adjectives (poderoso/robusto/intuitivo), advertising tone, `#` H1 in
+  the body, incomplete frontmatter (`layout`, `title`, `lang`, `category`, `image`), a
+  category that does not exist for the post's language, an EN post without `permalink`, a
+  `translation:` pointing nowhere, and images referenced but absent from disk. Note that
+  the PT/EN pairing is checked through `translation:`, **not** the filename — several
+  pairs use translated slugs (`oficial`/`official`, `demanda`/`demand`), so the
+  `slug` + `-en` convention is not reliable.
+- **`jekyll build`**, which exits non-zero on a Liquid error, invalid frontmatter or a
+  missing include.
+
+It exists because the Hermes engine (`planexec.py`) looks for a `test:` Makefile target to
+decide whether a project has a gate at all; without it `run_tests` returns `None` and the
+review approves on the reviewing model's word alone — on a repo that publishes straight to
+production. Run it before any push.
 
 `serve.sh` runs Jekyll inside a `ruby:3.3` podman container, because the VPS has no Ruby and no root access to install one. Gems are installed into `vendor/bundle` on first run (gitignored); later runs reuse them. On a machine that does have Ruby installed, `bundle exec jekyll serve` works directly.
 

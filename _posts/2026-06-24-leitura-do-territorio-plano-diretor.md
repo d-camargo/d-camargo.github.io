@@ -4,6 +4,7 @@ title: "Leitura do Território: como diagnosticar a cidade real com dados aberto
 lang: pt
 translation: /en/2026/06/24/reading-the-territory-master-plan.html
 category: "Planejamento Urbano"
+image: /assets/images/leitura_territorio.webp
 ---
 
 A Leitura do Território é a etapa do Plano Diretor que troca a cidade idealizada no papel pela cidade que existe. São nove mapeamentos temáticos que viram diagnóstico, e este post mostra cada um deles com as bases de dados abertos que alimentam o mapa.

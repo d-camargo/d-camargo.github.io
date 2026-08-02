@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Bem-vindo ao novo Blog!"
+lang: pt
 category: "Geral"
 image: /assets/images/posts/bem-vindo-ao-blog.webp
 ---

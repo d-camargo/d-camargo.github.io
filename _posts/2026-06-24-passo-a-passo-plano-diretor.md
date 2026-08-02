@@ -4,6 +4,7 @@ title: "Como se elabora um Plano Diretor: as cinco etapas na prática"
 lang: pt
 translation: /en/2026/06/24/step-by-step-master-plan.html
 category: "Planejamento Urbano"
+image: /assets/images/plano_diretor_cover2.webp
 ---
 
 Um Plano Diretor precisa ser revisado pelo menos a cada dez anos. Antes de redigir uma única linha do projeto de lei, porém, existem quatro etapas que decidem se a futura lei vai ter alguma conexão com a cidade real. São cinco etapas no total, e este post percorre cada uma seguindo a metodologia do *Guia para Elaboração e Revisão de Planos Diretores*.

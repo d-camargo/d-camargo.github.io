@@ -4,6 +4,7 @@ title: "SIG-Bus: da interface ao relatório em PDF"
 lang: pt
 translation: /en/2026/06/26/sig-bus-usability-report.html
 category: "Engenharia de Transportes"
+image: /assets/images/posts/sigbus01/1.png
 ---
 
 A interface do SIG-Bus é contida por decisão: cada botão corresponde a uma etapa do fluxo de análise, e nenhum campo pede uma informação que o plugin poderia derivar sozinho. O resultado é um painel com poucas ações, todas em ordem.

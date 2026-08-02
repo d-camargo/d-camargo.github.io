@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/06/03/desire-lines-aon-delaunay-qgis.html"
 permalink: /en/2026/06/03/desire-lines-aon-delaunay-qgis.html
 category: "Transport Engineering"
+image: /assets/images/posts/desire_lines_v020.png
 ---
 
 The new update of the Desire Lines plugin (version 0.2.0) introduces advanced flow allocation tools and significant usability enhancements. The main highlight of this release is the capability to perform *All-or-Nothing* (AoN) flow allocations on a structured network built from Delaunay triangulations, offering a new layer of spatial analysis for transport engineers and urban planners.
@@ -26,7 +27,7 @@ This approach is ideal for preliminary network analysis when a digitalized road 
 
 To demonstrate the capability of Delaunay network assignment, the plugin repository provides a sample dataset of the **Passenger Origin-Destination Matrix of the Metropolitan Region of São Paulo (RMSP)**.
 
-By loading the São Paulo traffic zones and their corresponding travel matrix, the plugin builds the Delaunay mesh and distributes travel demand automatically. This process reveals the major movement corridors of the metropolis, highlighting the heavy radial demand towards the city center and perimetric integration flows—all modeled efficiently and rapidly, without the computational burden of a full road network graph.
+By loading the São Paulo traffic zones and their corresponding travel matrix, the plugin builds the Delaunay mesh and distributes travel demand automatically. This process reveals the major movement corridors of the metropolis, highlighting the heavy radial demand towards the city center and perimetric integration flows, all modeled without the computational burden of a full road network graph.
 
 ![Passenger O-D Matrix of the São Paulo Metropolitan Region with Delaunay allocation in QGIS](/assets/images/posts/Delaunay_matriz_od_saopaulo.png)
 
@@ -47,7 +48,7 @@ Furthermore, the plugin now performs **real-time attribute table validation**, c
 
 ## Graduated Styling (Natural Breaks)
 
-Visualizing the results is now more intuitive, thanks to automatic graduated styling based on the **Natural Breaks (Jenks)** algorithm. Once processing is complete, the generated layers are styled automatically according to flow volume, instantly highlighting major desire corridors and traffic channels. The styling remains 100% editable within the standard QGIS symbology panel.
+Visualizing the results no longer requires manual setup: the plugin applies graduated styling based on the **Natural Breaks (Jenks)** algorithm on its own. Once processing is complete, the generated layers are styled automatically according to flow volume, instantly highlighting major desire corridors and traffic channels. The styling remains 100% editable within the standard QGIS symbology panel.
 
 ## How to Install
 

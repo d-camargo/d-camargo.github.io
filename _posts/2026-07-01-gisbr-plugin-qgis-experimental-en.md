@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/07/01/gisbr-plugin-qgis-experimental.html"
 permalink: /en/2026/07/01/gisbr-plugin-qgis-experimental.html
 category: "Geoprocessing"
+image: /assets/images/posts/gisbr-cover.webp
 ---
 
 GisBR, my new QGIS plugin, has been approved in the official plugin repository as an experimental release. It brings the "one line → one layer" access of IPEA's **geobr** and **censobr** packages into QGIS, no R or Python skills required.

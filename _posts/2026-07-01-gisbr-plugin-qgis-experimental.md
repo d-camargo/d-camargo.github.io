@@ -4,6 +4,7 @@ title: "GisBR: dados espaciais oficiais do Brasil direto no QGIS"
 lang: pt
 translation: /en/2026/07/01/gisbr-plugin-qgis-experimental.html
 category: "Geoprocessamento"
+image: /assets/images/posts/gisbr-cover.webp
 ---
 
 O GisBR, meu novo plugin para QGIS, foi aprovado no repositório oficial de complementos como versão experimental. Ele traz para dentro do QGIS o acesso "uma linha → uma camada" dos pacotes **geobr** e **censobr**, do IPEA, sem exigir que o usuário saiba programar em R ou Python.

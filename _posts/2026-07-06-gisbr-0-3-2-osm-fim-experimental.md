@@ -3,6 +3,7 @@ layout: post
 title: "GisBR 0.3.2: malha viária do OSM e o fim do rótulo experimental"
 lang: pt
 category: "Geoprocessamento"
+image: /assets/images/posts/gisbr-osm-belem.webp
 translation: /en/2026/07/06/gisbr-0-3-2-osm-fim-experimental.html
 ---
 

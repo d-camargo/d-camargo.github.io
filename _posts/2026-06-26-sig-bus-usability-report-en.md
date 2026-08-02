@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/06/26/sig-bus-usabilidade-relatorio.html"
 permalink: /en/2026/06/26/sig-bus-usability-report.html
 category: "Transport Engineering"
+image: /assets/images/posts/sigbus01/1.png
 ---
 
 SIG-Bus's interface is deliberately compact: each button maps to a step in the analysis workflow, and no field asks for information the plugin can derive on its own. The result is a panel with few actions, all in order.

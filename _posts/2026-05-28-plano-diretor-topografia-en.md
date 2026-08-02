@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/05/28/plano-diretor-topografia.html"
 permalink: /en/2026/05/28/plano-diretor-topografia.html
 category: "Urban Planning"
+image: /assets/images/plano_diretor_cover.png
 ---
 
 The Master Plan (in Brazil, *Plano Diretor*) is the basic law governing a municipality's urban development and expansion policy, as established by the Federal Constitution. For anyone studying Advanced Surveying, it is the document that organizes the physical and territorial space and defines how the territory should be read, planned, and managed. More than a legal instrument, the Master Plan is the main consumer of a municipality's georeferenced maps.
@@ -15,7 +16,7 @@ The link between the Master Plan and surveying is direct: land-use rules only ma
 
 ## The Master Plan from a Surveying Perspective
 
-The Master Plan is a municipal law that articulates the physical, economic, and social aspects desired by the community. Its purpose is to order the full development of the functions performed within the territory — work, housing, leisure, and circulation — based on a careful reading of the space.
+The Master Plan is a municipal law that articulates the physical, economic, and social aspects desired by the community. Its purpose is to order the full development of the functions performed within the territory (work, housing, leisure, and circulation) based on a careful reading of the space.
 
 For surveying, the Master Plan matters for three reasons:
 
@@ -27,7 +28,7 @@ For surveying, the Master Plan matters for three reasons:
 
 ## Essential Mapping in the Reading of the Territory
 
-The "Reading of the Territory" is the stage where surveying work becomes central. The goal is to **spatialize** the municipality's issues — that is, to locate them in space so they can be mapped, cross-referenced, and analyzed.
+The "Reading of the Territory" is the stage where surveying work becomes central. The goal is to **spatialize** the municipality's issues: to locate them in space so they can be mapped, cross-referenced, and analyzed.
 
 The surveys of greatest interest to Advanced Surveying include:
 

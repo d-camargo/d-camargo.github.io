@@ -5,6 +5,7 @@ lang: en
 translation: "/2026/05/21/plugin-desire-lines-oficial-qgis.html"
 permalink: /en/2026/05/21/plugin-desire-lines-oficial-qgis.html
 category: "Transport Engineering"
+image: /assets/images/desire_lines_flow_map.png
 ---
 
 The Desire Lines plugin is now integrated into the official QGIS plugin repository. This approval makes installation straightforward via the software's plugin manager, removing the need for external file downloads.
@@ -28,8 +29,8 @@ It is important to note that the plugin generates **straight desire lines** rath
 
 To deepen the practical and theoretical understanding of flow analysis, I published two detailed articles on Medium (in Portuguese):
 
-1. [**Você sabe o que é uma matriz O-D?**](https://medium.com/@eng.diegocamargo/você-sabe-o-que-é-uma-matriz-o-d-7b66a922018d) — Fundamental concepts about Origin-Destination Matrices and their role in planning.
-2. [**Mapa de fluxo no QGIS com DesireLines**](https://medium.com/@eng.diegocamargo/mapa-de-fluxo-no-qgis-com-desirelines-49591953c173) — Step-by-step tutorial on how to generate flow maps using the tool.
+1. [**Você sabe o que é uma matriz O-D?**](https://medium.com/@eng.diegocamargo/você-sabe-o-que-é-uma-matriz-o-d-7b66a922018d): Fundamental concepts about Origin-Destination Matrices and their role in planning.
+2. [**Mapa de fluxo no QGIS com DesireLines**](https://medium.com/@eng.diegocamargo/mapa-de-fluxo-no-qgis-com-desirelines-49591953c173): Step-by-step tutorial on how to generate flow maps using the tool.
 
 ## How to Install
 

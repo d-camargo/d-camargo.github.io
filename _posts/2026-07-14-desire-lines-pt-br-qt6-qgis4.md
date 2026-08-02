@@ -4,6 +4,7 @@ title: "Desire Lines 0.3.2: interface em português e compatibilidade com QGIS 4
 lang: pt
 translation: /en/2026/07/14/desire-lines-pt-br-qt6-qgis4.html
 category: "Engenharia de Transportes"
+image: /assets/images/desire_lines_flow_map.png
 ---
 
 O plugin Desire Lines ganhou duas atualizações que mudam quem consegue usá-lo e onde. A interface agora está traduzida para português e o mesmo pacote passou a rodar tanto no QGIS 3.x quanto no QGIS 4.x, que migrou de Qt5 para Qt6.

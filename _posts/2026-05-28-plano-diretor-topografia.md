@@ -4,6 +4,7 @@ title: "Plano Diretor: por que ele depende da Topografia e do Mapeamento"
 lang: pt
 translation: /en/2026/05/28/plano-diretor-topografia.html
 category: "Planejamento Urbano"
+image: /assets/images/plano_diretor_cover.png
 ---
 
 O Plano Diretor (PD) é a lei básica da política de desenvolvimento e expansão urbana do município, conforme previsto na Constituição Federal. Para quem estuda Topografia Avançada, ele é o documento que organiza o espaço físico-territorial e define como o território deve ser lido, planejado e gerido. Mais do que uma peça jurídica, o PD é o principal demandante de mapas georreferenciados de um município.
@@ -14,7 +15,7 @@ A relação entre o Plano Diretor e a Topografia é direta: as regras de ocupaç
 
 ## O Plano Diretor sob a ótica da Topografia
 
-O Plano Diretor é uma lei de competência municipal que articula os aspectos físicos, econômicos e sociais desejados pela coletividade. Seu objetivo é ordenar o pleno desenvolvimento das funções exercidas no território — trabalho, moradia, lazer e circulação — a partir de uma leitura cuidadosa do espaço.
+O Plano Diretor é uma lei de competência municipal que articula os aspectos físicos, econômicos e sociais desejados pela coletividade. Seu objetivo é ordenar o pleno desenvolvimento das funções exercidas no território (trabalho, moradia, lazer e circulação) a partir de uma leitura cuidadosa do espaço.
 
 Para a Topografia, o PD é relevante por três razões:
 
@@ -22,7 +23,7 @@ Para a Topografia, o PD é relevante por três razões:
 *   **Exige a leitura do território:** sua elaboração parte da caracterização dos principais problemas, conflitos e potencialidades do município.
 *   **Adota o georreferenciamento como base:** recomenda-se que as informações sejam georreferenciadas e disponibilizadas em formatos abertos e acessíveis.
 
-> Para um especialista em Topografia, o Plano Diretor não é apenas uma lei: é o principal cliente do trabalho de mapeamento e geoprocessamento.
+> Para um especialista em Topografia, o Plano Diretor é o principal cliente do trabalho de mapeamento e geoprocessamento.
 
 ## Mapeamentos essenciais na Leitura do Território
 
