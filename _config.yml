@@ -17,6 +17,7 @@ exclude:
   - Skills/
   - bin/
   - serve.sh
+  - Makefile
   - Gemfile
   - Gemfile.lock
   - vendor/

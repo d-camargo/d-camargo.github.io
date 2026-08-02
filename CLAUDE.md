@@ -11,9 +11,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Build only, output to _site/
 ./serve.sh --build
 
+# Verification gate — same thing, via the target the Hermes engine looks for
+make test
+
 # Generate a post cover image (see Images below)
 bin/gen-post-image.py --slug <slug> --prompt "<subject>" [--n 3]
 ```
+
+`make test` is the project's verification gate: it runs `jekyll build`, which exits
+non-zero on a Liquid error, invalid frontmatter or a missing include. It exists because
+the Hermes engine (`planexec.py`) looks for a `test:` Makefile target to decide whether a
+project has a gate at all; without it `run_tests` returns `None` and the review approves
+on the reviewing model's word alone — on a repo that publishes straight to production.
+Run it before any push.
 
 `serve.sh` runs Jekyll inside a `ruby:3.3` podman container, because the VPS has no Ruby and no root access to install one. Gems are installed into `vendor/bundle` on first run (gitignored); later runs reuse them. On a machine that does have Ruby installed, `bundle exec jekyll serve` works directly.
 
@@ -25,9 +35,24 @@ ssh -L 4000:localhost:4000 -L 35729:localhost:35729 diego@<ip-da-vps>
 
 then browse to `http://localhost:4000`. Port 35729 carries live reload.
 
-`_config.yml` has an `exclude:` list keeping repo working files (`CLAUDE.md`, `Skills/`, `serve.sh`, the Gemfiles) out of the published site — anything added at the repo root that is not site content must be added there too.
+`_config.yml` has an `exclude:` list keeping repo working files (`CLAUDE.md`, `Skills/`, `bin/`, `serve.sh`, `Makefile`, the Gemfiles) out of the published site — anything added at the repo root that is not site content must be added there too.
 
-Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/deploy-pages.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`.
+Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/deploy-pages.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`. **A push is a publication** — there is no staging step between `gh-pages` and the live professional site. Build clean (`make test`) before pushing.
+
+## Two ways this repo gets worked on
+
+Besides interactive Claude Code, this project is also driven from Discord through the
+Hermes agent (channel `#d-camargo-github-io`), which runs a plan → run → review → push
+pipeline via `~/.hermes/skills/planexec/scripts/planexec.py`. Two consequences for
+anything written here:
+
+- The executing engine is often **Gemini (`agy`), which does not read `.claude/skills/`**.
+  The site's voice and post-structure rules live there (`site-content`,
+  `blog-post-writer`), so content-writing steps must be tagged `[T03]` in the plan to
+  route to a Claude engine. Everything an engine must know regardless of which one it is
+  belongs in **this file**, not only in a skill.
+- `planexec push` is the only sanctioned way to commit from that pipeline, and it
+  publishes. See `~/.hermes/skills/proj-d-camargo-github-io/SKILL.md`.
 
 ## Architecture
 
