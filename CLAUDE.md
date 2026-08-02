@@ -10,6 +10,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # Build only, output to _site/
 ./serve.sh --build
+
+# Generate a post cover image (see Images below)
+bin/gen-post-image.py --slug <slug> --prompt "<subject>" [--n 3]
 ```
 
 `serve.sh` runs Jekyll inside a `ruby:3.3` podman container, because the VPS has no Ruby and no root access to install one. Gems are installed into `vendor/bundle` on first run (gitignored); later runs reuse them. On a machine that does have Ruby installed, `bundle exec jekyll serve` works directly.
@@ -73,6 +76,14 @@ Portuguese posts are named `YYYY-MM-DD-slug.md`; English counterparts use the sa
 **Portfolio pages** (`portfolio/` and `en/portfolio/`) are plain HTML files using `layout: default`. Each page is self-contained with its own `<style>` block; there is no shared portfolio template.
 
 **Images**: Post images go in `assets/images/posts/`; portfolio images go in `assets/images/portfolio/`.
+
+Post cover images are generated at authoring time by `bin/gen-post-image.py` and committed as static assets — the Jekyll build never calls the API, so builds stay free, deterministic and secret-free. The script calls the Gemini image API (`gemini-3.1-flash-image`, "Nano Banana 2", by default), applies a fixed house-style prompt derived from the design system, and writes a resized WebP capped at 200KB. Generated images carry an invisible SynthID watermark.
+
+The API key lives in `~/.config/dcamargo/gemini.env` (mode 600, outside the repo); `GEMINI_API_KEY` in the environment overrides it. **Image models have no free tier** — the key's Google Cloud project must have billing enabled, otherwise every call returns HTTP 429 with `free_tier_requests, limit: 0`. A Google AI Pro subscription does not by itself grant API access (its benefits apply to the AI Studio web interface), but it does entitle the account to $10/month in Google Cloud credits via the Google Developer Program, activated manually at google.dev, which the API usage draws from.
+
+Without billing there is a manual route that stays within the subscription: `--print-prompt` emits the full house-style prompt to paste into the Gemini app, AI Studio or Antigravity, and `--from-file <path>` imports the downloaded image through the same WebP normalisation. Do not attempt to reuse the Antigravity OAuth token in `~/.gemini/` as an API credential — it is not one.
+
+Posts should carry an `image:` frontmatter field pointing at the cover; `jekyll-seo-tag` turns it into `og:image`. A PT post and its EN counterpart share one image file.
 
 ## Skills
 

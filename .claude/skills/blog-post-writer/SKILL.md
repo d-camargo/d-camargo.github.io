@@ -26,6 +26,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
     title: "[A compelling and clear title based on the topic]"
     lang: pt
     category: "[Category in PT: Engenharia de Transportes | Geoprocessamento | Planejamento Urbano | Geral]"
+    image: /assets/images/posts/slug.webp
     translation: /en/YYYY/MM/DD/slug.html
     ---
     ```
@@ -36,6 +37,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
     title: "[A compelling and clear title based on the topic]"
     lang: en
     category: "[Category in EN: Transport Engineering | Geoprocessing | Urban Planning | General]"
+    image: /assets/images/posts/slug.webp
     permalink: /en/YYYY/MM/DD/slug.html
     translation: "/YYYY/MM/DD/slug.html"
     ---
@@ -44,7 +46,27 @@ Take a deep breath and think step by step about how to best accomplish this goal
 - `translation` is the URL of the counterpart post in the other language (the nav language toggle uses it). Category never appears in the path: PT posts resolve to `/YYYY/MM/DD/slug.html`, EN posts to `/en/YYYY/MM/DD/slug.html`. Omit the field when there is no counterpart.
 - Do not use `H1` (`#`) in the body text (the title already serves as the main heading). Use `H2` (`##`) and `H3` (`###`) for subheadings.
 - Keep paragraphs relatively short to ensure readability on the web.
-- For images, reference an existing image under `assets/images/posts/` or ask the user to provide one (do not attempt to call an image generation tool). Place the markdown image link (e.g., `![Image Alt Text](/assets/images/posts/filename.png)`) immediately after the introductory text/hook at the beginning of the post.
+- **Cover image**: generate one with `bin/gen-post-image.py`, which calls the Gemini image API and writes an optimised WebP to `assets/images/posts/`:
+
+  ```bash
+  bin/gen-post-image.py --slug <post-slug> --prompt "<what the image shows>" --alt "<alt text>"
+  ```
+
+  The script already applies the site's house style (near-black background, gold accents, no text in the image) — `--prompt` should describe only the subject, in English, as a concrete visual scene rather than an abstract topic. Add `--n 3` to produce variations and let the user pick. Use `--model gemini-3-pro-image` only when the image must contain legible text.
+
+  A PT post and its EN counterpart share one image; generate it once, under the PT slug, and reference the same file from both.
+
+  If the script fails because billing is not enabled on the key's Google Cloud project (HTTP 429, `free_tier_requests, limit: 0`), switch to the manual route, which is covered by the user's Google AI Pro subscription:
+
+  ```bash
+  bin/gen-post-image.py --slug <post-slug> --prompt "<subject>" --print-prompt
+  # user pastes it into the Gemini app / AI Studio / Antigravity and downloads the result
+  bin/gen-post-image.py --slug <post-slug> --from-file <path> --alt "<alt text>"
+  ```
+
+  Print the prompt, hand it to the user with the instruction above, and wait for the downloaded file — do not proceed as if the image existed. As a last resort, reference an existing image under `assets/images/posts/`. Never invent a filename that is not on disk.
+
+  Place the markdown link (`![Alt text](/assets/images/posts/filename.webp)`) immediately after the introductory hook, and add the matching `image:` field to the frontmatter so `jekyll-seo-tag` emits `og:image`.
 - Use bold text, bullet points, and blockquotes where appropriate to break up the text and highlight key information.
 - Save the final content directly to the user's `_posts` folder.
 - File naming convention:

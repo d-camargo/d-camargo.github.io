@@ -5,11 +5,12 @@ lang: en
 translation: "/2026/07/28/gisbr-0-4-3-ssl-certificados.html"
 permalink: /en/2026/07/28/gisbr-0-4-3-ssl-certificados.html
 category: "Geoprocessing"
+image: /assets/images/posts/gisbr-ssl-certificados.webp
 ---
 
 Someone installs QGIS from scratch through OSGeo4W, opens GisBR and tries to download any official layer. The answer is `unable to find issuer certificate`. It is not a connectivity problem or a flaky server: it is the SSL trust chain a freshly installed Windows machine does not yet recognize. Version 0.4.3 closes that gap, but it is the third infrastructure fix since 0.3.2, and all three are worth telling together.
 
-![GisBR plugin icon](/assets/images/posts/gisbr-cover.webp)
+![Certificate chain closing the link over map layers](/assets/images/posts/gisbr-ssl-certificados.webp)
 
 ## Two quiet fixes: 0.4.0 and 0.4.1
 

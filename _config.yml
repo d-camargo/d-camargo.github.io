@@ -15,6 +15,7 @@ plugins:
 exclude:
   - CLAUDE.md
   - Skills/
+  - bin/
   - serve.sh
   - Gemfile
   - Gemfile.lock

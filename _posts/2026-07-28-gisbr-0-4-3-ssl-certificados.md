@@ -3,12 +3,13 @@ layout: post
 title: "GisBR 0.4.3: certificados SSL para instalações novas de Windows/OSGeo4W"
 lang: pt
 category: "Geoprocessamento"
+image: /assets/images/posts/gisbr-ssl-certificados.webp
 translation: /en/2026/07/28/gisbr-0-4-3-ssl-certificados.html
 ---
 
 Alguém instala o QGIS do zero via OSGeo4W, abre o GisBR e tenta baixar qualquer camada oficial. A resposta é `unable to find issuer certificate`. Não é falta de internet nem instabilidade do servidor: é a cadeia de confiança SSL que o Windows recém-instalado não reconhece. A 0.4.3 fecha essa lacuna, mas ela é a terceira correção de infraestrutura desde a 0.3.2, e vale contar as três.
 
-![Ícone do plugin GisBR](/assets/images/posts/gisbr-cover.webp)
+![Cadeia de certificados fechando o elo sobre camadas de mapa](/assets/images/posts/gisbr-ssl-certificados.webp)
 
 ## Duas correções silenciosas: 0.4.0 e 0.4.1
 
