@@ -14,6 +14,7 @@ numa skill e conselho; regra que roda no gate e limite.
 """
 
 import argparse
+import collections
 import pathlib
 import re
 import sys
@@ -26,6 +27,11 @@ CATEGORIAS = {
     "pt": {"Engenharia de Transportes", "Geoprocessamento", "Planejamento Urbano", "Geral"},
     "en": {"Transport Engineering", "Geoprocessing", "Urban Planning", "General"},
 }
+
+# Prints de tela numerados: /assets/images/posts/<conjunto>/<n>.<ext>, gravados
+# pelo bin/add-post-images.py. O marcador e a forma crua, antes do --apply.
+PRINT_REF = re.compile(r"!\[[^\]]*\]\(/assets/images/posts/([^/)]+)/(\d+)\.\w+\)")
+PRINT_MARKER = re.compile(r"\[\[\s*(?:print|img|imagem)\s+\d+\s*:", re.I)
 
 # Marcas de texto gerado que a skill site-content proibe explicitamente.
 TELLS = [
@@ -79,6 +85,7 @@ def checar():
 
     urls = {}
     dados = {}
+    usadas = collections.defaultdict(set)  # conjunto de prints -> numeros citados
     for f in arquivos:
         fm, corpo, off = parse(f.read_text())
         dados[f] = (fm, corpo, off)
@@ -123,9 +130,27 @@ def checar():
         img = fm.get("image")
         if img and not (REPO / img.lstrip("/")).exists():
             err(1, f"`image: {img}` nao existe no disco")
+        capa = re.match(r"/assets/images/posts/([^/]+)/(\d+)\.\w+$", img or "")
+        if capa:
+            usadas[capa.group(1)].add(int(capa.group(2)))
         for m in re.finditer(r"!\[[^\]]*\]\((/assets/[^)]+)\)", corpo):
             if not (REPO / m.group(1).lstrip("/")).exists():
                 err(off + corpo[:m.start()].count("\n"), f"imagem {m.group(1)} nao existe no disco")
+
+        # --- prints de tela: marcador resolvido e sequencia na ordem de leitura ---
+        for m in PRINT_MARKER.finditer(corpo):
+            err(off + corpo[: m.start()].count("\n"),
+                "marcador [[print N: ...]] nao resolvido "
+                "(rode bin/add-post-images.py --slug <conjunto> --apply <post>)")
+
+        for conjunto in {c for c, _ in PRINT_REF.findall(corpo)}:
+            seq = [int(n) for c, n in PRINT_REF.findall(corpo) if c == conjunto]
+            usadas[conjunto].update(seq)
+            esperado = list(range(1, len(seq) + 1))
+            if seq != esperado:
+                err(1, f"prints de {conjunto}/ fora da sequencia: o texto usa "
+                       f"{', '.join(map(str, seq))} e o padrao e "
+                       f"{', '.join(map(str, esperado))}, na ordem de leitura")
 
         # --- marcas de texto gerado ---
         for rx, msg in TELLS:
@@ -133,6 +158,14 @@ def checar():
                 linha = off + corpo[: m.start()].count("\n")
                 trecho = corpo[max(0, m.start() - 30): m.start() + 40].replace("\n", " ").strip()
                 err(linha, f"{msg} → ...{trecho}...")
+
+    # --- print importado que nenhum post cita (peso morto no repositorio) ---
+    pastas = REPO / "assets" / "images" / "posts"
+    for pasta in sorted(p for p in pastas.glob("*") if p.is_dir()):
+        for arquivo in sorted(pasta.glob("*.*")):
+            if arquivo.stem.isdigit() and int(arquivo.stem) not in usadas[pasta.name]:
+                avisos.append((f"assets/images/posts/{pasta.name}/{arquivo.name}", 0,
+                               "print na pasta que nenhum post referencia"))
 
     return erros, avisos
 

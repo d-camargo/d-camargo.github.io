@@ -67,6 +67,25 @@ Take a deep breath and think step by step about how to best accomplish this goal
   Print the prompt, hand it to the user with the instruction above, and wait for the downloaded file — do not proceed as if the image existed. As a last resort, reference an existing image under `assets/images/posts/`. Never invent a filename that is not on disk.
 
   Place the markdown link (`![Alt text](/assets/images/posts/filename.webp)`) immediately after the introductory hook, and add the matching `image:` field to the frontmatter so `jekyll-seo-tag` emits `og:image`.
+- **Screenshots in the body**: posts about the QGIS plugins usually carry screenshots of the interface, which are handled separately from the cover and never generated — they come from the user, as Discord attachments cached in `~/.hermes/cache/images/`.
+
+  While drafting, do not write image links for them. Mark the spot where each one belongs:
+
+  ```markdown
+  [[print 2: alt text describing the screen]]
+  ```
+
+  Numbering runs 1, 2, 3… in reading order, with no gaps and no repeats, and the same number means the same screenshot in the PT and the EN post. Write the alt text in the language of the post.
+
+  Then import the files and resolve the markers:
+
+  ```bash
+  bin/add-post-images.py --slug <set> --from-cache <n>   # or 1=<file> 2=<file> ...
+  bin/add-post-images.py --slug <set> --apply _posts/<post>.md
+  bin/add-post-images.py --slug <set> --apply _posts/<post>-en.md
+  ```
+
+  `<set>` is a subfolder of `assets/images/posts/` named after the subject plus a sequence number (`sigbus01`, `gisbr02`), shared by the PT and EN posts. `--from-cache <n>` takes the n most recent attachments in the order they were sent; use the explicit `N=<file>` form when the user asked for a different order. Never infer an order from the hash filenames, which carry none — if the intended order is unclear, show the user what `--from-cache` mapped and ask. A marker left unresolved fails `make test`.
 - Use bold text, bullet points, and blockquotes where appropriate to break up the text and highlight key information.
 - Save the final content directly to the user's `_posts` folder.
 - File naming convention:

@@ -19,6 +19,10 @@ bin/check-content.py
 
 # Generate a post cover image (see Images below)
 bin/gen-post-image.py --slug <slug> --prompt "<subject>" [--n 3]
+
+# Import numbered screenshots for the body of a post (see Screenshots below)
+bin/add-post-images.py --slug <set> --from-cache <n>   # or 1=<file> 2=<file> ...
+bin/add-post-images.py --slug <set> --apply _posts/<post>.md
 ```
 
 `make test` is the project's verification gate, and it runs two independent checks:
@@ -28,7 +32,8 @@ bin/gen-post-image.py --slug <slug> --prompt "<subject>" [--n 3]
   structure, unproven adjectives (poderoso/robusto/intuitivo), advertising tone, `#` H1 in
   the body, incomplete frontmatter (`layout`, `title`, `lang`, `category`, `image`), a
   category that does not exist for the post's language, an EN post without `permalink`, a
-  `translation:` pointing nowhere, and images referenced but absent from disk. Note that
+  `translation:` pointing nowhere, images referenced but absent from disk, an unresolved
+  `[[print N: ...]]` marker, and a numbered screenshot set used out of sequence. Note that
   the PT/EN pairing is checked through `translation:`, **not** the filename — several
   pairs use translated slugs (`oficial`/`official`, `demanda`/`demand`), so the
   `slug` + `-en` convention is not reliable.
@@ -124,6 +129,43 @@ The API key lives in `~/.config/dcamargo/gemini.env` (mode 600, outside the repo
 Without billing there is a manual route that stays within the subscription: `--print-prompt` emits the full house-style prompt to paste into the Gemini app, AI Studio or Antigravity, and `--from-file <path>` imports the downloaded image through the same WebP normalisation. Do not attempt to reuse the Antigravity OAuth token in `~/.gemini/` as an API credential — it is not one.
 
 Posts should carry an `image:` frontmatter field pointing at the cover; `jekyll-seo-tag` turns it into `og:image`. A PT post and its EN counterpart share one image file.
+
+**Screenshots in the body** (posts about the QGIS plugins, mostly) are a separate thing from the cover and follow their own convention, enforced by `bin/check-content.py`:
+
+- They live in a **subfolder per post**, named after the post's subject and a sequence number: `assets/images/posts/sigbus01/`. The PT post and its EN counterpart share the same folder.
+- Inside the folder they are **numbered `1.webp`, `2.webp`, `3.webp`…**, and the post's body references them **in that order, starting at 1, with no gaps**. Image 3 in the folder is the third image the reader meets. Older sets are `.png`; new ones are WebP.
+- Diego sends the screenshots as **Discord attachments**, which the Hermes agent caches under `~/.hermes/cache/images/` with hash names (`img_<hash>.png`) that carry no order. The number therefore comes from him, not from the filename.
+
+The workflow has two steps. First import. Attachments are cached in the order they were attached to the Discord message, so when that is the intended order all it takes is the count:
+
+```bash
+bin/add-post-images.py --slug sigbus02 --from-cache 3
+```
+
+The script prints which file became which number, with each file's age, so the mapping can be checked before anything else happens. Add `--start 4` to append to a set that already exists. When the order differs, give each number explicitly instead:
+
+```bash
+bin/add-post-images.py --slug sigbus02 \
+    1=~/.hermes/cache/images/img_a1b2.png \
+    2=~/.hermes/cache/images/img_c3d4.png
+```
+
+The script resizes to 1600px wide and writes WebP, trying lossless first and falling back to a quality ladder only when the file would exceed 300KB — screenshots carry interface text, where compression artefacts show up early. It refuses to overwrite an existing number without `--force`.
+
+Second, in the draft, each image is marked **at the exact point in the text where it belongs**:
+
+```markdown
+[[print 2: alt text describing the screen]]
+```
+
+and `--apply` swaps every marker for the real markdown link, once per language:
+
+```bash
+bin/add-post-images.py --slug sigbus02 --apply _posts/2026-08-05-post.md
+bin/add-post-images.py --slug sigbus02 --apply _posts/2026-08-05-post-en.md
+```
+
+Markers out of sequence (`2, 1`, a repeat, a gap) abort the run and write nothing. An unresolved `[[print N: ...]]` marker left in a post is a gate error, so a marker can never reach production as raw text. A numbered file no post references is a gate warning.
 
 ## Skills
 
