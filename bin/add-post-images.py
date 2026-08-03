@@ -220,7 +220,20 @@ def aplicar(pasta, slug, caminho_post):
     return len(marcadores)
 
 
-def do_cache(quantos, cache_dir, inicio):
+def marca_bate(nome, marca):
+    """O arquivo do cache veio da conversa `marca`?
+
+    Desde 03/08/2026 o Hermes carimba a origem no nome do anexo
+    (`img_<canal>_<topico>_<uuid>.png`, patch C32). A comparacao e por slug dos
+    dois lados, e cada parte do carimbo e truncada em 32 caracteres — por isso
+    a marca tambem entra truncada, senao "post-sobre-uma-coisa-bem-comprida"
+    nunca casaria com o carimbo cortado.
+    """
+    s = re.sub(r"[^a-z0-9]+", "-", marca.lower()).strip("-")[:32].strip("-")
+    return bool(s) and s in nome.lower()
+
+
+def do_cache(quantos, cache_dir, inicio, marca=None):
     """Pega os `quantos` prints mais recentes do cache do Hermes, em ordem de chegada.
 
     Anexo de Discord vira arquivo com nome de hash, mas o Hermes os grava na
@@ -240,8 +253,18 @@ def do_cache(quantos, cache_dir, inicio):
 
     imagens = [p for p in cache.iterdir()
                if p.is_file() and p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".gif"}]
+    if marca:
+        antes = len(imagens)
+        imagens = [p for p in imagens if marca_bate(p.name, marca)]
+        print(f"filtrando por --marca {marca!r}: {len(imagens)} de {antes} imagem(ns) "
+              f"do cache vieram dessa conversa", file=sys.stderr)
+        if not imagens:
+            sys.exit(f"erro: nenhuma imagem do cache tem o carimbo {marca!r}. Anexos "
+                     f"anteriores a 03/08/2026 nao tem carimbo nenhum; nesses use "
+                     f"--from-cache sem --marca, ou `N=arquivo`.")
     if len(imagens) < quantos:
-        sys.exit(f"erro: --from-cache {quantos}, mas ha {len(imagens)} imagem(ns) em {cache}.")
+        sys.exit(f"erro: --from-cache {quantos}, mas ha {len(imagens)} imagem(ns) "
+                 f"{'com esse carimbo' if marca else 'em ' + str(cache)}.")
 
     recentes = sorted(imagens, key=lambda p: p.stat().st_mtime)[-quantos:]
     agora = time.time()
@@ -295,6 +318,9 @@ def main():
     parser.add_argument("--start", type=int, default=1, metavar="N",
                         help="numero do primeiro print com --from-cache (default: 1); "
                              "use para acrescentar a um conjunto que ja existe")
+    parser.add_argument("--marca", metavar="CONVERSA",
+                        help="com --from-cache, so considera anexos carimbados com esse "
+                             "canal ou topico (o slug do topico do post, normalmente)")
     parser.add_argument("--cache-dir", default=HERMES_CACHE,
                         help=f"onde o Hermes grava os anexos (default: {HERMES_CACHE})")
     parser.add_argument("--list", action="store_true", help="mostra o que ja esta na pasta")
@@ -325,8 +351,8 @@ def main():
 
     escritos = []
     if importando:
-        mapa = (do_cache(args.from_cache, args.cache_dir, args.start) if args.from_cache
-                else parse_pares(args.pares))
+        mapa = (do_cache(args.from_cache, args.cache_dir, args.start, args.marca)
+                if args.from_cache else parse_pares(args.pares))
         pasta.mkdir(parents=True, exist_ok=True)
         print(f"importando para {rel(pasta)}/", file=sys.stderr)
         escritos = importar(pasta, mapa, args)

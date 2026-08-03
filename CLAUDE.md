@@ -144,7 +144,13 @@ bin/add-post-images.py --slug sigbus02 --from-cache 3
 
 The script prints which file became which number, with each file's age, so the mapping can be checked before anything else happens. Add `--start 4` to append to a set that already exists.
 
-⚠️ **The Hermes image cache is a single global directory** — one pile for every channel and every topic, with filenames (`img_<uuid>.png`) that say nothing about where they came from. Working inside a per-post Discord topic does **not** isolate it. So an image sent in another conversation can land inside the window `--from-cache` takes; the script flags any file more than 15 minutes apart from the previous one, because attachments of one message are written seconds apart. Read the printed mapping before moving on — the failure mode is silent, the wrong image under the right number.
+**The Hermes image cache is a single global directory** — one pile for every channel and every topic. Working inside a per-post Discord topic does not isolate it. Since 2026-08-03 the Hermes side stamps the origin into the filename (`img_<channel>_<topic>_<uuid>.png`, patch C32 in the brain repo), so the right call inside a post's topic is to filter by it:
+
+```bash
+bin/add-post-images.py --slug sigbus02 --from-cache 3 --marca "<topic name>"
+```
+
+Without `--marca`, `--from-cache` takes the most recent files from the whole pile, and an image sent minutes earlier in another channel lands in the post silently — the wrong image under the right number. The script also flags any file more than 15 minutes apart from the previous one, since attachments of one message are written seconds apart, and it always prints which file became which number: read that mapping before moving on. Attachments cached before 2026-08-03 carry no stamp; those need `--from-cache` without `--marca`, or the explicit `N=<file>` form.
 
 When the order differs, give each number explicitly instead:
 
