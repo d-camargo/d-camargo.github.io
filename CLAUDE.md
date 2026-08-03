@@ -142,7 +142,11 @@ The workflow has two steps. First import. Attachments are cached in the order th
 bin/add-post-images.py --slug sigbus02 --from-cache 3
 ```
 
-The script prints which file became which number, with each file's age, so the mapping can be checked before anything else happens. Add `--start 4` to append to a set that already exists. When the order differs, give each number explicitly instead:
+The script prints which file became which number, with each file's age, so the mapping can be checked before anything else happens. Add `--start 4` to append to a set that already exists.
+
+⚠️ **The Hermes image cache is a single global directory** — one pile for every channel and every topic, with filenames (`img_<uuid>.png`) that say nothing about where they came from. Working inside a per-post Discord topic does **not** isolate it. So an image sent in another conversation can land inside the window `--from-cache` takes; the script flags any file more than 15 minutes apart from the previous one, because attachments of one message are written seconds apart. Read the printed mapping before moving on — the failure mode is silent, the wrong image under the right number.
+
+When the order differs, give each number explicitly instead:
 
 ```bash
 bin/add-post-images.py --slug sigbus02 \
@@ -165,7 +169,7 @@ bin/add-post-images.py --slug sigbus02 --apply _posts/2026-08-05-post.md
 bin/add-post-images.py --slug sigbus02 --apply _posts/2026-08-05-post-en.md
 ```
 
-Markers out of sequence (`2, 1`, a repeat, a gap) abort the run and write nothing. An unresolved `[[print N: ...]]` marker left in a post is a gate error, so a marker can never reach production as raw text. A numbered file no post references is a gate warning.
+Markers out of sequence (`2, 1`, a repeat, a gap) abort the run and write nothing. Images already resolved by an earlier `--apply` count in that sequence, so a second batch added with `--start` is marked `[[print 4: ...]]` onwards, not renumbered from 1. An unresolved `[[print N: ...]]` marker left in a post is a gate error, so a marker can never reach production as raw text. A numbered file no post references is a gate warning.
 
 ## Skills
 

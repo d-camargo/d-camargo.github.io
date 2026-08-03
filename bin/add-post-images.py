@@ -53,10 +53,19 @@ HERMES_CACHE = str(Path.home() / ".hermes" / "cache" / "images")
 # [[print 2: alt text]] — aceita img/imagem como sinonimos de print.
 MARKER = re.compile(r"\[\[\s*(?:print|img|imagem)\s+(\d+)\s*:\s*([^\]]+?)\s*\]\]", re.I)
 
+# O mesmo print ja resolvido em markdown, de um --apply anterior. Mesma forma
+# que o bin/check-content.py procura no gate.
+RESOLVIDO = re.compile(r"!\[[^\]]*\]\(/assets/images/posts/([^/)]+)/(\d+)\.\w+\)")
+
 # Ladder de qualidade do lossy. Comeca mais alto que o da capa: print de tela
 # tem texto de interface, e artefato em texto pequeno aparece antes que em
 # ilustracao.
 QUALITY_LADDER = (92, 88, 82, 76, 70)
+
+# Intervalo, em minutos, acima do qual dois prints seguidos do --from-cache
+# provavelmente NAO vieram da mesma mensagem. Anexos de uma mensagem so sao
+# gravados com segundos de diferenca.
+GAP_ALERTA_MIN = 15
 
 
 def rel(caminho):
@@ -179,16 +188,22 @@ def aplicar(pasta, slug, caminho_post):
     # 1, 2, 3... na ordem de leitura, sem pulo e sem repeticao: e o que faz "a
     # imagem 3" do texto ser a terceira imagem que o leitor encontra. Mesma
     # regra que o bin/check-content.py cobra no gate, para que os dois nunca
-    # discordem.
-    numeros = [int(m.group(1)) for m in marcadores]
+    # discordem. Os prints ja resolvidos por um --apply anterior contam na
+    # sequencia; sem isso, acrescentar prints a um post pronto (o caso do
+    # --start) daria falso "fora da sequencia".
+    pendentes = [int(m.group(1)) for m in marcadores]
+    leitura = sorted([(m.start(), int(m.group(2))) for m in RESOLVIDO.finditer(texto)
+                      if m.group(1) == slug]
+                     + [(m.start(), n) for m, n in zip(marcadores, pendentes)])
+    numeros = [n for _, n in leitura]
     esperado = list(range(1, len(numeros) + 1))
     if numeros != esperado:
-        sys.exit(f"erro: em {post.name} os marcadores estao fora da sequencia "
-                 f"({', '.join(map(str, numeros))}); o padrao e "
-                 f"{', '.join(map(str, esperado))}, na ordem de leitura. "
+        sys.exit(f"erro: em {post.name} os prints de {slug}/ estao fora da sequencia "
+                 f"({', '.join(map(str, numeros))}, contando os ja resolvidos); "
+                 f"o padrao e {', '.join(map(str, esperado))}, na ordem de leitura. "
                  f"Renumere; nada foi escrito.")
 
-    faltando = [n for n in numeros if not arquivo_do_numero(pasta, n)]
+    faltando = [n for n in pendentes if not arquivo_do_numero(pasta, n)]
     if faltando:
         disponiveis = ", ".join(sorted(p.name for p in pasta.glob("*.*"))) or "(pasta vazia)"
         sys.exit(f"erro: {post.name} referencia print(s) {', '.join(map(str, faltando))}, "
@@ -201,7 +216,7 @@ def aplicar(pasta, slug, caminho_post):
 
     post.write_text(MARKER.sub(troca, texto))
     print(f"  {post.name} — {len(marcadores)} marcador(es) resolvido(s): "
-          f"{', '.join(map(str, numeros))}", file=sys.stderr)
+          f"{', '.join(map(str, pendentes))}", file=sys.stderr)
     return len(marcadores)
 
 
@@ -212,6 +227,12 @@ def do_cache(quantos, cache_dir, inicio):
     ordem em que vieram na mensagem, entao a data de modificacao preserva a
     ordem em que o Diego anexou. Evita que um modelo tenha que transcrever
     caminho de hash na mao, que e onde esse tipo de fluxo costuma errar.
+
+    ATENCAO: o cache e UM SO, global (get_image_cache_dir do Hermes) — nao ha
+    pasta por canal nem por topico, e o nome do arquivo (img_<uuid>.png) nao
+    diz de onde veio. Imagem mandada em qualquer outro canal cai na mesma pilha
+    e pode entrar aqui. Dai o mapa impresso e o alerta de intervalo: a falha
+    seria silenciosa, com a imagem errada no numero certo.
     """
     cache = Path(cache_dir).expanduser()
     if not cache.is_dir():
@@ -226,10 +247,24 @@ def do_cache(quantos, cache_dir, inicio):
     agora = time.time()
     print(f"do cache {cache} (mais antigo primeiro = ordem em que foram anexados):",
           file=sys.stderr)
+    anterior = None
+    furos = []
     for numero, origem in enumerate(recentes, start=inicio):
-        idade = (agora - origem.stat().st_mtime) / 60
+        mtime = origem.stat().st_mtime
+        idade = (agora - mtime) / 60
         marca = "  <-- confira: nao chegou agora" if idade > 360 else ""
+        if anterior is not None and (mtime - anterior) / 60 > GAP_ALERTA_MIN:
+            marca += f"  <-- {(mtime - anterior) / 60:.0f} min depois do anterior"
+            furos.append(numero)
         print(f"  {numero} <- {origem.name}  ({idade:.0f} min atras){marca}", file=sys.stderr)
+        anterior = mtime
+
+    if furos:
+        print(f"AVISO: {len(furos)} print(s) com intervalo grande para o anterior — o "
+              f"cache do Hermes e global (toda imagem de todo canal cai nele), entao "
+              f"pode haver imagem de outra conversa no meio. Confira o mapa acima antes "
+              f"de seguir; se estiver errado, apague a pasta e refaca com `N=arquivo`.",
+              file=sys.stderr)
     return {numero: origem for numero, origem in enumerate(recentes, start=inicio)}
 
 

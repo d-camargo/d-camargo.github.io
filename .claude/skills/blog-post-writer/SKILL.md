@@ -85,7 +85,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
   bin/add-post-images.py --slug <set> --apply _posts/<post>-en.md
   ```
 
-  `<set>` is a subfolder of `assets/images/posts/` named after the subject plus a sequence number (`sigbus01`, `gisbr02`), shared by the PT and EN posts. `--from-cache <n>` takes the n most recent attachments in the order they were sent; use the explicit `N=<file>` form when the user asked for a different order. Never infer an order from the hash filenames, which carry none — if the intended order is unclear, show the user what `--from-cache` mapped and ask. A marker left unresolved fails `make test`.
+  `<set>` is a subfolder of `assets/images/posts/` named after the subject plus a sequence number (`sigbus01`, `gisbr02`), shared by the PT and EN posts. `--from-cache <n>` takes the n most recent attachments in the order they were sent; use the explicit `N=<file>` form when the user asked for a different order. Never infer an order from the hash filenames, which carry none — if the intended order is unclear, show the user what `--from-cache` mapped and ask. The cache is one global directory shared by every channel and topic, so if the script warns about a time gap, show that mapping to the user instead of proceeding. A marker left unresolved fails `make test`.
 - Use bold text, bullet points, and blockquotes where appropriate to break up the text and highlight key information.
 - Save the final content directly to the user's `_posts` folder.
 - File naming convention:
