@@ -1,0 +1,142 @@
+---
+layout: default
+title: "Logis: Plugin QGIS para Logística no Brasil"
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Logis</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Plugin QGIS que leva roteirização, setorização e localização de instalações para projetos de logística no Brasil.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/logis.webp' | relative_url }}" alt="Malha viária urbana com rotas de coleta e distribuição destacadas sobre a rede" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>O Problema</h2>
+            <p>Por onde o caminhão de coleta passa, quantos caminhões a operação exige e onde instalar um centro de distribuição são contas que aparecem na rotina da gestão urbana e quase nunca são feitas. Os métodos estão na literatura de pesquisa operacional há décadas, mas chegam ao técnico por apenas dois caminhos: software proprietário de roteirização, com licença fora do orçamento de um município pequeno, ou script de pesquisador, que exige ambiente Python montado e conhecimento de programação. Quem trabalha no QGIS, que é a ferramenta instalada na maioria das prefeituras e consultorias, não tem por onde começar.</p>
+            <p>A coleta de resíduos sólidos é o caso mais direto. Definir os setores de coleta e a ordem em que o caminhão percorre as ruas é um problema de roteirização <strong>por arcos</strong>: o que precisa ser coberto é a extensão da via, não um conjunto de pontos de parada. Isso muda a formulação do problema e sai do alcance das ferramentas de rota mais comuns, que otimizam visitas a pontos. O resultado é conhecido: setor desenhado no olho, sobreposição entre roteiros e quilometragem improdutiva que ninguém mede.</p>
+
+            <h2>A Solução</h2>
+            <p>O <strong>Logis</strong> é um plugin do QGIS que coloca esses cálculos dentro do programa que o técnico já usa. Ele se organiza em três módulos, cada um sobre uma rede base própria, e todos oferecem as mesmas três camadas de capacidade: indicadores, roteirização e localização de instalações.</p>
+            <p><strong>Logística Urbana:</strong> trabalha sobre a malha viária municipal do OpenStreetMap, tratada por um pipeline derivado do GisBR. Cobre os indicadores de rede e de demanda na escala da cidade, incluindo acessibilidade gravitacional a atratores e distância média de entrega ao depósito mais próximo.</p>
+            <p><strong>Logística Regional:</strong> trabalha sobre as bases rodoviárias nacionais (DNIT/SNV e geobr) e sobre bases estaduais, como a IDE-Sisema em Minas Gerais. É a escala de estado e de país: densidade da malha, percentual de pavimentação e identificação dos arcos críticos, aqueles cuja remoção parte a rede em duas.</p>
+            <p><strong>Logística Especializada:</strong> reúne os serviços urbanos cuja roteirização é por arcos, com foco inicial na coleta de resíduos sólidos. Concentra a setorização, as três formulações clássicas de percurso (CPP, RPP e CARP), o dimensionamento de frota e os indicadores que dizem se o desenho resultante se sustenta.</p>
+
+            <h2>Funcionalidades Principais</h2>
+
+            <p><strong>25 algoritmos na Caixa de Ferramentas:</strong> o plugin se registra como um Processing Provider (<code>logis</code>), o que significa que cada análise vira um algoritmo comum do QGIS, encadeável em modelo gráfico ou chamável por script, sem interface própria para aprender.</p>
+
+            <p><strong>Roteirização por arcos:</strong> as três formulações que a coleta de resíduos exige, implementadas sobre a rede viária: percurso euleriano de custo mínimo cobrindo todas as vias (CPP), percurso restrito ao subconjunto com coleta ativa (RPP) e rotas de veículos capacitados por arcos (CARP).</p>
+
+            <p><strong>Setorização e dimensionamento de frota:</strong> a rede é particionada em setores de coleta contíguos e balanceados por carga, com sementes <em>farthest-first</em>, crescimento de regiões e troca de trechos de fronteira. A partir do volume estimado, dos turnos e da capacidade nominal, o algoritmo de frota devolve o número de caminhões necessário.</p>
+
+            <p><strong>Indicadores que auditam a rota:</strong> razão de <em>deadhead</em> (quilometragem improdutiva sobre a produtiva, por rota e no total), equilíbrio de carga e extensão entre setores, cobertura da coleta por setor e distância ao aterro ou ponto de destino. São eles que transformam o roteiro em algo verificável.</p>
+
+            <p><strong>Localização de instalações:</strong> p-mediana pela heurística de Teitz-Bart, que minimiza o custo total ponderado de deslocamento da demanda, cobertura máxima (MCLP) com número fixo de instalações e cobertura de conjuntos (LSCP), que busca o menor número de instalações capaz de atender toda a demanda.</p>
+
+            <p><strong>Indicadores de rede urbana e regional:</strong> densidade viária, conectividade pelos índices α, β e γ, circuidade média, centralidade de intermediação de arestas por amostragem com semente opcional para resultado reproduzível, índice de restrição à circulação de carga e, na escala regional, densidade, pavimentação e arcos críticos sobre o SNV.</p>
+
+            <p><strong>Três painéis em abas:</strong> os módulos urbano, regional e de coleta têm painéis dock próprios, organizados por assunto e com painel de resultados fixo no rodapé. É o caminho para quem não abre a Caixa de Ferramentas de Processamento no dia a dia.</p>
+
+            <p><strong>Zero dependências externas obrigatórias:</strong> todo o cálculo de grafos e caminhos mínimos usa as classes nativas do QGIS (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) e heurísticas clássicas escritas em Python puro (savings de Clarke-Wright, sweep, 2-opt, Teitz-Bart, matching euleriano). O OR-Tools entra como backend opcional, com importação tardia e retorno automático às heurísticas quando não está instalado, o que evita conflito com outros plugins e a barreira de instalação para quem não administra a própria máquina.</p>
+
+            <h2>Stack Tecnológica</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">QGIS Processing Framework</span>
+                <span class="tech-badge">QgsGraph / QgsGraphAnalyzer</span>
+                <span class="tech-badge">OR-Tools (opcional)</span>
+                <span class="tech-badge">OpenStreetMap / Overpass API</span>
+                <span class="tech-badge">DNIT SNV</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+            </p>
+
+            <h2>Impacto</h2>
+            <p>Análises que antes dependiam de software proprietário de roteirização passam a caber no QGIS que o técnico já tem instalado, com entrada e saída em SIRGAS 2000 (EPSG:4674) e CRS métrico apenas nos cálculos intermediários de distância e tempo. Para uma prefeitura, isso significa poder testar um desenho de setorização e medir a quilometragem improdutiva que ele gera antes de contratar a operação, e não depois.</p>
+            <p>O plugin está na versão 0.1.5, marcada como experimental, sob licença GPL-3.0, e foi validado pelo autor no QGIS 4.2 sobre Ubuntu. O código está aberto no GitHub, e a mesma escolha de não exigir dependência externa que sustenta a instalação em máquina restrita também mantém o resultado auditável: as heurísticas estão à vista, em Python legível, e não atrás de uma caixa-preta.</p>
+
+            <div class="project-links">
+                <a href="https://github.com/d-camargo/logis" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>

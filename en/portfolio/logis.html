@@ -1,0 +1,143 @@
+---
+layout: default
+title: "Logis: QGIS Plugin for Logistics in Brazil"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Logis</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">QGIS plugin bringing routing, sector design and facility location to logistics projects in Brazil.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/logis.webp' | relative_url }}" alt="Urban street network with collection and distribution routes highlighted over the grid" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>Which streets the collection truck should cover, how many trucks the operation actually needs and where to place a distribution centre are everyday questions in urban management, and they are almost never calculated. The methods have been in the operations research literature for decades, but they reach the practitioner through only two doors: proprietary routing software, priced beyond a small municipality's budget, or a researcher's script, which assumes a working Python environment and programming skills. Whoever works in QGIS, the tool installed in most city halls and consultancies, has nowhere to start.</p>
+            <p>Solid waste collection is the clearest case. Defining collection sectors and the order in which the truck runs the streets is an <strong>arc routing</strong> problem: what must be covered is the length of the street, not a set of stop points. That changes the formulation and puts it out of reach of the more common routing tools, which optimise visits to points. The outcome is familiar: sectors drawn by eye, overlapping itineraries and unproductive mileage nobody measures.</p>
+
+            <h2>The Solution</h2>
+            <p><strong>Logis</strong> is a QGIS plugin that puts these calculations inside the software the practitioner already uses. It is organised into three modules, each built on its own base network, and all three offer the same three layers of capability: indicators, routing and facility location.</p>
+            <p><strong>Urban Logistics:</strong> works on the municipal street network from OpenStreetMap, processed by a pipeline derived from GisBR. It covers network and demand indicators at city scale, including gravity accessibility to attractors and average delivery distance to the nearest depot.</p>
+            <p><strong>Regional Logistics:</strong> works on the national highway databases (DNIT/SNV and geobr) and on state databases such as IDE-Sisema in Minas Gerais. This is the state and country scale: network density, share of paved road and identification of critical links, the ones whose removal splits the network in two.</p>
+            <p><strong>Specialised Logistics:</strong> gathers the urban services whose routing is arc-based, starting with solid waste collection. It holds the sector design, the three classic traversal formulations (CPP, RPP and CARP), fleet sizing and the indicators that tell whether the resulting design holds up.</p>
+
+            <h2>Key Features</h2>
+
+            <p><strong>25 algorithms in the Processing Toolbox:</strong> the plugin registers as a Processing Provider (<code>logis</code>), which means every analysis becomes an ordinary QGIS algorithm, chainable in the graphical modeller or callable from a script, with no bespoke interface to learn.</p>
+
+            <p><strong>Arc routing:</strong> the three formulations waste collection requires, implemented over the street network: minimum cost Eulerian traversal covering every street (CPP), traversal restricted to the subset with active collection (RPP) and capacitated arc routing for a vehicle fleet (CARP).</p>
+
+            <p><strong>Sector design and fleet sizing:</strong> the network is partitioned into contiguous, load-balanced collection sectors using <em>farthest-first</em> seeding, region growing and boundary segment swapping. From estimated volume, shifts and nominal capacity, the fleet algorithm returns the number of trucks required.</p>
+
+            <p><strong>Indicators that audit the route:</strong> <em>deadhead</em> ratio (unproductive over productive mileage, per route and overall), balance of load and length across sectors, collection coverage per sector and distance to the landfill or destination point. These are what turn an itinerary into something verifiable.</p>
+
+            <p><strong>Facility location:</strong> p-median through the Teitz-Bart heuristic, which minimises total demand-weighted travel cost, maximum covering location (MCLP) with a fixed number of facilities, and set covering (LSCP), which looks for the smallest number of facilities able to serve all demand.</p>
+
+            <p><strong>Urban and regional network indicators:</strong> street density, connectivity through the α, β and γ indices, average circuity, edge betweenness centrality by sampling with an optional seed for reproducible results, a freight circulation restriction index and, at regional scale, density, paving and critical links over the SNV.</p>
+
+            <p><strong>Three tabbed panels:</strong> the urban, regional and collection modules each have their own dock panel, organised by subject with a results pane fixed at the bottom. This is the way in for anyone who does not open the Processing Toolbox day to day.</p>
+
+            <p><strong>No mandatory external dependencies:</strong> all graph and shortest path computation uses native QGIS classes (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) and classic heuristics written in pure Python (Clarke-Wright savings, sweep, 2-opt, Teitz-Bart, Eulerian matching). OR-Tools comes in as an optional backend, lazily imported and falling back to the heuristics when it is not installed, which avoids conflicts with other plugins and removes the installation barrier for anyone who does not administer their own machine.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">QGIS Processing Framework</span>
+                <span class="tech-badge">QgsGraph / QgsGraphAnalyzer</span>
+                <span class="tech-badge">OR-Tools (optional)</span>
+                <span class="tech-badge">OpenStreetMap / Overpass API</span>
+                <span class="tech-badge">DNIT SNV</span>
+                <span class="tech-badge">GeoPackage / SQLite</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>Analyses that used to depend on proprietary routing software now fit inside the QGIS the practitioner already has installed, with input and output in SIRGAS 2000 (EPSG:4674) and a metric CRS only for intermediate distance and time computations. For a city hall, that means being able to test a sector design and measure the unproductive mileage it generates before contracting the operation, rather than after.</p>
+            <p>The plugin is at version 0.1.5, flagged as experimental, licensed under GPL-3.0, and validated by the author on QGIS 4.2 running on Ubuntu. The code is open on GitHub, and the same decision not to require an external dependency that makes installation possible on a locked-down machine also keeps the result auditable: the heuristics are in plain sight, in readable Python, not behind a black box.</p>
+
+            <div class="project-links">
+                <a href="https://github.com/d-camargo/logis" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>
