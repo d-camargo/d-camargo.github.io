@@ -103,6 +103,7 @@ lang: pt                    # 'pt' or 'en'
 category: "Geoprocessamento"  # singular field, one category per post
 permalink: /en/YYYY/MM/DD/slug.html   # required for English posts only
 translation: /en/YYYY/MM/DD/slug.html # URL of the counterpart post in the other language; the nav language toggle uses it. On EN posts this is the PT post's date-based URL, e.g. "/2026/06/24/slug.html" (quote it) — no category in the path, see the note below. Omit if there is no counterpart — the toggle then falls back to the other language's blog index.
+math: true                  # opcional; carrega MathJax naquela pagina. Sintaxe kramdown: $$...$$ (inline e display), nunca $...$
 ---
 ```
 

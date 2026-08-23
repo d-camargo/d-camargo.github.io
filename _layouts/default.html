@@ -36,6 +36,12 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+
+    {% if page.math %}
+    <!-- MathJax (so em paginas com `math: true` no frontmatter) -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }</style>
+    {% endif %}
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
