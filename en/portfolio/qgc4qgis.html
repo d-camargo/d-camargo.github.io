@@ -1,0 +1,146 @@
+---
+layout: default
+title: "QGC4QGIS: QGroundControl Flight Planning Inside QGIS"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .project-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">QGC4QGIS</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">A QGIS plugin that brings QGroundControl's photogrammetric survey planning into the GIS environment.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/qgc4qgis.webp' | relative_url }}" alt="Stacked layers icon in green on a dark background, the QGC4QGIS plugin mark" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>Planning a drone survey means working in two places at once. The area of interest, the cadastral boundary, the road network and the terrain all live in QGIS, while the survey grid is drawn in QGroundControl on top of a generic satellite basemap with none of those layers in sight. The polygon ends up redrawn by hand inside the flight app, and the gap between what was designed and what will be flown only shows up during image processing, after the flight has already cost battery and travel time.</p>
+            <p>The second friction is the file format. QGroundControl writes <code>.plan</code>, Litchi reads <code>.csv</code> and <code>.kml</code> in the classic hub and <code>.kmz</code> in Hub 2, and DJI Fly uses WPML inside a <code>.kmz</code> renamed with the mission GUID. Each target has its own waypoint ceiling and its own way of handling altitude, and none of them warns you when the mission exceeds them: the classic Litchi hub converts an altitude of 0 m into 30 m and silently truncates anything outside the -200 to 500 m range.</p>
+
+            <h2>The Solution</h2>
+            <p><strong>QGC4QGIS</strong> reimplements QGroundControl's survey grid generator (the <code>SurveyComplexItem</code> class) inside QGIS, with a live preview drawn over the project layers and export to the formats the flight apps actually accept. The polygon already in the project becomes a flight grid without leaving the program.</p>
+            <p>The dockable panel splits planning into five steps: pick the coverage polygon, pick the camera (from the built-in library or by entering sensor size, resolution and focal length), set flight altitude or GSD, tune the grid (overlaps, angle, turnaround, entry corner and a 90° cross grid) and export. Transects, photo capture centres and image footprints are redrawn on the map at every parameter change.</p>
+            <p>The same operations are registered as a Processing Provider (<code>qgc4qgis</code>), so grid generation and export can be chained in a graphical model or a script without going through the panel.</p>
+            <p>Fidelity to QGroundControl holds even where QGroundControl is limited. The plugin inherits two constraints from the original algorithm: concave polygons and polygons with holes are swept by their envelope, with no decomposition into convex subpolygons, and the conversion between flight altitude and GSD uses only sensor width and image width. Reproducing that behaviour is what guarantees that the <code>.plan</code> opened in QGC shows the same grid QGIS drew.</p>
+
+            <h2>Key Features</h2>
+
+            <p><strong>Survey grid with the QGC parameters:</strong> side and front overlap, transect angle relative to North, turnaround distance so the aircraft stabilises outside the polygon, the corner where the sweep starts, and a perpendicular cross grid for surveys that need a double pass.</p>
+
+            <p><strong>Camera and GSD coupled:</strong> changing the flight altitude recalculates the GSD and the other way round, preserving the optics of the chosen camera. The library ships with ready-made models and accepts a manual camera defined by sensor size, resolution and focal length.</p>
+
+            <p><strong>Statistics before takeoff:</strong> covered area, total transect length, estimated photo count and flight time are computed in QGIS, with the footprints drawn over the project layers. This is where you find out the mission does not fit in a single battery.</p>
+
+            <p><strong>Four export targets:</strong> native QGroundControl <code>.plan</code>, <code>.csv</code> and <code>.kml</code> for the classic Litchi Mission Hub, and WPML in a <code>.kmz</code> for DJI Fly, which Litchi Hub 2 also imports. One plan serves all three platforms.</p>
+
+            <p><strong>DEM downloaded automatically:</strong> the plugin fetches Copernicus DEM GLO-30 for the mission area from the same Auterion endpoint QGroundControl queries, so the sampled altitudes match the ones QGC recalculates. The raster arrives loaded and selected in the project, with a configurable margin to cover the turnaround curves and the takeoff point.</p>
+
+            <p><strong>Terrain mode converted to WPML:</strong> DJI Fly has no native terrain following in the format, so terrain-mode altitudes are converted to heights relative to the takeoff point, and the plugin warns when any of them ends up at or below zero.</p>
+
+            <p><strong>Warnings where the apps stay silent:</strong> Litchi's 99 waypoint limit, DJI Fly's practical ceiling of 200, the 0 m to 30 m altitude conversion and the classic hub's altitude truncation become messages before export instead of surprises in the field. The photo trigger mode is checked as well, since without it the KML carries only the endpoints of each transect.</p>
+
+            <p><strong>Seven algorithms in the Processing Toolbox:</strong> grid generation, photo capture centres, Copernicus DEM download and the four exporters, all as ordinary QGIS algorithms.</p>
+
+            <p><strong>Qt6, QGIS 4 and no NumPy in the way:</strong> version 0.7.1 clears the 106 findings raised by the official repository's Qt6 check, with scoped enums and field types built according to the Qt version. DEM writing uses GDAL's native bindings without touching <code>osgeo.gdal_array</code>, which avoids the error raised by an extension compiled against NumPy 1.x in environments running NumPy 2.x.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyQGIS</span>
+                <span class="tech-badge">QGIS Processing Framework</span>
+                <span class="tech-badge">Qt5 / Qt6</span>
+                <span class="tech-badge">QGroundControl (.plan)</span>
+                <span class="tech-badge">WPML / DJI Fly</span>
+                <span class="tech-badge">KML / KMZ</span>
+                <span class="tech-badge">Copernicus DEM GLO-30</span>
+                <span class="tech-badge">GDAL</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>Planning stops being a drawing redone in the flight app and comes out of the same project that holds the area boundary, the cadastre and the terrain. Before takeoff you already know the photo count, the estimated flight time and whether the computed height above ground is workable, and the same mission goes on to QGroundControl, Litchi or DJI Fly without being replanned.</p>
+            <p>The plugin is at version 0.7.1, not experimental, licensed under GPL-3.0, and compatible with QGIS 3.34 through the 4.x series on both Qt5 and Qt6. The interface is written in English and ships with a Brazilian Portuguese translation applied automatically in pt-BR locales. Using the Copernicus DEM requires the attribution © Airbus Defence and Space GmbH.</p>
+
+            <div class="project-links">
+                <a href="https://github.com/d-camargo/qgroundcontrol-4QGIS" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+            </div>
+
+        </div>
+    </div>
+</section>
