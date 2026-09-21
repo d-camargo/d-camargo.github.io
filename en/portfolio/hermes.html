@@ -1,0 +1,124 @@
+---
+layout: default
+title: "Hermes: A Multi-Agent Development Architecture Driven by Conversation"
+lang: en
+---
+<style>
+    .project-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .project-content h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent);
+        font-family: 'Cinzel', serif;
+    }
+    .project-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .project-content ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+    .project-content li {
+        margin-bottom: 8px;
+    }
+    .tech-badge {
+        display: inline-block;
+        background: rgba(var(--accent-rgb, 200,160,100), 0.15);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+    .timeline-item {
+        border-left: 2px solid var(--accent);
+        padding-left: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+    .timeline-year {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="project-header">
+    <div class="container">
+        <h1 class="section-title">Hermes</h1>
+        <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">A multi-agent system that coordinates different language engines to build and maintain real projects from a conversation.</p>
+    </div>
+</section>
+
+<section class="project-details">
+    <div class="container">
+
+        <div class="project-image" style="text-align:center; margin-bottom: 2rem;">
+            <img src="{{ '/assets/images/portfolio/hermes.webp' | relative_url }}" alt="Diagram on a near-black background: a single gold node at the top connected by thin lines to three smaller dark blocks, with one line returning from a block back up to the node" style="max-width:800px; width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+
+        <div class="project-content">
+
+            <h2>The Problem</h2>
+            <p>Keeping several projects alive at the same time (QGIS plugins, a bilingual site, data analyses) means switching all day between deciding what to do, implementing it, checking the result and shipping it. Language models good enough to write production code charge by the token, and that bill grows with the amount of work done. The real bottleneck is not writing code: it is deciding, executing, checking and paying for all of it in a way that holds up over months.</p>
+
+            <h2>The Solution</h2>
+            <p>Hermes is a multi-agent system derived from Nous Research's Hermes Agent, adapted to run around the clock on a dedicated Ubuntu 24.04 VPS. The whole operation happens through Discord, including from a phone, with no terminal open and no continuous working session required. Each channel on the server maps to one project, and the same cycle repeats in every one of them: conversation, plan, implementation, review and publication.</p>
+
+            <h2>Architecture Decisions</h2>
+            <p><strong>Coordination separated from execution:</strong> a lightweight orchestrator reads the conversation and decides what needs to happen, but the implementation always goes to an external subscription engine such as Claude Code (Opus), Antigravity (Gemini) or Codex. The orchestrator never writes code itself; it delegates.</p>
+            <p><strong>The strong model plans, the cheap one executes:</strong> the expensive reasoning (understanding the request, drafting the plan, reviewing the outcome) stays with the most capable model available. Each step of the plan is implemented by a cheaper executor, and it only moves forward once the strong model has checked what came back.</p>
+            <p><strong>A routing engine of its own, by difficulty:</strong> a Python engine reads the plan and sends each step to the executor that matches its complexity, telling mechanical tasks apart from the ones that need reasoning. When a provider runs out of quota, the engine falls back to another one without interrupting the work in progress.</p>
+            <p><strong>Cost split into two buckets:</strong> only coordination, the part that decides and reviews, spends credits billed per token. Execution runs on monthly subscriptions already paid for the coding engines, which brings the marginal cost of each executed task close to zero. That split was a deliberate financial decision, and each engine's behaviour (cost, quota, quality) is measured and revisited over time.</p>
+            <p><strong>Human approval at the start, automated review at the end:</strong> no plan runs without being approved first, and nothing is published without an automated review of the result. The two checkpoints keep the system out of the autonomous decision both about what to do and about what reaches production.</p>
+
+            <h2>Operations and Reliability</h2>
+            <p>Hermes runs as a persistent systemd service, with a separate timer that audits its own behaviour every week. The whole operation emits structured logs and notifications, and every line of the system's code is versioned in git. Publishing this site, for instance, is automated by GitHub Actions from the moment an approved change is pushed. The system's evolution stays documented: each architecture decision is recorded with its date, and the behaviour of the models in use (cost, quota, answer quality) is measured empirically rather than assumed.</p>
+
+            <h2>Technology Stack</h2>
+            <p>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Multi-Agent Architecture</span>
+                <span class="tech-badge">LLM Orchestration</span>
+                <span class="tech-badge">Prompt Engineering</span>
+                <span class="tech-badge">Claude Code (Opus)</span>
+                <span class="tech-badge">Gemini</span>
+                <span class="tech-badge">Codex</span>
+                <span class="tech-badge">Discord API</span>
+                <span class="tech-badge">Linux / Ubuntu Server</span>
+                <span class="tech-badge">systemd</span>
+                <span class="tech-badge">Git</span>
+                <span class="tech-badge">GitHub Actions</span>
+                <span class="tech-badge">QGIS / PyQGIS</span>
+            </p>
+
+            <h2>Impact</h2>
+            <p>The result can be checked on three fronts. Hermes develops and maintains the published QGIS plugins (GisBR, Desire Lines and SIG-Bus, all three available in the official plugin repository), keeps this site running (the blog posts in Portuguese and English, and this portfolio page itself) and runs data analyses, all of it driven by conversation. The arrangement shows what it takes to design systems that coordinate multiple language models with cost under control, clear roles between planning and execution, and human oversight at the points where it matters.</p>
+
+        </div>
+    </div>
+</section>

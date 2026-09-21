@@ -222,7 +222,7 @@ def main():
         dest = args.outdir / f"{args.slug}.webp"
         (width, height), kb, quality = to_webp(args.from_file.read_bytes(), dest, args.max_width, args.max_kb)
         print(f"importado de {args.from_file}", file=sys.stderr)
-        print(f"  {dest.relative_to(REPO_ROOT)} — {width}x{height}, {kb:.0f} KB, q{quality}", file=sys.stderr)
+        print(f"  {dest.resolve().relative_to(REPO_ROOT)} — {width}x{height}, {kb:.0f} KB, q{quality}", file=sys.stderr)
         written.append(dest)
     else:
         api_key = load_api_key()
@@ -232,7 +232,7 @@ def main():
             print(f"gerando {index}/{args.n} ({args.model}, {args.size}, {args.aspect})...", file=sys.stderr)
             raw = request_image(api_key, args.model, prompt, args.aspect, args.size)
             (width, height), kb, quality = to_webp(raw, dest, args.max_width, args.max_kb)
-            print(f"  {dest.relative_to(REPO_ROOT)} — {width}x{height}, {kb:.0f} KB, q{quality}", file=sys.stderr)
+            print(f"  {dest.resolve().relative_to(REPO_ROOT)} — {width}x{height}, {kb:.0f} KB, q{quality}", file=sys.stderr)
             written.append(dest)
 
     print("\n--- frontmatter (og:image via jekyll-seo-tag) ---")
