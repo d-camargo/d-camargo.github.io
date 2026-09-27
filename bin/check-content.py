@@ -11,6 +11,10 @@ numa skill e conselho; regra que roda no gate e limite.
 
     bin/check-content.py            # falha (exit 1) se houver erro
     bin/check-content.py --quiet    # so imprime problemas
+
+Nota: A regra das estruturas retóricas binárias ('Não é apenas X, é Y')
+aplica-se retroativamente apenas como aviso, gerando erro apenas em
+posts novos, definidos pelo CORTE_BINARIO.
 """
 
 import argparse
@@ -37,8 +41,6 @@ PRINT_MARKER = re.compile(r"\[\[\s*(?:print|img|imagem)\s+\d+\s*:", re.I)
 TELLS = [
     (re.compile(r"—"),
      "em dash no corpo (regra: zero; use dois-pontos, virgula, parenteses ou quebre a frase)"),
-    (re.compile(r"\bNão é (apenas|somente|só|sobre)\b", re.I),
-     "estrutura binaria 'Não é apenas/sobre X' (proibida)"),
     (re.compile(r"\b(poderos[ao]|robust[ao]|intuitiv[ao]|revolucionári[ao]|inovador[ao]?)\b", re.I),
      "adjetivo batido sem prova concreta"),
     (re.compile(r"\b(game[- ]?chang\w+|cutting[- ]edge|revolutionary|powerful|robust|intuitive)\b", re.I),
@@ -48,6 +50,34 @@ TELLS = [
     (re.compile(r"^# ", re.M),
      "H1 no corpo (o title do frontmatter ja e o H1)"),
 ]
+
+CORTE_BINARIO = "2026-09-27"
+BINARIOS = [
+    (re.compile(r"(?<!mas )\b(não (é )?(apenas|somente|só)|não é sobre)\b", re.I),
+     "estrutura binaria 'Não é apenas/sobre X' (proibida)"),
+    (re.compile(r"\b(?:not (just|about)|não se trata de)\b", re.I),
+     "estrutura binaria 'not just/about X' (proibida)"),
+]
+
+CASOS_BINARIO = [
+    ("Não é apenas para isso", True),
+    ("Não apenas isso", True),
+    ("mas não só", False),
+
+    ("Não é somente isso", True),
+    ("Não é só isso", True),
+    ("Não é sobre isso", True),
+    ("Isso não é verdade", False),
+    ("Not just this", True),
+    ("Not about it", True),
+    ("Not exactly", False),
+]
+
+for _caso, _esperado in CASOS_BINARIO:
+    _bateu = any(rx.search(_caso) for rx, _ in BINARIOS)
+    if _bateu != _esperado:
+        raise RuntimeError(f"Erro no autoteste BINARIOS: '{_caso}' classificou como {_bateu} (esperado: {_esperado})")
+
 
 
 def parse(texto):
@@ -158,6 +188,17 @@ def checar():
                 linha = off + corpo[: m.start()].count("\n")
                 trecho = corpo[max(0, m.start() - 30): m.start() + 40].replace("\n", " ").strip()
                 err(linha, f"{msg} → ...{trecho}...")
+
+        # --- regra binarios ---
+        data_post = f.name[:10]
+        for rx, msg in BINARIOS:
+            for m in rx.finditer(corpo):
+                linha = off + corpo[: m.start()].count("\n")
+                trecho = corpo[max(0, m.start() - 30): m.start() + 40].replace("\n", " ").strip()
+                if data_post >= CORTE_BINARIO:
+                    err(linha, f"{msg} → ...{trecho}...")
+                else:
+                    avisos.append((rel, linha, f"{msg} → ...{trecho}..."))
 
     # --- print importado que nenhum post cita (peso morto no repositorio) ---
     pastas = REPO / "assets" / "images" / "posts"

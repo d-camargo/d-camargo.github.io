@@ -21,7 +21,7 @@ Diego Camargo's personal site for a Civil/Transportation Engineer and educator a
 
 These rules apply to ALL content on the site (blog posts, portfolio pages, section descriptions):
 
-- **No binary/cliché structures.** Never use "Não é sobre X. É sobre Y" or "Não é sorte. É método."
+- **No binary/cliché structures.** Never use "Não é sobre X. É sobre Y", "Não é sorte. É método.", "o que muda não é A, é B", "a diferença não está em A, está em B" or "não se trata de A, mas de B".
 - **No generic opening hooks.** Do not start with "O que a maioria das pessoas não percebe é...", "Pouca gente sabe...", or "Aqui está o que ninguém está falando...".
 - **No advertisement tone.** Avoid "A tecnologia está transformando o mundo...", "O futuro já chegou", or "Uma jornada incrível que está apenas começando."
 - **No artificial grandeur.** Don't inflate ordinary steps into turning points: never write "Não foi apenas um projeto. Foi uma virada de chave" or "Não foi apenas uma reunião. Foi um marco."

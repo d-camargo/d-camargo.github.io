@@ -35,14 +35,15 @@ bin/add-post-images.py --slug <set> --apply _posts/<post>.md
 
 - **`bin/check-content.py`** turns the mechanical half of the `site-content` skill into a
   real check: em dashes in body text (the rule is zero), the banned "Não é apenas X"
-  structure, unproven adjectives (poderoso/robusto/intuitivo), advertising tone, `#` H1 in
-  the body, incomplete frontmatter (`layout`, `title`, `lang`, `category`, `image`), a
-  category that does not exist for the post's language, an EN post without `permalink`, a
-  `translation:` pointing nowhere, images referenced but absent from disk, an unresolved
-  `[[print N: ...]]` marker, and a numbered screenshot set used out of sequence. Note that
-  the PT/EN pairing is checked through `translation:`, **not** the filename — several
-  pairs use translated slugs (`oficial`/`official`, `demanda`/`demand`), so the
-  `slug` + `-en` convention is not reliable.
+  structure, the "não é X, é Y" / "is not X, it is Y" family (error from 2026-09-27
+  onwards, warning in earlier posts), unproven adjectives (poderoso/robusto/intuitivo),
+  advertising tone, `#` H1 in the body, incomplete frontmatter (`layout`, `title`, `lang`,
+  `category`, `image`), a category that does not exist for the post's language, an EN post
+  without `permalink`, a `translation:` pointing nowhere, images referenced but absent
+  from disk, an unresolved `[[print N: ...]]` marker, and a numbered screenshot set used
+  out of sequence. Note that the PT/EN pairing is checked through `translation:`, **not**
+  the filename — several pairs use translated slugs (`oficial`/`official`,
+  `demanda`/`demand`), so the `slug` + `-en` convention is not reliable.
 - **`jekyll build`**, which exits non-zero on a Liquid error, invalid frontmatter or a
   missing include.
 
