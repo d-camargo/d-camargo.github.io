@@ -111,12 +111,36 @@ lang: en
                 <div class="timeline-year">v0.4.3 — Consolidated SSL certificates</div>
                 <p style="margin-bottom:0">SSL certificate support, until then limited to the IPEA downloader, moved into a single module (<code>core/ssl_support.py</code>) and was extended to every connector in the plugin — WFS, ArcGIS REST, Overpass, and the satellite basemap — fixing certificate chain failures on fresh Windows/OSGeo4W installs when querying sources like SICAR, ANA/SNIRH, INDE, SGB, and IBAMA.</p>
             </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.5.0 / v0.6.0 — New federal sources</div>
+                <p style="margin-bottom:0">The diagnostic's source catalog gained six new public datasets: geological risk sectors (SGB/CPRM), mining claims (SIGMINE), groundwater wells (SIAGAS), IBGE's BC250 and urbanised-areas layers, and the BDIA soil, geology and vegetation set (v0.5.0). The following release added a SIGEF connector that reads certified land parcels from a manually downloaded file, since INCRA's export service requires a gov.br login (v0.6.0).</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.7.0 / v0.8.0 — OSM POIs and Census data</div>
+                <p style="margin-bottom:0">v0.7.0 added an OpenStreetMap POI engine that downloads buildings, businesses and station-like points for the urban axis, plus a GMNS export algorithm for demand models. v0.8.0 let the diagnostic attach Census tables via censobr directly to the census tract layer.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.10.0 — Agriculture and Livestock</div>
+                <p style="margin-bottom:0">Ninth diagnostic axis, "Agriculture and Livestock," with MapBiomas land cover and land use data plus IBGE agricultural data (PAM and the 2017 Census of Agriculture).</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.11.0 / v0.12.0 — Road network with real topology</div>
+                <p style="margin-bottom:0">The road network was rebuilt from OpenStreetMap's real topology: ways are split into arcs at shared nodes, and the vehicle and pedestrian networks are now generated separately. A new layer collects connectivity problems (islands, dangling ends, one-way traps) classified by severity, replacing the minimal topology from v0.3.2, which lost junctions in the middle of a way.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v1.0.0 — Metropolitan Region</div>
+                <p style="margin-bottom:0">First 1.0 release: the diagnostic gained a Metropolitan Region mode, running over every municipality in a metro area instead of a single one, covering the 84 metropolitan regions in IBGE's catalog.</p>
+            </div>
 
             <h2>Key Features</h2>
 
-            <p><strong>55 Processing algorithms:</strong> every official geography (country, states, municipalities, census tracts, biomes, conservation units, indigenous lands, favelas, polling places, and more) becomes an algorithm with year, state/IBGE code filtering, and optional simplified geometry.</p>
+            <p><strong>57 Processing algorithms:</strong> every official geography (country, states, municipalities, census tracts, biomes, conservation units, indigenous lands, favelas, polling places, and more) becomes an algorithm with year, state/IBGE code filtering, and optional simplified geometry.</p>
 
-            <p><strong>OpenStreetMap road networks:</strong> downloads any municipality's roads via Overpass, assembled as a link-and-node network ready for transport modeling, in SIRGAS 2000 (EPSG:4674).</p>
+            <p><strong>Master Plan diagnosis:</strong> gathers 54 official sources organized into 9 axes, already clipped to the municipality's boundary, into a single GeoPackage.</p>
+
+            <p><strong>Metropolitan Region mode:</strong> runs the same diagnosis over every municipality in a metropolitan region, covering the 84 RMs in IBGE's catalog.</p>
+
+            <p><strong>OpenStreetMap road networks:</strong> downloads any municipality's roads via Overpass, built from OSM's real topology, with ways split into arcs at shared nodes. Vehicle and pedestrian networks are generated separately, and a dedicated layer collects connectivity problems (islands, dangling ends, one-way traps) with severity, in SIRGAS 2000 (EPSG:4674).</p>
 
             <p><strong>Local cache with a GitHub mirror:</strong> downloads are cached on disk; if IPEA's server is down, the plugin fetches the same files from a GitHub mirror without interrupting the workflow.</p>
 
@@ -135,11 +159,12 @@ lang: en
             </p>
 
             <h2>Impact</h2>
-            <p>GisBR removes the manual search, download, and conversion steps for anyone working in QGIS, covering dozens of administrative, census, environmental, and sectoral geographies, plus OpenStreetMap road networks — all without requiring any programming knowledge. The project is evolving into an automated municipal diagnosis system for drafting and revising Master Plans, gathering a municipality's official datasets already clipped to its boundary into a single GeoPackage.</p>
+            <p>GisBR removes the manual search, download, and conversion steps for anyone working in QGIS, covering dozens of administrative, census, environmental, and sectoral geographies, plus OpenStreetMap road networks — all without requiring any programming knowledge. The plugin also runs the municipal diagnosis for drafting and revising Master Plans, for a single municipality or a whole metropolitan region, gathering the official datasets already clipped to the area's boundary into a single GeoPackage.</p>
 
             <div class="project-links">
                 <a href="https://plugins.qgis.org/plugins/gisbr/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Official QGIS Repository</a>
                 <a href="https://github.com/d-camargo/gisbr" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+                <a href="https://gisbr.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentation</a>
             </div>
 
         </div>

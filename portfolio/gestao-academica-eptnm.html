@@ -113,20 +113,32 @@ title: "Gestão Acadêmica EPTNM — CEFET-MG"
                 <div class="timeline-year">2026 — Generalização e Streamlit</div>
                 <p style="margin-bottom:0">Com o apoio de Inteligência Artificial para acelerar o desenvolvimento, o código foi generalizado para atender qualquer curso da EPTNM, não apenas o de Trânsito. Em seguida, os scripts foram empacotados em uma <strong>aplicação web com Streamlit</strong>, permitindo que qualquer coordenador envie sua planilha e receba o relatório PDF direto no e-mail institucional, sem instalar nada.</p>
             </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Versão 2.0: vários bimestres</div>
+                <p style="margin-bottom:0">Em julho, o app passou a aceitar até quatro mapas de turma de uma vez, um por bimestre, e ganhou uma <strong>análise multibimestral</strong>. Em agosto, o relatório foi reestruturado: seção própria para Matemática, Física e Química, gráfico de quadrantes notas × faltas e um modelo auditável de <strong>probabilidade de reprovação</strong> no lugar da antiga estimativa heurística de risco. A versão atual é a 2.0.1.</p>
+            </div>
 
             <h2>Funcionalidades Principais</h2>
 
-            <p><strong>Processamento inteligente de mapas de turma:</strong> O sistema extrai automaticamente o nome do curso, a turma e o bimestre a partir do cabeçalho da planilha XLS exportada do SIGAA. Caso a planilha contenha dados misturados de dois bimestres, a execução é abortada com aviso ao usuário para garantir precisão estatística.</p>
+            <p><strong>Processamento inteligente de mapas de turma:</strong> O sistema extrai automaticamente o nome do curso, a turma e o bimestre a partir do cabeçalho da planilha XLS exportada do SIGAA. O coordenador pode enviar até quatro planilhas de uma vez, uma por bimestre. Cada arquivo precisa corresponder a um único bimestre: um mapa que misture bimestres é rejeitado com aviso ao usuário, para garantir precisão estatística.</p>
 
             <p><strong>Régua de aprovação dinâmica:</strong> O CEFET-MG distribui pontos de forma variável — 1º e 3º bimestres valem 20 pontos; 2º e 4º valem 30. O sistema identifica o bimestre e ajusta automaticamente o limiar de aprovação (60%), tornando precisas as taxas calculadas sem nenhuma configuração manual.</p>
 
             <p><strong>Análise estatística de faltas:</strong> A frequência é analisada por métricas estatísticas (média, mediana, P90, desvio padrão) em vez de um cálculo fixo de carga horária. Isso permite identificar anomalias — alunos acima do P90 ou além de <em>média + 2σ</em> — e produzir um ranking dos dez maiores faltosos do bimestre.</p>
 
+            <p><strong>Disciplinas STEM:</strong> Matemática, Física e Química, as disciplinas que mais reprovam no EPTNM, ganham seção própria no relatório, com tabela resumo e quatro gráficos: boxplot das notas, faixas de aproveitamento, contagem de alunos abaixo do limiar em uma, duas ou três delas ao mesmo tempo, e comparação com a média geral da turma.</p>
+
+            <p><strong>Quadrantes notas × faltas:</strong> Um gráfico de dispersão coloca cada aluno segundo média e total de faltas, dividido pelo limiar de aprovação e pela média de faltas da turma em quatro quadrantes: em dia, risco de frequência, risco de desempenho e risco duplo. Os alunos em risco duplo são numerados por gravidade.</p>
+
+            <p><strong>Análise multibimestral:</strong> Com dois ou mais bimestres enviados, o relatório ganha uma seção que estima a média anual de cada aluno, calcula o IDA (Índice de Desempenho do Aluno, que combina notas e faltas no acumulado dos bimestres), aponta as maiores quedas de desempenho e estima a probabilidade de reprovação. Com um bimestre só, a seção não aparece.</p>
+
+            <p><strong>Probabilidade de reprovação auditável:</strong> Uma parte determinística separa quem já está aprovado por nota e quem não alcança mais os 60 pontos nas notas regulares. Para os demais, um modelo normal com encolhimento estatístico estima, a partir do aproveitamento do próprio aluno, a chance de não fechar os pontos que faltam, sempre entre 1% e 99%. O relatório mostra a conta de cada aluno. A frequência mínima de 75% e a recuperação ficam fora do modelo.</p>
+
             <p><strong>Relatório PDF profissional:</strong> Gerado com ReportLab, o documento inclui sumário dinâmico (TOC), histograma de faltas, boxplots por disciplina, gráficos de desempenho, listagem de alunos e disciplinas críticas, e um parágrafo analítico opcional gerado por IA.</p>
 
             <p><strong>Caso especial Trânsito + Estradas (2º e 3º anos):</strong> A partir do 2º ano, cada curso possui suas próprias disciplinas técnicas em planilhas XLS separadas, mas o núcleo de Ensino Médio permanece numa planilha compartilhada. Ao ativar esse modo, o coordenador sobe as duas planilhas de técnicas; o sistema extrai as notas do Ensino Médio da planilha de Estradas, incorpora nos dados de Trânsito, e então gera <strong>dois PDFs distintos</strong> — um para cada curso — enviando-os juntos no mesmo e-mail.</p>
 
-            <p><strong>Privacidade por design:</strong> O acesso de envio é restrito ao domínio <code>@cefetmg.br</code>. Planilhas e PDFs são processados exclusivamente em memória RAM (<code>BytesIO</code>) — nenhum dado de aluno é salvo em disco ou disponibilizado para download no site.</p>
+            <p><strong>Privacidade por design:</strong> O acesso de envio é restrito ao domínio <code>@cefetmg.br</code>. Planilhas e PDFs são processados exclusivamente em memória RAM (<code>BytesIO</code>) — nenhum dado de aluno é salvo em disco ou disponibilizado para download no site. O app pode registrar, de forma opcional, metadados de uso (data e hora, curso, bimestre e e-mail do coordenador) numa planilha, sem nenhuma nota ou nome de aluno.</p>
 
             <h2>Stack Tecnológica</h2>
             <p>

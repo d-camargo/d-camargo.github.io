@@ -78,6 +78,7 @@ lang: en
     <div class="container">
         <h1 class="section-title">Logis</h1>
         <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">QGIS plugin bringing routing, sector design and facility location to logistics projects in Brazil.</p>
+        <p style="color: var(--accent); margin-top: 6px; font-size: 0.95rem;">Version 0.7.0 (experimental)</p>
     </div>
 </section>
 
@@ -102,7 +103,7 @@ lang: en
 
             <h2>Key Features</h2>
 
-            <p><strong>25 algorithms in the Processing Toolbox:</strong> the plugin registers as a Processing Provider (<code>logis</code>), which means every analysis becomes an ordinary QGIS algorithm, chainable in the graphical modeller or callable from a script, with no bespoke interface to learn.</p>
+            <p><strong>29 algorithms in the Processing Toolbox:</strong> the plugin registers as a Processing Provider (<code>logis</code>), which means every analysis becomes an ordinary QGIS algorithm, chainable in the graphical modeller or callable from a script, with no bespoke interface to learn.</p>
 
             <p><strong>Arc routing:</strong> the three formulations waste collection requires, implemented over the street network: minimum cost Eulerian traversal covering every street (CPP), traversal restricted to the subset with active collection (RPP) and capacitated arc routing for a vehicle fleet (CARP).</p>
 
@@ -114,9 +115,13 @@ lang: en
 
             <p><strong>Urban and regional network indicators:</strong> street density, connectivity through the α, β and γ indices, average circuity, edge betweenness centrality by sampling with an optional seed for reproducible results, a freight circulation restriction index and, at regional scale, density, paving and critical links over the SNV.</p>
 
-            <p><strong>Three tabbed panels:</strong> the urban, regional and collection modules each have their own dock panel, organised by subject with a results pane fixed at the bottom. This is the way in for anyone who does not open the Processing Toolbox day to day.</p>
+            <p><strong>Tabbed panels:</strong> the urban, regional and collection modules each have their own dock panel, organised by subject with a results pane fixed at the bottom, and the <strong>Road Network</strong> panel downloads the municipal OpenStreetMap network or the state SNV/DNIT network from a state → municipality list, with no IBGE code to memorise. Downloads are cached locally and, with GisBR 0.11 or later installed, the municipal network comes from it. This is the way in for anyone who does not open the Processing Toolbox day to day.</p>
 
-            <p><strong>No mandatory external dependencies:</strong> all graph and shortest path computation uses native QGIS classes (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) and classic heuristics written in pure Python (Clarke-Wright savings, sweep, 2-opt, Teitz-Bart, Eulerian matching). OR-Tools comes in as an optional backend, lazily imported and falling back to the heuristics when it is not installed, which avoids conflicts with other plugins and removes the installation barrier for anyone who does not administer their own machine.</p>
+            <p><strong>Travelling salesman and multi-depot CVRP:</strong> the Routing panel has tabs for the TSP and the CVRP. Distance can be straight-line or along the road network, the computation runs in the background through the QGIS task manager, with per-stage progress and a Cancel button, and the result layers are written to the network's GeoPackage. In the CVRP, the depot layer can hold more than one point: each demand goes to the depot named in a field or, without one, to the nearest, and routes come out tagged with <code>depot_id</code>.</p>
+
+            <p><strong>Census tracts linked to streets:</strong> when estimating waste generation, if the street layer does not yet carry the tract field, the plugin runs the spatial join with the census tracts itself, keeping the tract with the largest overlap for each segment.</p>
+
+            <p><strong>No mandatory external dependencies:</strong> all graph and shortest path computation uses native QGIS classes (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) and classic heuristics written in pure Python (Clarke-Wright savings, sweep, 2-opt, Teitz-Bart, Eulerian matching). OR-Tools comes in as an optional backend, lazily imported and falling back to the heuristics when it is not installed, which avoids conflicts with other plugins and removes the installation barrier for anyone who does not administer their own machine. For those who want OR-Tools, the Dependency Manager installs the library into QGIS's own Python with one click, with no terminal and no external process.</p>
 
             <h2>Technology Stack</h2>
             <p>
@@ -132,10 +137,12 @@ lang: en
 
             <h2>Impact</h2>
             <p>Analyses that used to depend on proprietary routing software now fit inside the QGIS the practitioner already has installed, with input and output in SIRGAS 2000 (EPSG:4674) and a metric CRS only for intermediate distance and time computations. For a city hall, that means being able to test a sector design and measure the unproductive mileage it generates before contracting the operation, rather than after.</p>
-            <p>The plugin is at version 0.1.5, flagged as experimental, licensed under GPL-3.0, and validated by the author on QGIS 4.2 running on Ubuntu. The code is open on GitHub, and the same decision not to require an external dependency that makes installation possible on a locked-down machine also keeps the result auditable: the heuristics are in plain sight, in readable Python, not behind a black box.</p>
+            <p>The plugin is at version 0.7.0, flagged as experimental, licensed under GPL-3.0. It has been approved into the official QGIS plugin repository, so it installs straight from the Plugin Manager, and it was validated by the author on QGIS 4.2 running on Ubuntu. The code is open on GitHub, and the same decision not to require an external dependency that makes installation possible on a locked-down machine also keeps the result auditable: the heuristics are in plain sight, in readable Python, not behind a black box.</p>
 
             <div class="project-links">
+                <a href="https://plugins.qgis.org/plugins/logis/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Official QGIS Repository</a>
                 <a href="https://github.com/d-camargo/logis" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+                <a href="https://logis.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentation</a>
             </div>
 
         </div>

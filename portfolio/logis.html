@@ -77,6 +77,7 @@ title: "Logis: Plugin QGIS para Logística no Brasil"
     <div class="container">
         <h1 class="section-title">Logis</h1>
         <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Plugin QGIS que leva roteirização, setorização e localização de instalações para projetos de logística no Brasil.</p>
+        <p style="color: var(--accent); margin-top: 6px; font-size: 0.95rem;">Versão 0.7.0 (experimental)</p>
     </div>
 </section>
 
@@ -101,7 +102,7 @@ title: "Logis: Plugin QGIS para Logística no Brasil"
 
             <h2>Funcionalidades Principais</h2>
 
-            <p><strong>25 algoritmos na Caixa de Ferramentas:</strong> o plugin se registra como um Processing Provider (<code>logis</code>), o que significa que cada análise vira um algoritmo comum do QGIS, encadeável em modelo gráfico ou chamável por script, sem interface própria para aprender.</p>
+            <p><strong>29 algoritmos na Caixa de Ferramentas:</strong> o plugin se registra como um Processing Provider (<code>logis</code>), o que significa que cada análise vira um algoritmo comum do QGIS, encadeável em modelo gráfico ou chamável por script, sem interface própria para aprender.</p>
 
             <p><strong>Roteirização por arcos:</strong> as três formulações que a coleta de resíduos exige, implementadas sobre a rede viária: percurso euleriano de custo mínimo cobrindo todas as vias (CPP), percurso restrito ao subconjunto com coleta ativa (RPP) e rotas de veículos capacitados por arcos (CARP).</p>
 
@@ -113,9 +114,13 @@ title: "Logis: Plugin QGIS para Logística no Brasil"
 
             <p><strong>Indicadores de rede urbana e regional:</strong> densidade viária, conectividade pelos índices α, β e γ, circuidade média, centralidade de intermediação de arestas por amostragem com semente opcional para resultado reproduzível, índice de restrição à circulação de carga e, na escala regional, densidade, pavimentação e arcos críticos sobre o SNV.</p>
 
-            <p><strong>Três painéis em abas:</strong> os módulos urbano, regional e de coleta têm painéis dock próprios, organizados por assunto e com painel de resultados fixo no rodapé. É o caminho para quem não abre a Caixa de Ferramentas de Processamento no dia a dia.</p>
+            <p><strong>Painéis em abas:</strong> os módulos urbano, regional e de coleta têm painéis dock próprios, organizados por assunto e com painel de resultados fixo no rodapé, e o painel <strong>Rede Viária</strong> baixa a malha municipal do OpenStreetMap ou a estadual do SNV/DNIT a partir de uma lista UF → município, sem precisar decorar código IBGE. Os downloads ficam em cache local e, com o GisBR 0.11 ou superior instalado, a rede municipal vem dele. É o caminho para quem não abre a Caixa de Ferramentas de Processamento no dia a dia.</p>
 
-            <p><strong>Zero dependências externas obrigatórias:</strong> todo o cálculo de grafos e caminhos mínimos usa as classes nativas do QGIS (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) e heurísticas clássicas escritas em Python puro (savings de Clarke-Wright, sweep, 2-opt, Teitz-Bart, matching euleriano). O OR-Tools entra como backend opcional, com importação tardia e retorno automático às heurísticas quando não está instalado, o que evita conflito com outros plugins e a barreira de instalação para quem não administra a própria máquina.</p>
+            <p><strong>Caixeiro viajante e CVRP com vários depósitos:</strong> o painel de Roteirização tem abas para o TSP e o CVRP. A distância pode ser em linha reta ou pela rede viária, o cálculo roda em segundo plano no gerenciador de tarefas do QGIS, com progresso por etapa e botão Cancelar, e as camadas de resultado são gravadas no GeoPackage da rede. No CVRP, a camada de depósito pode ter mais de um ponto: cada demanda vai para o depósito indicado num campo ou, sem ele, para o mais próximo, e as rotas saem identificadas por <code>depot_id</code>.</p>
+
+            <p><strong>Setor censitário associado às vias:</strong> na estimativa de geração de resíduos, se a camada de vias ainda não tiver o campo de setor, o plugin faz sozinho a junção espacial com os setores censitários, ficando com o setor de maior sobreposição em cada trecho.</p>
+
+            <p><strong>Zero dependências externas obrigatórias:</strong> todo o cálculo de grafos e caminhos mínimos usa as classes nativas do QGIS (<code>QgsGraph</code>, <code>QgsGraphBuilder</code>, <code>QgsGraphAnalyzer</code>) e heurísticas clássicas escritas em Python puro (savings de Clarke-Wright, sweep, 2-opt, Teitz-Bart, matching euleriano). O OR-Tools entra como backend opcional, com importação tardia e retorno automático às heurísticas quando não está instalado, o que evita conflito com outros plugins e a barreira de instalação para quem não administra a própria máquina. Para quem quer o OR-Tools, o Gerenciador de Dependências instala a biblioteca no Python do próprio QGIS com um clique, sem abrir terminal nem executar processo externo.</p>
 
             <h2>Stack Tecnológica</h2>
             <p>
@@ -131,10 +136,12 @@ title: "Logis: Plugin QGIS para Logística no Brasil"
 
             <h2>Impacto</h2>
             <p>Análises que antes dependiam de software proprietário de roteirização passam a caber no QGIS que o técnico já tem instalado, com entrada e saída em SIRGAS 2000 (EPSG:4674) e CRS métrico apenas nos cálculos intermediários de distância e tempo. Para uma prefeitura, isso significa poder testar um desenho de setorização e medir a quilometragem improdutiva que ele gera antes de contratar a operação, e não depois.</p>
-            <p>O plugin está na versão 0.1.5, marcada como experimental, sob licença GPL-3.0, e foi validado pelo autor no QGIS 4.2 sobre Ubuntu. O código está aberto no GitHub, e a mesma escolha de não exigir dependência externa que sustenta a instalação em máquina restrita também mantém o resultado auditável: as heurísticas estão à vista, em Python legível, e não atrás de uma caixa-preta.</p>
+            <p>O plugin está na versão 0.7.0, marcada como experimental, sob licença GPL-3.0, foi aprovado no repositório oficial de complementos do QGIS, o que permite instalá-lo direto pelo Gerenciador de Complementos, e foi validado pelo autor no QGIS 4.2 sobre Ubuntu. O código está aberto no GitHub, e a mesma escolha de não exigir dependência externa que sustenta a instalação em máquina restrita também mantém o resultado auditável: as heurísticas estão à vista, em Python legível, e não atrás de uma caixa-preta.</p>
 
             <div class="project-links">
+                <a href="https://plugins.qgis.org/plugins/logis/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Repositório Oficial QGIS</a>
                 <a href="https://github.com/d-camargo/logis" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+                <a href="https://logis.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentação</a>
             </div>
 
         </div>

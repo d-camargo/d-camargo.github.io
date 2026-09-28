@@ -78,6 +78,7 @@ lang: en
     <div class="container">
         <h1 class="section-title">SIG-Bus</h1>
         <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">QGIS plugin for GTFS reading, passenger demand integration, and per-line report generation.</p>
+        <p style="color: var(--accent); margin-top: 6px; font-size: 0.95rem;">Version 0.8.4 (experimental)</p>
     </div>
 </section>
 
@@ -108,8 +109,24 @@ lang: en
                 <p style="margin-bottom:0">Project presented at CEFET-MG's Science and Technology Week, demonstrating the GTFS + demand integration and per-line load map generation.</p>
             </div>
             <div class="timeline-item">
-                <div class="timeline-year">2026 — Reports and Clustering</div>
-                <p style="margin-bottom:0">Added automatic cluster-based categorization of demand segments with graduated styling, and PDF report generation with two maps — accumulated load and cluster grouping — overlaid on route geometry.</p>
+                <div class="timeline-year">v0.2 — PDF Report and Clustering</div>
+                <p style="margin-bottom:0">v0.2 consolidated the plugin's base (GTFS read into GeoPackage, demand import, allocation over segments) and added the PDF report, one A4 page per direction, with two maps overlaid on the route geometry: graduated load and K-means clustering of segments.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.3 / v0.4 — Block Diagram</div>
+                <p style="margin-bottom:0">A time by lane chart where each bar is a trip, with Trips Mode (one lane per line and direction) and Blocks Mode, which infers fleet allocation by chaining trips on the same vehicle through a minimum-fleet greedy heuristic, respecting layover. Needed because BHTrans's GTFS carries no `block_id`. Headway between trips is also shown. v0.4 refined the diagram and reorganized the interface into tabs.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.5 — Build GTFS and Geocoding</div>
+                <p style="margin-bottom:0">A "Build GTFS" wizard to create a line from scratch (stops, timetable by frequency) and fine-tune it trip by trip in the Block Diagram before saving. Stop address geocoding cascades through Google (optional, key stored in QGIS's user settings, not in the project), Nominatim, and Photon, with an Overpass (OSM) street-name corrector for misspelled streets.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.7 / v0.8 — GTFS Editing</div>
+                <p style="margin-bottom:0">Adjusting a line's timetable directly on the loaded feed, with a single editor combining block diagram and timetable matrix, validation, and export back to a GTFS feed. See the <a href="{{ '/en/2026/08/15/sig-bus-gtfs-editing-adjust-timetables.html' | relative_url }}" style="color: var(--accent);">post on timetable editing</a>.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.8.4 — Documentation</div>
+                <p style="margin-bottom:0">No functional change: documentation became a website at sigbus.dcamargo.com.br, which the QGIS Plugin Manager now links to.</p>
             </div>
 
             <h2>Key Features</h2>
@@ -124,7 +141,13 @@ lang: en
 
             <p><strong>Hourly analysis:</strong> Analysis can be restricted to a specific hour (0h to 23h) or run for the full day, with automatic selection of the dominant route shape when a line operates multiple geometric variants.</p>
 
-            <p><strong>PDF report with clustering:</strong> The current version generates a report with two maps — accumulated load and cluster-based segment grouping — with graduated styles applied automatically at the end of processing.</p>
+            <p><strong>PDF report with clustering:</strong> Since v0.2, the plugin generates a report with two maps (accumulated load and cluster-based segment grouping), with graduated styles applied automatically at the end of processing.</p>
+
+            <p><strong>Block Diagram:</strong> A time by lane chart where each bar is a trip, with Trips Mode (one lane per line and direction) and Blocks Mode, which infers fleet allocation by chaining trips on the same vehicle through a minimum-fleet greedy heuristic, respecting layover. Headway between trips is shown on the diagram, which supports zoom, pan, and PNG or SVG export.</p>
+
+            <p><strong>GTFS Editing:</strong> Adjusts the trips of a selected line directly in the feed, without unzipping the .zip or editing `stop_times.txt` by hand. The shift can be applied to the whole trip or only to the departure or arrival time, with intermediate stops redistributed proportionally. The feed is validated before export. See the <a href="{{ '/en/2026/08/15/sig-bus-gtfs-editing-adjust-timetables.html' | relative_url }}" style="color: var(--accent);">post on timetable editing</a>.</p>
+
+            <p><strong>Build GTFS and Geocoding:</strong> A wizard to create a line from scratch (stops, timetable by frequency) and fine-tune it trip by trip in the Block Diagram before saving. Stop address geocoding cascades through Google (optional, key stored in QGIS's user settings, not in the project), Nominatim, and Photon, with an Overpass (OSM) street-name corrector. Nominatim and Photon are limited to 1 request per second, so geocoding a whole line takes minutes.</p>
 
             <h2>Technology Stack</h2>
             <p>
@@ -140,6 +163,7 @@ lang: en
 
             <div class="project-links">
                 <a href="https://github.com/d-camargo/sig-bus" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+                <a href="https://sigbus.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentation</a>
             </div>
 
         </div>

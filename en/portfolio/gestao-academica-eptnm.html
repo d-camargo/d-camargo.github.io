@@ -114,20 +114,32 @@ lang: en
                 <div class="timeline-year">2026 — Generalization &amp; Streamlit</div>
                 <p style="margin-bottom:0">With AI-assisted development, the code was generalized to support any EPTNM course, not just Transportation. The scripts were then packaged into a <strong>Streamlit web application</strong>, allowing any coordinator to upload their spreadsheet and receive the PDF report directly in their institutional email — no installation required.</p>
             </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2026 — Version 2.0: multiple quarters</div>
+                <p style="margin-bottom:0">In July, the app began accepting up to four class reports at once, one per quarter, and gained a <strong>multi-quarter analysis</strong>. In August, the report was restructured: a dedicated section for Mathematics, Physics and Chemistry, a grades × absences quadrant chart and an auditable <strong>failure probability</strong> model replacing the old heuristic risk estimate. The current version is 2.0.1.</p>
+            </div>
 
             <h2>Key Features</h2>
 
-            <p><strong>Intelligent class map processing:</strong> The system automatically extracts the course name, class, and academic quarter from the header of the XLS file exported from SIGAA. If the spreadsheet contains data from two mixed quarters, execution is aborted with a user alert to guarantee statistical accuracy.</p>
+            <p><strong>Intelligent class map processing:</strong> The system automatically extracts the course name, class, and academic quarter from the header of the XLS file exported from SIGAA. Coordinators can upload up to four spreadsheets at once, one per quarter. Each file must cover a single quarter: a report mixing quarters is rejected with a warning, to keep the statistics accurate.</p>
 
             <p><strong>Dynamic approval threshold:</strong> CEFET-MG distributes points variably — 1st and 3rd quarters are worth 20 points; 2nd and 4th quarters are worth 30. The system identifies the current quarter and automatically adjusts the approval threshold (60%), making all calculated pass rates precise without any manual configuration.</p>
 
             <p><strong>Statistical attendance analysis:</strong> Attendance is analyzed using statistical metrics (mean, median, P90, standard deviation) rather than a fixed credit-hour calculation. This enables anomaly detection — students above P90 or beyond <em>mean + 2σ</em> — and produces a top-10 absentee ranking for the quarter.</p>
 
+            <p><strong>STEM subjects:</strong> Mathematics, Physics and Chemistry, the subjects with the highest failure rates in EPTNM, get their own report section, with a summary table and four charts: a grade boxplot, achievement bands, a count of students below the threshold in one, two or all three of them at once, and a comparison with the class's overall average.</p>
+
+            <p><strong>Grades × absences quadrants:</strong> A scatter plot places each student by average grade and total absences, split by the passing threshold and the class's average absences into four quadrants: on track, attendance risk, performance risk and double risk. Students at double risk are numbered by severity.</p>
+
+            <p><strong>Multi-quarter analysis:</strong> With two or more quarters uploaded, the report adds a section that estimates each student's annual average, computes the IDA (Student Performance Index, which combines grades and absences across the quarters), flags the steepest performance drops and estimates the probability of failing. With a single quarter, the section does not appear.</p>
+
+            <p><strong>Auditable failure probability:</strong> A deterministic step separates students who have already passed on grades from those who can no longer reach 60 points in regular-quarter grades. For the rest, a normal model with statistical shrinkage estimates, from the student's own performance, the chance of not making up the missing points, always between 1% and 99%. The report shows the calculation for each student. The 75% minimum attendance and make-up exams are outside the model.</p>
+
             <p><strong>Professional PDF report:</strong> Built with ReportLab, the document includes a dynamic table of contents, an absence distribution histogram, subject-level boxplots, performance charts, a highlighted list of at-risk students and subjects, and an optional AI-generated analytical paragraph.</p>
 
             <p><strong>Traffic Operations + Road Building special case (2nd &amp; 3rd years):</strong> From the 2nd year onward, each program has its own technical disciplines in separate XLS spreadsheets, but the secondary-education core remains in a single shared spreadsheet. When this mode is enabled, the coordinator uploads both technical spreadsheets; the system extracts the secondary-education grades from the Road Building spreadsheet, incorporates them into the Traffic Operations data, and then generates <strong>two distinct PDFs</strong> — one per program — sent together in the same email.</p>
 
-            <p><strong>Privacy by design:</strong> Report delivery is restricted to <code>@cefetmg.br</code> domain addresses. Spreadsheets and PDFs are processed exclusively in RAM (<code>BytesIO</code>) — no student data is ever written to disk or made available for direct download on the site.</p>
+            <p><strong>Privacy by design:</strong> Report delivery is restricted to <code>@cefetmg.br</code> domain addresses. Spreadsheets and PDFs are processed exclusively in RAM (<code>BytesIO</code>) — no student data is ever written to disk or made available for direct download on the site. The app can optionally log usage metadata (date and time, course, quarter and the coordinator's email) to a spreadsheet, with no student grades or names.</p>
 
             <h2>Technology Stack</h2>
             <p>

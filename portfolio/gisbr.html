@@ -110,12 +110,36 @@ title: "GisBR: Plugin QGIS para Dados Espaciais Oficiais do Brasil"
                 <div class="timeline-year">v0.4.3 — Certificados SSL consolidados</div>
                 <p style="margin-bottom:0">O suporte a certificados SSL, até então restrito ao downloader do IPEA, passou para um módulo único (<code>core/ssl_support.py</code>) e se estendeu a todos os conectores do plugin — WFS, ArcGIS REST, Overpass e o basemap de satélite —, resolvendo falhas de cadeia de certificado em instalações novas de Windows/OSGeo4W ao consultar fontes como SICAR, ANA/SNIRH, INDE, SGB e IBAMA.</p>
             </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.5.0 / v0.6.0 — Novas fontes federais</div>
+                <p style="margin-bottom:0">O catálogo de fontes do diagnóstico ganhou seis novas bases públicas: risco geológico (SGB/CPRM), processos minerários (SIGMINE), poços de água subterrânea (SIAGAS), as camadas BC250 e de áreas urbanizadas do IBGE, e o conjunto BDIA de solo, geologia e vegetação (v0.5.0). A versão seguinte adicionou o conector do SIGEF, que lê parcelas certificadas do INCRA a partir de um arquivo baixado manualmente, já que o serviço exige login gov.br (v0.6.0).</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.7.0 / v0.8.0 — POIs do OSM e dados do Censo</div>
+                <p style="margin-bottom:0">A v0.7.0 trouxe um motor de POIs do OpenStreetMap, que baixa edifícios, comércios e pontos como estações para o eixo urbano, além do algoritmo de exportação para o formato GMNS usado em modelos de demanda. A v0.8.0 passou a permitir anexar as tabelas do Censo via censobr direto à camada de setores censitários do diagnóstico.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.10.0 — Agricultura e Pecuária</div>
+                <p style="margin-bottom:0">Nono eixo do diagnóstico, "Agricultura e Pecuária", com uso e cobertura da terra do MapBiomas e dados agropecuários do IBGE (PAM e Censo Agropecuário 2017).</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.11.0 / v0.12.0 — Rede viária com topologia real</div>
+                <p style="margin-bottom:0">A rede viária foi refeita a partir da topologia real do OpenStreetMap: as vias são quebradas em arcos nos nós compartilhados, e as redes veicular e pedonal passaram a ser geradas separadamente. Uma nova camada reúne os problemas de conectividade (ilhas, pontas soltas, armadilhas de mão única) classificados por severidade, substituindo a topologia mínima da v0.3.2, que perdia os cruzamentos no meio de uma via.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v1.0.0 — Região Metropolitana</div>
+                <p style="margin-bottom:0">Primeiro lançamento 1.0: o diagnóstico ganhou um modo Região Metropolitana, que roda sobre o conjunto de municípios de uma RM em vez de um único município, cobrindo as 84 regiões metropolitanas do catálogo do IBGE.</p>
+            </div>
 
             <h2>Funcionalidades Principais</h2>
 
-            <p><strong>55 algoritmos de Processing:</strong> cada geografia oficial (país, estados, municípios, setores censitários, biomas, unidades de conservação, terras indígenas, favelas, locais de votação e mais) vira um algoritmo com parâmetros de ano, filtro por UF ou código IBGE e opção de geometria simplificada.</p>
+            <p><strong>57 algoritmos de Processing:</strong> cada geografia oficial (país, estados, municípios, setores censitários, biomas, unidades de conservação, terras indígenas, favelas, locais de votação e mais) vira um algoritmo com parâmetros de ano, filtro por UF ou código IBGE e opção de geometria simplificada.</p>
 
-            <p><strong>Malha viária do OpenStreetMap:</strong> download das vias de qualquer município via Overpass, montadas como uma rede de links e nós pronta para modelagem de transportes, em SIRGAS 2000 (EPSG:4674).</p>
+            <p><strong>Diagnóstico de Plano Diretor:</strong> reúne 54 fontes oficiais organizadas em 9 eixos, já recortadas pelo polígono do município, em um único GeoPackage.</p>
+
+            <p><strong>Modo Região Metropolitana:</strong> roda o mesmo diagnóstico sobre o conjunto de municípios de uma região metropolitana, cobrindo as 84 RMs do catálogo do IBGE.</p>
+
+            <p><strong>Malha viária do OpenStreetMap:</strong> download das vias de qualquer município via Overpass, montada a partir da topologia real do OSM, com as vias quebradas em arcos nos nós compartilhados. As redes veicular e pedonal são geradas separadamente, e uma camada própria reúne os problemas de conectividade (ilhas, pontas soltas, armadilhas de mão única) com severidade, em SIRGAS 2000 (EPSG:4674).</p>
 
             <p><strong>Cache local com espelho no GitHub:</strong> downloads ficam em cache em disco; se o servidor do IPEA estiver fora do ar, o plugin busca os mesmos arquivos em um espelho no GitHub, sem interromper o fluxo de trabalho.</p>
 
@@ -134,11 +158,12 @@ title: "GisBR: Plugin QGIS para Dados Espaciais Oficiais do Brasil"
             </p>
 
             <h2>Impacto</h2>
-            <p>O GisBR elimina a etapa manual de busca, download e conversão de dados oficiais para quem trabalha em QGIS, cobrindo dezenas de geografias administrativas, censitárias, ambientais e setoriais, além da malha viária do OpenStreetMap — tudo sem exigir conhecimento de programação. O projeto está evoluindo para um sistema de diagnóstico municipal automatizado, voltado à elaboração e revisão de Planos Diretores, que reúne as bases oficiais de um município já recortadas pelo seu polígono em um único GeoPackage.</p>
+            <p>O GisBR elimina a etapa manual de busca, download e conversão de dados oficiais para quem trabalha em QGIS, cobrindo dezenas de geografias administrativas, censitárias, ambientais e setoriais, além da malha viária do OpenStreetMap — tudo sem exigir conhecimento de programação. O plugin também faz o diagnóstico municipal para a elaboração e revisão de Planos Diretores, individualmente ou por região metropolitana, e reúne as bases oficiais já recortadas pelo polígono do território em um único GeoPackage.</p>
 
             <div class="project-links">
                 <a href="https://plugins.qgis.org/plugins/gisbr/" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Repositório Oficial QGIS</a>
                 <a href="https://github.com/d-camargo/gisbr" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+                <a href="https://gisbr.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentação</a>
             </div>
 
         </div>

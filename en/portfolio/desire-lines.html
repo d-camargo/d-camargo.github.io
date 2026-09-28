@@ -75,6 +75,9 @@ lang: en
                 <li><strong>September 16, 2024:</strong> Publication of the first article introducing the topic: <a href="https://medium.com/@eng.diegocamargo/voc%C3%AA-sabe-o-que-%C3%A9-uma-matriz-o-d-7b66a922018d" target="_blank" style="color: var(--accent);">Do you know what an O-D Matrix is?</a> (Portuguese)</li>
                 <li><strong>September 26, 2024:</strong> The project became fully functional, marked by the publication detailing its use: <a href="https://medium.com/@eng.diegocamargo/mapa-de-fluxo-no-qgis-com-desirelines-49591953c173" target="_blank" style="color: var(--accent);">Flow Map in QGIS with DesireLines</a> (Portuguese). Initially, distribution was done manually via .ZIP.</li>
                 <li><strong>May 21, 2026:</strong> The plugin was officially approved and included in the official QGIS repository, facilitating direct installation through the software.</li>
+                <li><strong>June 2026:</strong> Version 0.2.0, with All-or-Nothing (AoN) flow allocation over a network built by Delaunay triangulation of the zone centroids. Details in the post <a href="{{ '/en/2026/06/03/desire-lines-aon-delaunay-qgis.html' | relative_url }}" style="color: var(--accent);">Desire Lines 0.2.0: AoN allocation on Delaunay networks</a>.</li>
+                <li><strong>July 2026:</strong> Version 0.3.2, with the interface translated into Portuguese and compatibility with QGIS 4.x (Qt6), keeping QGIS 3.x support in the same package.</li>
+                <li><strong>September 2026:</strong> Versions 0.4.0 and 0.5.0, with highway traffic assignment over the official road network (DNIT/SNV and state DERs) downloaded through the <a href="{{ '/en/portfolio/gisbr.html' | relative_url }}" style="color: var(--accent);">GisBR</a> plugin. Per-direction capacity is computed with HCM (6th edition) procedures, and the assignment can be All-or-Nothing or equilibrium (MSA with a BPR function). In 0.5.0 the tool moved to a dockable panel.</li>
             </ul>
 
             <h2>Technologies Used</h2>
@@ -82,19 +85,20 @@ lang: en
                 <li><strong>Python</strong> for the core logic development.</li>
                 <li><strong>PyQGIS (QGIS API)</strong> for GUI integration and processing of spatial features.</li>
                 <li><strong>Analytical Methodology</strong> based on Transportation Engineering concepts (Origin-Destination Matrices).</li>
+                <li><strong>HCM methodology (Highway Capacity Manual, 6th edition)</strong> to compute per-direction capacity on two-lane (ch. 15) and multilane (ch. 12) highways, the basis of the highway assignment.</li>
             </ul>
 
             <h2>Next Steps</h2>
             <p>The development of the plugin is ongoing. The next mapped improvements are:</p>
             <ul>
-                <li><strong>1. Incorporate analysis with Delaunay Lines:</strong> Implement spatial triangulation algorithms to generate connections and more complex transportation network analyses.</li>
-                <li><strong>2. Create integrated visual style:</strong> Allow users to apply and configure the visual style of the lines (colors, thickness based on demand) directly through the plugin's user interface.</li>
-                <li><strong>3. Traffic loading filter:</strong> Develop a feature to automatically filter and highlight only the routes with the highest traffic volumes, making it easier to read dense maps.</li>
+                <li><strong>1. Create integrated visual style:</strong> Allow users to apply and configure the visual style of the lines (colors, thickness based on demand) directly through the plugin's user interface.</li>
+                <li><strong>2. Traffic loading filter:</strong> Develop a feature to automatically filter and highlight only the routes with the highest traffic volumes, making it easier to read dense maps.</li>
             </ul>
 
             <div class="project-links">
                 <a href="https://plugins.qgis.org/plugins/desire_lines/#plugin-details" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Official QGIS Repository</a>
                 <a href="https://github.com/d-camargo/desire_lines" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Source Code (GitHub)</a>
+                <a href="https://desirelines.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentation</a>
             </div>
         </div>
     </div>

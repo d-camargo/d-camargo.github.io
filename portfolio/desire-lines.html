@@ -71,6 +71,9 @@ title: "Plugin QGIS: Desire Lines"
                 <li><strong>16 de setembro de 2024:</strong> Publicação do primeiro artigo introduzindo o tema: <a href="https://medium.com/@eng.diegocamargo/voc%C3%AA-sabe-o-que-%C3%A9-uma-matriz-o-d-7b66a922018d" target="_blank" style="color: var(--accent);">Você sabe o que é uma Matriz O-D?</a></li>
                 <li><strong>26 de setembro de 2024:</strong> O projeto ficou totalmente funcional, marcado pela publicação detalhando seu uso: <a href="https://medium.com/@eng.diegocamargo/mapa-de-fluxo-no-qgis-com-desirelines-49591953c173" target="_blank" style="color: var(--accent);">Mapa de Fluxo no QGIS com DesireLines</a>. Inicialmente, a distribuição era feita de forma manual via arquivo .ZIP.</li>
                 <li><strong>21 de maio de 2026:</strong> O plugin foi oficialmente aprovado e incluído no repositório oficial do QGIS, facilitando a instalação direta pelo software.</li>
+                <li><strong>Junho de 2026:</strong> Versão 0.2.0, com alocação de fluxo do tipo Tudo ou Nada (AoN) sobre uma rede montada por triangulação Delaunay entre os centroides das zonas. Detalhes no post <a href="{{ '/2026/06/03/desire-lines-aon-delaunay-qgis.html' | relative_url }}" style="color: var(--accent);">Desire Lines 0.2.0: Alocação AoN sobre redes Delaunay</a>.</li>
+                <li><strong>Julho de 2026:</strong> Versão 0.3.2, com a interface traduzida para português e compatibilidade com o QGIS 4.x (Qt6), mantendo o suporte ao QGIS 3.x no mesmo pacote.</li>
+                <li><strong>Setembro de 2026:</strong> Versões 0.4.0 e 0.5.0, com alocação de tráfego em rodovias sobre a malha oficial (DNIT/SNV e DERs) baixada pelo plugin <a href="{{ '/portfolio/gisbr.html' | relative_url }}" style="color: var(--accent);">GisBR</a>. A capacidade de cada sentido é calculada pelos procedimentos do HCM (6ª edição), e a alocação pode ser Tudo ou Nada ou por equilíbrio (MSA com função BPR). Na 0.5.0, a ferramenta passou para um painel acoplável.</li>
             </ul>
             <p>O <strong>Desire Lines</strong> foi criado para automatizar e democratizar a geração de mapas de desejo (linhas retas conectando origens a destinos). Este tipo de visualização é uma etapa essencial para a engenharia de tráfego, análise de mobilidade urbana, e planejamento estratégico de redes de transporte público.</p>
 
@@ -79,19 +82,20 @@ title: "Plugin QGIS: Desire Lines"
                 <li><strong>Python</strong> para o desenvolvimento da lógica central.</li>
                 <li><strong>PyQGIS (API do QGIS)</strong> para a integração da interface gráfica e processamento de feições espaciais.</li>
                 <li><strong>Metodologia Analítica</strong> baseada em conceitos de Engenharia de Transportes (Matrizes de Origem-Destino).</li>
+                <li><strong>Metodologia HCM (Highway Capacity Manual, 6ª edição)</strong> para calcular a capacidade por sentido em rodovias de pista simples (cap. 15) e de múltiplas faixas (cap. 12), base da alocação em rodovias.</li>
             </ul>
 
             <h2>Próximos Passos</h2>
             <p>O desenvolvimento do plugin é contínuo. As próximas melhorias mapeadas são:</p>
             <ul>
-                <li><strong>1. Incorporar análise com Delaunay Lines:</strong> Implementar algoritmos de triangulação espacial para gerar conexões e análises de redes de transporte mais complexas.</li>
-                <li><strong>2. Criar estilo visual integrado:</strong> Permitir que o usuário aplique e configure o estilo das linhas (cores, espessura baseada em demanda) diretamente pela interface do plugin.</li>
-                <li><strong>3. Filtro de carregamento:</strong> Desenvolver uma função para filtrar e destacar automaticamente as rotas com os maiores volumes de tráfego, facilitando a leitura de mapas densos.</li>
+                <li><strong>1. Criar estilo visual integrado:</strong> Permitir que o usuário aplique e configure o estilo das linhas (cores, espessura baseada em demanda) diretamente pela interface do plugin.</li>
+                <li><strong>2. Filtro de carregamento:</strong> Desenvolver uma função para filtrar e destacar automaticamente as rotas com os maiores volumes de tráfego, facilitando a leitura de mapas densos.</li>
             </ul>
 
             <div class="project-links">
                 <a href="https://plugins.qgis.org/plugins/desire_lines/#plugin-details" target="_blank" class="btn primary-btn"><i class="fas fa-external-link-alt"></i> Repositório Oficial QGIS</a>
                 <a href="https://github.com/d-camargo/desire_lines" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+                <a href="https://desirelines.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentação</a>
             </div>
         </div>
     </div>

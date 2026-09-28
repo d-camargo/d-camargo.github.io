@@ -77,6 +77,7 @@ title: "SIG-Bus: Plugin QGIS para Análise de Transporte Público"
     <div class="container">
         <h1 class="section-title">SIG-Bus</h1>
         <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Plugin QGIS para leitura de GTFS, integração de demanda de passageiros e geração de relatórios por linha.</p>
+        <p style="color: var(--accent); margin-top: 6px; font-size: 0.95rem;">Versão 0.8.4 (experimental)</p>
     </div>
 </section>
 
@@ -107,8 +108,24 @@ title: "SIG-Bus: Plugin QGIS para Análise de Transporte Público"
                 <p style="margin-bottom:0">Apresentação do projeto na Semana de Ciência e Tecnologia do CEFET-MG, com demonstração da integração GTFS + demanda e geração dos mapas de carga por linha.</p>
             </div>
             <div class="timeline-item">
-                <div class="timeline-year">2026 — Relatórios e Clusterização</div>
-                <p style="margin-bottom:0">Adição de categorização automática dos trechos por cluster de demanda com estilos graduados, e geração de relatório PDF com dois mapas — carga acumulada e agrupamento por cluster — sobrepostos à geometria da rota.</p>
+                <div class="timeline-year">v0.2 — Relatório PDF e clusterização</div>
+                <p style="margin-bottom:0">A v0.2 consolidou a base do plugin (leitura do GTFS para GeoPackage, importação da demanda e alocação por trecho) e adicionou o relatório PDF, uma página A4 por sentido, com dois mapas sobrepostos à geometria da rota: carga graduada e clusterização de trechos por K-means.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.3 / v0.4 — Diagrama de Blocos</div>
+                <p style="margin-bottom:0">Gráfico de tempo por faixa em que cada barra é uma viagem, com Modo Viagens (uma faixa por linha e sentido) e Modo Blocos, que infere a alocação da frota encadeando viagens de um mesmo veículo por uma heurística gulosa de frota mínima, respeitando o intervalo de recolhimento (layover). Necessário porque o GTFS da BHTrans não traz `block_id`. O headway entre viagens também é exibido. A v0.4 refinou o diagrama e reorganizou a interface em abas.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.5 — Construir GTFS e geocodificação</div>
+                <p style="margin-bottom:0">Assistente "Construir GTFS" para criar uma linha do zero (paradas, tabela de horários por frequência) e ajustar viagem por viagem no Diagrama de Blocos antes de salvar. Geocodificação dos endereços das paradas em cascata: Google (opcional, chave guardada nas configurações do usuário do QGIS, não no projeto), Nominatim e Photon, com um corretor de nomes de rua via Overpass (OSM) para ruas grafadas incorretamente.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.7 / v0.8 — Edição GTFS</div>
+                <p style="margin-bottom:0">Ajuste da tabela de horários de uma linha diretamente sobre o feed carregado, com um único editor combinando diagrama de blocos e matriz de horários, validação e exportação de volta para um feed GTFS. Ver o <a href="{{ '/2026/08/15/sig-bus-edicao-gtfs-ajustar-horarios.html' | relative_url }}" style="color: var(--accent);">post sobre a edição de horários</a>.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">v0.8.4 — Documentação</div>
+                <p style="margin-bottom:0">Sem mudança funcional: a documentação passou a ser um site em sigbus.dcamargo.com.br, para o qual o Gerenciador de Complementos do QGIS agora aponta.</p>
             </div>
 
             <h2>Funcionalidades Principais</h2>
@@ -123,7 +140,13 @@ title: "SIG-Bus: Plugin QGIS para Análise de Transporte Público"
 
             <p><strong>Análise horária:</strong> Toda a análise pode ser restrita a um intervalo horário específico (0h a 23h) ou executada para o dia completo, com seleção da forma de rota dominante quando uma linha opera múltiplas variantes geométricas.</p>
 
-            <p><strong>Relatório PDF com clusterização:</strong> A versão atual gera um relatório com dois mapas — carga acumulada e agrupamento dos trechos por cluster de demanda — com estilos graduados aplicados automaticamente ao final do processamento.</p>
+            <p><strong>Relatório PDF com clusterização:</strong> Desde a v0.2, o plugin gera um relatório com dois mapas (carga acumulada e agrupamento dos trechos por cluster de demanda), com estilos graduados aplicados automaticamente ao final do processamento.</p>
+
+            <p><strong>Diagrama de Blocos:</strong> Gráfico de tempo por faixa em que cada barra é uma viagem, com Modo Viagens (uma faixa por linha e sentido) e Modo Blocos, que infere a alocação da frota encadeando viagens de um mesmo veículo por uma heurística gulosa de frota mínima, respeitando o layover. O headway entre viagens é exibido no diagrama, que suporta zoom, deslocamento e exportação para PNG ou SVG.</p>
+
+            <p><strong>Edição GTFS:</strong> Ajusta as viagens de uma linha selecionada diretamente no feed, sem precisar descompactar o .zip nem editar o `stop_times.txt` na mão. O deslocamento pode ser aplicado à viagem inteira ou só ao horário de partida ou chegada, com as paradas intermediárias redistribuídas proporcionalmente. O feed é validado antes da exportação. Ver o <a href="{{ '/2026/08/15/sig-bus-edicao-gtfs-ajustar-horarios.html' | relative_url }}" style="color: var(--accent);">post sobre a edição de horários</a>.</p>
+
+            <p><strong>Construir GTFS e geocodificação:</strong> Assistente para criar uma linha do zero (paradas, tabela de horários por frequência) e ajustar viagem por viagem no Diagrama de Blocos antes de salvar. Geocodificação dos endereços das paradas em cascata: Google (opcional, chave guardada nas configurações do usuário do QGIS, não no projeto), Nominatim e Photon, com um corretor de nomes de rua via Overpass (OSM). Nominatim e Photon têm limite de 1 requisição por segundo, então geocodificar uma linha inteira leva minutos.</p>
 
             <h2>Stack Tecnológica</h2>
             <p>
@@ -139,6 +162,7 @@ title: "SIG-Bus: Plugin QGIS para Análise de Transporte Público"
 
             <div class="project-links">
                 <a href="https://github.com/d-camargo/sig-bus" target="_blank" class="btn secondary-btn"><i class="fab fa-github"></i> Código Fonte (GitHub)</a>
+                <a href="https://sigbus.dcamargo.com.br/" target="_blank" class="btn secondary-btn"><i class="fas fa-book"></i> Documentação</a>
             </div>
 
         </div>
