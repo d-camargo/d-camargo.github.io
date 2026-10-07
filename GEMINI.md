@@ -81,6 +81,10 @@ anything written here:
 - `planexec push` is the only sanctioned way to commit from that pipeline, and it
   publishes. See `~/.hermes/skills/proj-d-camargo-github-io/SKILL.md`.
 
+Blog posts are written by a Discord team (research, writer, reviewer, then a "prepare
+publication" step), with drafts kept under `.planexec/deep/` until that step; portfolio and
+page changes keep using the plan → run → review → push flow above.
+
 ## Architecture
 
 Jekyll 4.4 static site. No collections — content is either `_posts/` (Markdown) or plain HTML pages with YAML frontmatter.
