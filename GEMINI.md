@@ -62,7 +62,7 @@ ssh -L 4000:localhost:4000 -L 35729:localhost:35729 diego@<ip-da-vps>
 
 then browse to `http://localhost:4000`. Port 35729 carries live reload.
 
-`_config.yml` has an `exclude:` list keeping repo working files (`CLAUDE.md`, `Skills/`, `bin/`, `serve.sh`, `Makefile`, the Gemfiles) out of the published site — anything added at the repo root that is not site content must be added there too.
+`_config.yml` has an `exclude:` list keeping repo working files (`CLAUDE.md`, `GEMINI.md`, `AGENTS.md`, `Skills/`, `bin/`, `serve.sh`, `Makefile`, the Gemfiles) out of the published site — anything added at the repo root that is not site content must be added there too.
 
 Deployment is fully automatic: pushing to the `gh-pages` branch triggers the GitHub Actions workflow (`.github/workflows/deploy-pages.yml`), which builds and deploys to GitHub Pages at `dcamargo.com.br`. **A push is a publication** — there is no staging step between `gh-pages` and the live professional site. Build clean (`make test`) before pushing.
 
