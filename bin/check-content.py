@@ -41,7 +41,7 @@ PRINT_MARKER = re.compile(r"\[\[\s*(?:print|img|imagem)\s+\d+\s*:", re.I)
 TELLS = [
     (re.compile(r"—"),
      "em dash no corpo (regra: zero; use dois-pontos, virgula, parenteses ou quebre a frase)"),
-    (re.compile(r"\b(poderos[ao]|robust[ao]|intuitiv[ao]|revolucionári[ao]|inovador[ao]?)\b", re.I),
+    (re.compile(r"\b(poderos[ao]s?|robust[ao]s?|intuitiv[ao]s?|revolucionári[ao]s?|inovador(?:a|as|es)?)\b", re.I),
      "adjetivo batido sem prova concreta"),
     (re.compile(r"\b(game[- ]?chang\w+|cutting[- ]edge|revolutionary|powerful|robust|intuitive)\b", re.I),
      "adjetivo batido sem prova concreta (EN)"),

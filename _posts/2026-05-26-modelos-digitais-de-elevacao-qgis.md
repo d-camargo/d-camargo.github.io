@@ -44,7 +44,7 @@ As principais fontes de dados combinam missões de satélites com ampla cobertur
 
 ## Tutorial: Baixando e Preparando Dados no QGIS
 
-Para trabalhar com esses dados na prática, o QGIS é uma das ferramentas mais poderosas e acessíveis.
+Para trabalhar com esses dados na prática, o QGIS é uma boa escolha: é gratuito, de código aberto e lê os formatos de MDE mais comuns.
 
 ### 1. Como baixar dados SRTM pelo OpenTopography no QGIS
 
