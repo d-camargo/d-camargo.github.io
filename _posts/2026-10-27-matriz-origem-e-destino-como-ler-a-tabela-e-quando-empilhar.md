@@ -9,6 +9,8 @@ translation: "/en/2026/10/27/origin-destination-matrix-how-to-read-the-table-and
 
 Todo estudo de demanda por transporte começa com uma pergunta simples: quantas pessoas saem de cada lugar e para onde elas vão. A **matriz Origem e Destino (O/D)** é a tabela que guarda essa resposta. Neste post explico como ela é montada e como ler suas linhas, colunas e diagonal. Também mostro por que hoje os mesmos dados costumam ser guardados em outro formato, o empilhado.
 
+![Mapa de linhas de desejo: viagens de todos os municípios convergindo para um polo, com espessura proporcional ao fluxo](/assets/images/posts/matriz-origem-e-destino-como-ler-a-tabela-e-quando-empilhar.webp)
+
 ## Antes da matriz: zonas e centróides
 
 Para contar viagens, primeiro se divide o território em **Zonas de Análise de Tráfego** (TAZ, do inglês *Traffic Analysis Zones*). Cada zona é uma área tratada como unidade. No modelo, ela é representada por um único ponto, o **centróide**, de onde as viagens "saem" e onde "chegam".

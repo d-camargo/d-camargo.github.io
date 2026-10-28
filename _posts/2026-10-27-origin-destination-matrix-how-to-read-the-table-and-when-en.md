@@ -10,6 +10,8 @@ translation: "/2026/10/27/matriz-origem-e-destino-como-ler-a-tabela-e-quando-emp
 
 Every travel demand study starts with a simple question: how many people leave each place, and where do they go? The **Origin-Destination (O/D) matrix** is the table that holds the answer. In this post I explain how it is built and how to read its rows, columns and diagonal. I also show why the same data is now usually stored in a different format, the stacked one.
 
+![Desire-line map: trips from every municipality converging on a single hub, with line width proportional to flow](/assets/images/posts/matriz-origem-e-destino-como-ler-a-tabela-e-quando-empilhar.webp)
+
 ## Before the matrix: zones and centroids
 
 To count trips, you first divide the territory into **Traffic Analysis Zones** (TAZ). Each zone is an area treated as a single unit. In the model, it is represented by a single point, the **centroid**, where trips "leave" from and "arrive" at.

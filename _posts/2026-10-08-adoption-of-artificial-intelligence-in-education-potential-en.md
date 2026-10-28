@@ -10,6 +10,8 @@ translation: "/2026/10/08/adocao-da-inteligencia-artificial-na-educacao-potencia
 
 The integration of artificial intelligence in education promises to support teachers, but its effectiveness faces hurdles in the lack of infrastructure and in assessment biases.
 
+![Isometric illustration: students with laptops at desks around layers of an urban map, with blocks, streets and transit, linked to them by arrows](/assets/images/posts/adocao-da-inteligencia-artificial-na-educacao-potencial.webp)
+
 The adoption of artificial intelligence (AI) in schools and universities raises expectations about personalized learning. AI can act in report generation and scenario simulation, alleviating the daily tasks of teaching. This use requires continuous monitoring to avoid inaccuracies that demotivate students, as pointed out by the [analysis from Stanford experts](https://hai.stanford.edu/news/ai-will-transform-teaching-and-learning-lets-get-it-right).
 
 The systemic integration of technology demands public policies built for it. These strategies must be aligned with the specific context of the country, focusing especially on [massive training](https://documents.worldbank.org/curated/en/099254008272640739).

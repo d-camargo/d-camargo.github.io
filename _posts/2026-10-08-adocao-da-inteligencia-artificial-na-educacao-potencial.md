@@ -9,6 +9,8 @@ translation: "/en/2026/10/08/adoption-of-artificial-intelligence-in-education-po
 
 A integração da inteligência artificial no ensino promete apoiar professores, mas sua eficácia esbarra na falta de infraestrutura e nos vieses de avaliação.
 
+![Ilustração isométrica: estudantes com notebooks em mesas ao redor de camadas de um mapa urbano, com quadras, vias e transporte, ligadas a eles por setas](/assets/images/posts/adocao-da-inteligencia-artificial-na-educacao-potencial.webp)
+
 A adoção da inteligência artificial (IA) nas escolas e universidades desperta expectativas sobre a personalização do aprendizado. A IA pode atuar na geração de relatórios e na simulação de cenários, aliviando as tarefas diárias da docência. Esse uso exige monitoramento contínuo para evitar imprecisões que desmotivem os estudantes, conforme aponta a [análise de especialistas de Stanford](https://hai.stanford.edu/news/ai-will-transform-teaching-and-learning-lets-get-it-right).
 
 A integração sistêmica da tecnologia demanda políticas públicas pensadas para ela. Essas estratégias devem ser alinhadas ao contexto específico do país, focando de maneira especial na [capacitação massiva](https://documents.worldbank.org/curated/en/099254008272640739).
